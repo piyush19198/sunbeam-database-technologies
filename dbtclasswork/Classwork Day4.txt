@@ -1,0 +1,1345 @@
+Microsoft Windows [Version 10.0.19042.985]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\prati>mysql -u D8_56506_Pratik -p
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 41
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+D8_56506_Pratik>use classwork;
+Database changed
+D8_56506_Pratik>SELECT USER(), DATABASE();
++---------------------------+------------+
+| USER()                    | DATABASE() |
++---------------------------+------------+
+| D8_56506_Pratik@localhost | classwork  |
++---------------------------+------------+
+1 row in set (0.02 sec)
+
+D8_56506_Pratik>SELECT POWER(2, 5);
++-------------+
+| POWER(2, 5) |
++-------------+
+|          32 |
++-------------+
+1 row in set (0.02 sec)
+
+D8_56506_Pratik>
+D8_56506_Pratik>SELECT SQRT(2);
++--------------------+
+| SQRT(2)            |
++--------------------+
+| 1.4142135623730951 |
++--------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>
+D8_56506_Pratik>SELECT RAND();
++--------------------+
+| RAND()             |
++--------------------+
+| 0.2537556982168515 |
++--------------------+
+1 row in set (0.02 sec)
+
+D8_56506_Pratik>SELECT ROUND(3.141593, 2), ROUND(3.141593, 4);
++--------------------+--------------------+
+| ROUND(3.141593, 2) | ROUND(3.141593, 4) |
++--------------------+--------------------+
+|               3.14 |             3.1416 |
++--------------------+--------------------+
+1 row in set (0.03 sec)
+
+D8_56506_Pratik>SELECT ROUND(3.141593, -2), ROUND(3.141593, -4);
++---------------------+---------------------+
+| ROUND(3.141593, -2) | ROUND(3.141593, -4) |
++---------------------+---------------------+
+|                   0 |                   0 |
++---------------------+---------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT ROUND(3.141593, -2) blah, ROUND(3.141593, -4) bleh;
++------+------+
+| blah | bleh |
++------+------+
+|    0 |    0 |
++------+------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>select round (5646213645,-5);
++-----------------------+
+| round (5646213645,-5) |
++-----------------------+
+|            5646200000 |
++-----------------------+
+1 row in set (0.03 sec)
+
+D8_56506_Pratik>select round (5646293645,-5);
++-----------------------+
+| round (5646293645,-5) |
++-----------------------+
+|            5646300000 |
++-----------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT CEIL(3.14), FLOOR(3.14);
++------------+-------------+
+| CEIL(3.14) | FLOOR(3.14) |
++------------+-------------+
+|          4 |           3 |
++------------+-------------+
+1 row in set (0.04 sec)
+
+D8_56506_Pratik>SELECT CEIL(3.14), FLOOR(-3.14);
++------------+--------------+
+| CEIL(3.14) | FLOOR(-3.14) |
++------------+--------------+
+|          4 |           -4 |
++------------+--------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT CEIL(-3.14), FLOOR(-3.14);
++-------------+--------------+
+| CEIL(-3.14) | FLOOR(-3.14) |
++-------------+--------------+
+|          -3 |           -4 |
++-------------+--------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT CEIL(3.14), FLOOR(3.14);
++------------+-------------+
+| CEIL(3.14) | FLOOR(3.14) |
++------------+-------------+
+|          4 |           3 |
++------------+-------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT id, name, ROUND(price,2) FROM books;
++------+---------------------------------+----------------+
+| id   | name                            | ROUND(price,2) |
++------+---------------------------------+----------------+
+| 1001 | Exploring C                     |         182.13 |
+| 1002 | Pointers in C                   |         442.07 |
+| 1003 | ANSI C Programming              |         403.43 |
+| 1004 | ANSI C Programming              |         199.63 |
+| 2001 | C++ Complete Reference          |         438.65 |
+| 2002 | C++ Primer                      |          651.7 |
+| 2003 | C++ Programming Language        |        1036.57 |
+| 3001 | Java Complete Reference         |         551.38 |
+| 3002 | Core Java Volume I              |         604.43 |
+| 3003 | Java Programming Language       |         481.15 |
+| 4001 | Operating System Concepts       |         595.76 |
+| 4002 | Design of UNIX Operating System |         443.04 |
+| 4003 | UNIX Internals                  |         370.46 |
++------+---------------------------------+----------------+
+13 rows in set (0.04 sec)
+
+D8_56506_Pratik>SELECT NOW(), SYSDATE();
++---------------------+---------------------+
+| NOW()               | SYSDATE()           |
++---------------------+---------------------+
+| 2021-10-07 09:33:48 | 2021-10-07 09:33:48 |
++---------------------+---------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT NOW(), SYSDATE();
++---------------------+---------------------+
+| NOW()               | SYSDATE()           |
++---------------------+---------------------+
+| 2021-10-07 09:33:51 | 2021-10-07 09:33:51 |
++---------------------+---------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT NOW(), SYSDATE();
++---------------------+---------------------+
+| NOW()               | SYSDATE()           |
++---------------------+---------------------+
+| 2021-10-07 09:33:53 | 2021-10-07 09:33:53 |
++---------------------+---------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT NOW(), SYSDATE();
++---------------------+---------------------+
+| NOW()               | SYSDATE()           |
++---------------------+---------------------+
+| 2021-10-07 09:33:54 | 2021-10-07 09:33:54 |
++---------------------+---------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT NOW(), SYSDATE();
++---------------------+---------------------+
+| NOW()               | SYSDATE()           |
++---------------------+---------------------+
+| 2021-10-07 09:33:54 | 2021-10-07 09:33:54 |
++---------------------+---------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT NOW(), SYSDATE();
++---------------------+---------------------+
+| NOW()               | SYSDATE()           |
++---------------------+---------------------+
+| 2021-10-07 09:33:55 | 2021-10-07 09:33:55 |
++---------------------+---------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT NOW(), SYSDATE();
++---------------------+---------------------+
+| NOW()               | SYSDATE()           |
++---------------------+---------------------+
+| 2021-10-07 09:33:55 | 2021-10-07 09:33:55 |
++---------------------+---------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT NOW(), SYSDATE();
++---------------------+---------------------+
+| NOW()               | SYSDATE()           |
++---------------------+---------------------+
+| 2021-10-07 09:33:56 | 2021-10-07 09:33:56 |
++---------------------+---------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT NOW(), SYSDATE();
++---------------------+---------------------+
+| NOW()               | SYSDATE()           |
++---------------------+---------------------+
+| 2021-10-07 09:33:56 | 2021-10-07 09:33:56 |
++---------------------+---------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT NOW(), SYSDATE();
++---------------------+---------------------+
+| NOW()               | SYSDATE()           |
++---------------------+---------------------+
+| 2021-10-07 09:33:57 | 2021-10-07 09:33:57 |
++---------------------+---------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT NOW(), SLEEP(10), SYSDATE();
++---------------------+-----------+---------------------+
+| NOW()               | SLEEP(10) | SYSDATE()           |
++---------------------+-----------+---------------------+
+| 2021-10-07 09:35:19 |         0 | 2021-10-07 09:35:29 |
++---------------------+-----------+---------------------+
+1 row in set (10.04 sec)
+
+D8_56506_Pratik>SELECT NOW(), SLEEP(5), SYSDATE();
++---------------------+----------+---------------------+
+| NOW()               | SLEEP(5) | SYSDATE()           |
++---------------------+----------+---------------------+
+| 2021-10-07 09:40:40 |        0 | 2021-10-07 09:40:45 |
++---------------------+----------+---------------------+
+1 row in set (5.01 sec)
+
+D8_56506_Pratik>
+D8_56506_Pratik>SELECT DATE('2000-05-24 14:47:20'), TIME('2000-05-24 14:47:20');
++-----------------------------+-----------------------------+
+| DATE('2000-05-24 14:47:20') | TIME('2000-05-24 14:47:20') |
++-----------------------------+-----------------------------+
+| 2000-05-24                  | 14:47:20                    |
++-----------------------------+-----------------------------+
+1 row in set (0.03 sec)
+
+D8_56506_Pratik>
+D8_56506_Pratik>SELECT DATE(NOW()), TIME(NOW());
++-------------+-------------+
+| DATE(NOW()) | TIME(NOW()) |
++-------------+-------------+
+| 2021-10-07  | 09:40:46    |
++-------------+-------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>
+D8_56506_Pratik>SELECT DATE()
+    ->
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+D8_56506_Pratik>SELECT DATE();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+D8_56506_Pratik>SELECT DATE('2000-05-24 14:47:20'), TIME('2000-05-24 14:47:20');
++-----------------------------+-----------------------------+
+| DATE('2000-05-24 14:47:20') | TIME('2000-05-24 14:47:20') |
++-----------------------------+-----------------------------+
+| 2000-05-24                  | 14:47:20                    |
++-----------------------------+-----------------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT DATE(NOW()), TIME(NOW());
++-------------+-------------+
+| DATE(NOW()) | TIME(NOW()) |
++-------------+-------------+
+| 2021-10-07  | 09:41:35    |
++-------------+-------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT DATE_ADD(NOW(), INTERVAL 4 DAY);
++---------------------------------+
+| DATE_ADD(NOW(), INTERVAL 4 DAY) |
++---------------------------------+
+| 2021-10-11 09:41:43             |
++---------------------------------+
+1 row in set (0.03 sec)
+
+D8_56506_Pratik>SELECT DATE_ADD(NOW(), INTERVAL 1 MONTH);
++-----------------------------------+
+| DATE_ADD(NOW(), INTERVAL 1 MONTH) |
++-----------------------------------+
+| 2021-11-07 09:42:15               |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT DATEDIFF(NOW(), '1983-09-28');
++-------------------------------+
+| DATEDIFF(NOW(), '1983-09-28') |
++-------------------------------+
+|                         13889 |
++-------------------------------+
+1 row in set (0.03 sec)
+
+D8_56506_Pratik>SELECT DATEDIFF(NOW(), '1983-07-12');
++-------------------------------+
+| DATEDIFF(NOW(), '1983-07-12') |
++-------------------------------+
+|                         13967 |
++-------------------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT DATEDIFF(NOW(), '1995-07-12');
++-------------------------------+
+| DATEDIFF(NOW(), '1995-07-12') |
++-------------------------------+
+|                          9584 |
++-------------------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT TIMESTAMPDIFF(YEAR, '1983-09-28', NOW());
++------------------------------------------+
+| TIMESTAMPDIFF(YEAR, '1983-09-28', NOW()) |
++------------------------------------------+
+|                                       38 |
++------------------------------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT TIMESTAMPDIFF(YEAR, '1995-07-12', NOW());
++------------------------------------------+
+| TIMESTAMPDIFF(YEAR, '1995-07-12', NOW()) |
++------------------------------------------+
+|                                       26 |
++------------------------------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT ename,hire,TIMESTAMPDIFF(YEAR, hire, NOW())exp_yrs FROM emp;
++--------+------------+---------+
+| ename  | hire       | exp_yrs |
++--------+------------+---------+
+| SMITH  | 1980-12-17 |      40 |
+| ALLEN  | 1981-02-20 |      40 |
+| WARD   | 1981-02-22 |      40 |
+| JONES  | 1981-04-02 |      40 |
+| MARTIN | 1981-09-28 |      40 |
+| BLAKE  | 1981-05-01 |      40 |
+| CLARK  | 1981-06-09 |      40 |
+| SCOTT  | 1982-12-09 |      38 |
+| KING   | 1981-11-17 |      39 |
+| TURNER | 1981-09-08 |      40 |
+| ADAMS  | 1983-01-12 |      38 |
+| JAMES  | 1981-12-03 |      39 |
+| FORD   | 1981-12-03 |      39 |
+| MILLER | 1982-01-23 |      39 |
++--------+------------+---------+
+14 rows in set (0.02 sec)
+
+D8_56506_Pratik>SELECT ename, hire, TIMESTAMPDIFF(YEAR, hire, NOW()) exp_yrs, TIMESTAMPDIFF(MONTH, hire, NOW()) exp_mons FROM emp;
++--------+------------+---------+----------+
+| ename  | hire       | exp_yrs | exp_mons |
++--------+------------+---------+----------+
+| SMITH  | 1980-12-17 |      40 |      489 |
+| ALLEN  | 1981-02-20 |      40 |      487 |
+| WARD   | 1981-02-22 |      40 |      487 |
+| JONES  | 1981-04-02 |      40 |      486 |
+| MARTIN | 1981-09-28 |      40 |      480 |
+| BLAKE  | 1981-05-01 |      40 |      485 |
+| CLARK  | 1981-06-09 |      40 |      483 |
+| SCOTT  | 1982-12-09 |      38 |      465 |
+| KING   | 1981-11-17 |      39 |      478 |
+| TURNER | 1981-09-08 |      40 |      480 |
+| ADAMS  | 1983-01-12 |      38 |      464 |
+| JAMES  | 1981-12-03 |      39 |      478 |
+| FORD   | 1981-12-03 |      39 |      478 |
+| MILLER | 1982-01-23 |      39 |      476 |
++--------+------------+---------+----------+
+14 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT ename, hire, TIMESTAMPDIFF(YEAR, hire, NOW()) exp_yrs, TIMESTAMPDIFF(MONTH, hire, NOW()) % 12 exp_mons FROM emp;
++--------+------------+---------+----------+
+| ename  | hire       | exp_yrs | exp_mons |
++--------+------------+---------+----------+
+| SMITH  | 1980-12-17 |      40 |        9 |
+| ALLEN  | 1981-02-20 |      40 |        7 |
+| WARD   | 1981-02-22 |      40 |        7 |
+| JONES  | 1981-04-02 |      40 |        6 |
+| MARTIN | 1981-09-28 |      40 |        0 |
+| BLAKE  | 1981-05-01 |      40 |        5 |
+| CLARK  | 1981-06-09 |      40 |        3 |
+| SCOTT  | 1982-12-09 |      38 |        9 |
+| KING   | 1981-11-17 |      39 |       10 |
+| TURNER | 1981-09-08 |      40 |        0 |
+| ADAMS  | 1983-01-12 |      38 |        8 |
+| JAMES  | 1981-12-03 |      39 |       10 |
+| FORD   | 1981-12-03 |      39 |       10 |
+| MILLER | 1982-01-23 |      39 |        8 |
++--------+------------+---------+----------+
+14 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT DAY(NOW()), MONTH(NOW()), YEAR(NOW()), HOUR(NOW()), MINUTE(NOW()), SECOND(NOW()), WEEKDAY(NOW());
++------------+--------------+-------------+-------------+---------------+---------------+----------------+
+| DAY(NOW()) | MONTH(NOW()) | YEAR(NOW()) | HOUR(NOW()) | MINUTE(NOW()) | SECOND(NOW()) | WEEKDAY(NOW()) |
++------------+--------------+-------------+-------------+---------------+---------------+----------------+
+|          7 |           10 |        2021 |           9 |            56 |            49 |              3 |
++------------+--------------+-------------+-------------+---------------+---------------+----------------+
+1 row in set (0.03 sec)
+
+D8_56506_Pratik>SELECT DATE_FORMAT(NOW(), '%d-%b-%Y');
++--------------------------------+
+| DATE_FORMAT(NOW(), '%d-%b-%Y') |
++--------------------------------+
+| 07-Oct-2021                    |
++--------------------------------+
+1 row in set (0.02 sec)
+
+D8_56506_Pratik>SELECT DAY(NOW()), MONTH(NOW()), YEAR(NOW()), HOUR(NOW()), MINUTE(NOW()), SECOND(NOW()), WEEKDAY(NOW());
++------------+--------------+-------------+-------------+---------------+---------------+----------------+
+| DAY(NOW()) | MONTH(NOW()) | YEAR(NOW()) | HOUR(NOW()) | MINUTE(NOW()) | SECOND(NOW()) | WEEKDAY(NOW()) |
++------------+--------------+-------------+-------------+---------------+---------------+----------------+
+|          7 |           10 |        2021 |           9 |            58 |            38 |              3 |
++------------+--------------+-------------+-------------+---------------+---------------+----------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT * FROM emp WHERE YEAR(hire) = 1982;
++-------+--------+---------+------+------------+---------+------+--------+
+| empno | ename  | job     | mgr  | hire       | sal     | comm | deptno |
++-------+--------+---------+------+------------+---------+------+--------+
+|  7788 | SCOTT  | ANALYST | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7934 | MILLER | CLERK   | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+---------+------+------------+---------+------+--------+
+2 rows in set (0.00 sec)
+
+D8_56506_Pratik>HELP IF FUNCTION;
+Name: 'IF FUNCTION'
+Description:
+Syntax:
+IF(expr1,expr2,expr3)
+
+If expr1 is TRUE (expr1 <> 0 and expr1 <> NULL), IF() returns expr2.
+Otherwise, it returns expr3.
+
+*Note*:
+
+There is also an IF statement, which differs from the IF() function
+described here. See [HELP IF statement].
+
+If only one of expr2 or expr3 is explicitly NULL, the result type of
+the IF() function is the type of the non-NULL expression.
+
+The default return type of IF() (which may matter when it is stored
+into a temporary table) is calculated as follows:
+
+o If expr2 or expr3 produce a string, the result is a string.
+
+  If expr2 and expr3 are both strings, the result is case-sensitive if
+  either string is case-sensitive.
+
+o If expr2 or expr3 produce a floating-point value, the result is a
+  floating-point value.
+
+o If expr2 or expr3 produce an integer, the result is an integer.
+
+URL: https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html
+
+Examples:
+mysql> SELECT IF(1>2,2,3);
+        -> 3
+mysql> SELECT IF(1<2,'yes','no');
+        -> 'yes'
+mysql> SELECT IF(STRCMP('test','test1'),'no','yes');
+        -> 'no'
+
+D8_56506_Pratik>SELECT ename, sal, IF(sal>2500, 'RICH', 'POOR') category FROM emp;
++--------+---------+----------+
+| ename  | sal     | category |
++--------+---------+----------+
+| SMITH  |  800.00 | POOR     |
+| ALLEN  | 1600.00 | POOR     |
+| WARD   | 1250.00 | POOR     |
+| JONES  | 2975.00 | RICH     |
+| MARTIN | 1250.00 | POOR     |
+| BLAKE  | 2850.00 | RICH     |
+| CLARK  | 2450.00 | POOR     |
+| SCOTT  | 3000.00 | RICH     |
+| KING   | 5000.00 | RICH     |
+| TURNER | 1500.00 | POOR     |
+| ADAMS  | 1100.00 | POOR     |
+| JAMES  |  950.00 | POOR     |
+| FORD   | 3000.00 | RICH     |
+| MILLER | 1300.00 | POOR     |
++--------+---------+----------+
+14 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT IF(4>0, 'positive, IF(4<0,'negative','zero'));
+    '> ;
+    '> q;
+    '> qweqerw;
+    '> exit
+    '> SELECT IF(4>0, 'positive', IF(4<0,'negative','zero'));
+    '> SELECT IF(4>0, 'positive', IF(4<0,'negative','zero'));
+    '> SELECT IF(4>0, 'positive', IF(4<0,'negative','zero'));
+    '> SELECT IF(4>0, 'positive', IF(4<0,'negative','zero'));
+    '> SELECT IF(4>0, 'positive', IF(4<0,'negative','zero'));
+    '> SELECT IF(4>0, 'positive', IF(4<0,'negative','zero'));
+    '> SELECT IF(4>0, 'positive', IF(4<0,'negative','zero'));
+    '> SELECT IF(4>0, 'positive', IF(4<0,'negative','zero'));
+    '> SELECT IF(4>0, 'positive', IF(4<0,'negative','zero'));
+    '> SELECT IF(4>0, 'positive', IF(4<0,'negative','zero'));
+    '> SELECT IF(4>0, 'positive', IF(4<0,'negative','zero'));
+    '>
+
+==========================================================================================================================================
+Microsoft Windows [Version 10.0.19042.985]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\prati>mysql -u D8_56506_Pratik -p
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 42
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+D8_56506_Pratik>SET @num = 2;
+Query OK, 0 rows affected (0.00 sec)
+
+D8_56506_Pratik>SELECT @num = 2;
++----------+
+| @num = 2 |
++----------+
+|        1 |
++----------+
+1 row in set (0.04 sec)
+
+D8_56506_Pratik>SELECT @num;
++------+
+| @num |
++------+
+|    2 |
++------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT STR_TO_DATE('28/09/2021', '%d/%m/%Y');
++---------------------------------------+
+| STR_TO_DATE('28/09/2021', '%d/%m/%Y') |
++---------------------------------------+
+| 2021-09-28                            |
++---------------------------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SET @str = '28/09/2021';
+Query OK, 0 rows affected (0.00 sec)
+
+D8_56506_Pratik>SELECT STR_TO_DATE(@str, '%d/%m/%Y');
++-------------------------------+
+| STR_TO_DATE(@str, '%d/%m/%Y') |
++-------------------------------+
+| 2021-09-28                    |
++-------------------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT VERSION();
++-----------+
+| VERSION() |
++-----------+
+| 8.0.26    |
++-----------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT SYSDATE();
++---------------------+
+| SYSDATE()           |
++---------------------+
+| 2021-10-07 10:23:11 |
++---------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT USER(), DATABASE();
++---------------------------+------------+
+| USER()                    | DATABASE() |
++---------------------------+------------+
+| D8_56506_Pratik@localhost | NULL       |
++---------------------------+------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT IF(1,1,IF(1,1,IF(1,1,1)))
+    -> ;
++---------------------------+
+| IF(1,1,IF(1,1,IF(1,1,1))) |
++---------------------------+
+|                         1 |
++---------------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT IF(1,2,IF(3,4,IF(5,6,7)));
++---------------------------+
+| IF(1,2,IF(3,4,IF(5,6,7))) |
++---------------------------+
+|                         2 |
++---------------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT IF(0,2,IF(0,4,IF(0,6,7)));
++---------------------------+
+| IF(0,2,IF(0,4,IF(0,6,7))) |
++---------------------------+
+|                         7 |
++---------------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT GREATEST(23, 98, 53, 67);
++--------------------------+
+| GREATEST(23, 98, 53, 67) |
++--------------------------+
+|                       98 |
++--------------------------+
+1 row in set (0.02 sec)
+
+D8_56506_Pratik>SELECT LEAST(23, 98, 53, 67);
++-----------------------+
+| LEAST(23, 98, 53, 67) |
++-----------------------+
+|                    23 |
++-----------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT name, price, LEAST(price,700) FROM books;
+ERROR 1046 (3D000): No database selected
+D8_56506_Pratik>use classwork;
+Database changed
+D8_56506_Pratik>SELECT name, price, LEAST(price,700) FROM books;
++---------------------------------+----------+------------------+
+| name                            | price    | LEAST(price,700) |
++---------------------------------+----------+------------------+
+| Exploring C                     |  182.129 |          182.129 |
+| Pointers in C                   |  442.070 |          442.070 |
+| ANSI C Programming              |  403.426 |          403.426 |
+| ANSI C Programming              |  199.627 |          199.627 |
+| C++ Complete Reference          |  438.652 |          438.652 |
+| C++ Primer                      |  651.698 |          651.698 |
+| C++ Programming Language        | 1036.574 |          700.000 |
+| Java Complete Reference         |  551.377 |          551.377 |
+| Core Java Volume I              |  604.434 |          604.434 |
+| Java Programming Language       |  481.150 |          481.150 |
+| Operating System Concepts       |  595.761 |          595.761 |
+| Design of UNIX Operating System |  443.035 |          443.035 |
+| UNIX Internals                  |  370.463 |          370.463 |
++---------------------------------+----------+------------------+
+13 rows in set (0.04 sec)
+
+D8_56506_Pratik>SELECT GREATEST('AEROPLANE', 'CAR');
++------------------------------+
+| GREATEST('AEROPLANE', 'CAR') |
++------------------------------+
+| CAR                          |
++------------------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT LEAST('AEROPLANE', NULL, 'CAR');
++---------------------------------+
+| LEAST('AEROPLANE', NULL, 'CAR') |
++---------------------------------+
+| NULL                            |
++---------------------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT CONCAT('A', 12, NULL, 'B', 34.45);
++-----------------------------------+
+| CONCAT('A', 12, NULL, 'B', 34.45) |
++-----------------------------------+
+| NULL                              |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT COALESCE(NULL,NULL,12, 'Pratik');
++----------------------------------+
+| COALESCE(NULL,NULL,12, 'Pratik') |
++----------------------------------+
+| 12                               |
++----------------------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT COALESCE(45,NULL,12, 'Pratik');
++--------------------------------+
+| COALESCE(45,NULL,12, 'Pratik') |
++--------------------------------+
+| 45                             |
++--------------------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT ename, comm, sal, COALESCE(comm, sal) FROM emp;
++--------+---------+---------+---------------------+
+| ename  | comm    | sal     | COALESCE(comm, sal) |
++--------+---------+---------+---------------------+
+| SMITH  |    NULL |  800.00 |              800.00 |
+| ALLEN  |  300.00 | 1600.00 |              300.00 |
+| WARD   |  500.00 | 1250.00 |              500.00 |
+| JONES  |    NULL | 2975.00 |             2975.00 |
+| MARTIN | 1400.00 | 1250.00 |             1400.00 |
+| BLAKE  |    NULL | 2850.00 |             2850.00 |
+| CLARK  |    NULL | 2450.00 |             2450.00 |
+| SCOTT  |    NULL | 3000.00 |             3000.00 |
+| KING   |    NULL | 5000.00 |             5000.00 |
+| TURNER |    0.00 | 1500.00 |                0.00 |
+| ADAMS  |    NULL | 1100.00 |             1100.00 |
+| JAMES  |    NULL |  950.00 |              950.00 |
+| FORD   |    NULL | 3000.00 |             3000.00 |
+| MILLER |    NULL | 1300.00 |             1300.00 |
++--------+---------+---------+---------------------+
+14 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT ename, comm, sal, IF(comm IS NULL, sal, comm) FROM emp;
++--------+---------+---------+-----------------------------+
+| ename  | comm    | sal     | IF(comm IS NULL, sal, comm) |
++--------+---------+---------+-----------------------------+
+| SMITH  |    NULL |  800.00 |                      800.00 |
+| ALLEN  |  300.00 | 1600.00 |                      300.00 |
+| WARD   |  500.00 | 1250.00 |                      500.00 |
+| JONES  |    NULL | 2975.00 |                     2975.00 |
+| MARTIN | 1400.00 | 1250.00 |                     1400.00 |
+| BLAKE  |    NULL | 2850.00 |                     2850.00 |
+| CLARK  |    NULL | 2450.00 |                     2450.00 |
+| SCOTT  |    NULL | 3000.00 |                     3000.00 |
+| KING   |    NULL | 5000.00 |                     5000.00 |
+| TURNER |    0.00 | 1500.00 |                        0.00 |
+| ADAMS  |    NULL | 1100.00 |                     1100.00 |
+| JAMES  |    NULL |  950.00 |                      950.00 |
+| FORD   |    NULL | 3000.00 |                     3000.00 |
+| MILLER |    NULL | 1300.00 |                     1300.00 |
++--------+---------+---------+-----------------------------+
+14 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT ename, comm, sal, IFNULL(comm, sal) FROM emp;
++--------+---------+---------+-------------------+
+| ename  | comm    | sal     | IFNULL(comm, sal) |
++--------+---------+---------+-------------------+
+| SMITH  |    NULL |  800.00 |            800.00 |
+| ALLEN  |  300.00 | 1600.00 |            300.00 |
+| WARD   |  500.00 | 1250.00 |            500.00 |
+| JONES  |    NULL | 2975.00 |           2975.00 |
+| MARTIN | 1400.00 | 1250.00 |           1400.00 |
+| BLAKE  |    NULL | 2850.00 |           2850.00 |
+| CLARK  |    NULL | 2450.00 |           2450.00 |
+| SCOTT  |    NULL | 3000.00 |           3000.00 |
+| KING   |    NULL | 5000.00 |           5000.00 |
+| TURNER |    0.00 | 1500.00 |              0.00 |
+| ADAMS  |    NULL | 1100.00 |           1100.00 |
+| JAMES  |    NULL |  950.00 |            950.00 |
+| FORD   |    NULL | 3000.00 |           3000.00 |
+| MILLER |    NULL | 1300.00 |           1300.00 |
++--------+---------+---------+-------------------+
+14 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT ename, sal, NULLIF(sal,3000.0) FROM emp;
++--------+---------+--------------------+
+| ename  | sal     | NULLIF(sal,3000.0) |
++--------+---------+--------------------+
+| SMITH  |  800.00 |             800.00 |
+| ALLEN  | 1600.00 |            1600.00 |
+| WARD   | 1250.00 |            1250.00 |
+| JONES  | 2975.00 |            2975.00 |
+| MARTIN | 1250.00 |            1250.00 |
+| BLAKE  | 2850.00 |            2850.00 |
+| CLARK  | 2450.00 |            2450.00 |
+| SCOTT  | 3000.00 |               NULL |
+| KING   | 5000.00 |            5000.00 |
+| TURNER | 1500.00 |            1500.00 |
+| ADAMS  | 1100.00 |            1100.00 |
+| JAMES  |  950.00 |             950.00 |
+| FORD   | 3000.00 |               NULL |
+| MILLER | 1300.00 |            1300.00 |
++--------+---------+--------------------+
+14 rows in set (0.03 sec)
+
+D8_56506_Pratik>SELECT COUNT(sal), SUM(sal), AVG(sal), MAX(sal), MIN(sal) FROM emp;
++------------+----------+-------------+----------+----------+
+| COUNT(sal) | SUM(sal) | AVG(sal)    | MAX(sal) | MIN(sal) |
++------------+----------+-------------+----------+----------+
+|         14 | 29025.00 | 2073.214286 |  5000.00 |   800.00 |
++------------+----------+-------------+----------+----------+
+1 row in set (0.03 sec)
+
+D8_56506_Pratik>SELECT MAX(sal + IFNULL(comm,0)), MIN(sal + IFNULL(comm,0)) FROM emp;
++---------------------------+---------------------------+
+| MAX(sal + IFNULL(comm,0)) | MIN(sal + IFNULL(comm,0)) |
++---------------------------+---------------------------+
+|                   5000.00 |                    800.00 |
++---------------------------+---------------------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT ename, sal, comm, sal + IFNULL(comm,0) AS income FROM emp;
++--------+---------+---------+---------+
+| ename  | sal     | comm    | income  |
++--------+---------+---------+---------+
+| SMITH  |  800.00 |    NULL |  800.00 |
+| ALLEN  | 1600.00 |  300.00 | 1900.00 |
+| WARD   | 1250.00 |  500.00 | 1750.00 |
+| JONES  | 2975.00 |    NULL | 2975.00 |
+| MARTIN | 1250.00 | 1400.00 | 2650.00 |
+| BLAKE  | 2850.00 |    NULL | 2850.00 |
+| CLARK  | 2450.00 |    NULL | 2450.00 |
+| SCOTT  | 3000.00 |    NULL | 3000.00 |
+| KING   | 5000.00 |    NULL | 5000.00 |
+| TURNER | 1500.00 |    0.00 | 1500.00 |
+| ADAMS  | 1100.00 |    NULL | 1100.00 |
+| JAMES  |  950.00 |    NULL |  950.00 |
+| FORD   | 3000.00 |    NULL | 3000.00 |
+| MILLER | 1300.00 |    NULL | 1300.00 |
++--------+---------+---------+---------+
+14 rows in set (0.00 sec)
+
+D8_56506_Pratik>SET @@sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION';
+Query OK, 0 rows affected, 1 warning (0.05 sec)
+
+D8_56506_Pratik>
+D8_56506_Pratik>SELECT ename, MAX(sal) FROM emp;
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'classwork.emp.ename'; this is incompatible with sql_mode=only_full_group_by
+D8_56506_Pratik>SELECT ename, MAX(sal) FROM emp;
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'classwork.emp.ename'; this is incompatible with sql_mode=only_full_group_by
+D8_56506_Pratik>SELECT LOWER(ename), MAX(sal) FROM emp;
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'classwork.emp.ename'; this is incompatible with sql_mode=only_full_group_by
+D8_56506_Pratik>SELECT * FROM emp WHERE sal = MAX(sal);
+ERROR 1111 (HY000): Invalid use of group function
+D8_56506_Pratik>
+D8_56506_Pratik>SELECT SUM(MAX(sal)) FROM emp;
+ERROR 1111 (HY000): Invalid use of group function
+D8_56506_Pratik>SELECT deptno, COUNT(sal), SUM(sal), AVG(sal), MAX(sal), MIN(sal) FROM emp
+    -> GROUP BY deptno;
++--------+------------+----------+-------------+----------+----------+
+| deptno | COUNT(sal) | SUM(sal) | AVG(sal)    | MAX(sal) | MIN(sal) |
++--------+------------+----------+-------------+----------+----------+
+|     20 |          5 | 10875.00 | 2175.000000 |  3000.00 |   800.00 |
+|     30 |          6 |  9400.00 | 1566.666667 |  2850.00 |   950.00 |
+|     10 |          3 |  8750.00 | 2916.666667 |  5000.00 |  1300.00 |
++--------+------------+----------+-------------+----------+----------+
+3 rows in set (0.03 sec)
+
+D8_56506_Pratik>SELECT job, COUNT(sal), SUM(sal), AVG(sal), MAX(sal), MIN(sal) FROM emp
+    -> GROUP BY job;
++-----------+------------+----------+-------------+----------+----------+
+| job       | COUNT(sal) | SUM(sal) | AVG(sal)    | MAX(sal) | MIN(sal) |
++-----------+------------+----------+-------------+----------+----------+
+| CLERK     |          4 |  4150.00 | 1037.500000 |  1300.00 |   800.00 |
+| SALESMAN  |          4 |  5600.00 | 1400.000000 |  1600.00 |  1250.00 |
+| MANAGER   |          3 |  8275.00 | 2758.333333 |  2975.00 |  2450.00 |
+| ANALYST   |          2 |  6000.00 | 3000.000000 |  3000.00 |  3000.00 |
+| PRESIDENT |          1 |  5000.00 | 5000.000000 |  5000.00 |  5000.00 |
++-----------+------------+----------+-------------+----------+----------+
+5 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT deptno, COUNT(empno) FROM emp
+    -> GROUP BY deptno;
++--------+--------------+
+| deptno | COUNT(empno) |
++--------+--------------+
+|     20 |            5 |
+|     30 |            6 |
+|     10 |            3 |
++--------+--------------+
+3 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT job, COUNT(empno) FROM emp
+    -> GROUP BY job;
++-----------+--------------+
+| job       | COUNT(empno) |
++-----------+--------------+
+| CLERK     |            4 |
+| SALESMAN  |            4 |
+| MANAGER   |            3 |
+| ANALYST   |            2 |
+| PRESIDENT |            1 |
++-----------+--------------+
+5 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT empno, ename, deptno, job FROM emp
+    -> ORDER BY deptno, job;
++-------+--------+--------+-----------+
+| empno | ename  | deptno | job       |
++-------+--------+--------+-----------+
+|  7934 | MILLER |     10 | CLERK     |
+|  7782 | CLARK  |     10 | MANAGER   |
+|  7839 | KING   |     10 | PRESIDENT |
+|  7788 | SCOTT  |     20 | ANALYST   |
+|  7902 | FORD   |     20 | ANALYST   |
+|  7369 | SMITH  |     20 | CLERK     |
+|  7876 | ADAMS  |     20 | CLERK     |
+|  7566 | JONES  |     20 | MANAGER   |
+|  7900 | JAMES  |     30 | CLERK     |
+|  7698 | BLAKE  |     30 | MANAGER   |
+|  7499 | ALLEN  |     30 | SALESMAN  |
+|  7521 | WARD   |     30 | SALESMAN  |
+|  7654 | MARTIN |     30 | SALESMAN  |
+|  7844 | TURNER |     30 | SALESMAN  |
++-------+--------+--------+-----------+
+14 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT deptno, job, COUNT(empno) FROM emp
+    -> GROUP BY deptno, job
+    -> ORDER BY deptno, job;
++--------+-----------+--------------+
+| deptno | job       | COUNT(empno) |
++--------+-----------+--------------+
+|     10 | CLERK     |            1 |
+|     10 | MANAGER   |            1 |
+|     10 | PRESIDENT |            1 |
+|     20 | ANALYST   |            2 |
+|     20 | CLERK     |            2 |
+|     20 | MANAGER   |            1 |
+|     30 | CLERK     |            1 |
+|     30 | MANAGER   |            1 |
+|     30 | SALESMAN  |            4 |
++--------+-----------+--------------+
+9 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT deptno, job, COUNT(empno) FROM emp
+    -> GROUP BY deptno, job;
++--------+-----------+--------------+
+| deptno | job       | COUNT(empno) |
++--------+-----------+--------------+
+|     20 | CLERK     |            2 |
+|     30 | SALESMAN  |            4 |
+|     20 | MANAGER   |            1 |
+|     30 | MANAGER   |            1 |
+|     10 | MANAGER   |            1 |
+|     20 | ANALYST   |            2 |
+|     10 | PRESIDENT |            1 |
+|     30 | CLERK     |            1 |
+|     10 | CLERK     |            1 |
++--------+-----------+--------------+
+9 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT deptno, job, COUNT(empno) FROM emp
+    -> ORDER BY job, deptno;
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'classwork.emp.deptno'; this is incompatible with sql_mode=only_full_group_by
+D8_56506_Pratik>SELECT deptno, job, COUNT(empno) FROM emp
+    -> GROUP BY job, deptno;
++--------+-----------+--------------+
+| deptno | job       | COUNT(empno) |
++--------+-----------+--------------+
+|     20 | CLERK     |            2 |
+|     30 | SALESMAN  |            4 |
+|     20 | MANAGER   |            1 |
+|     30 | MANAGER   |            1 |
+|     10 | MANAGER   |            1 |
+|     20 | ANALYST   |            2 |
+|     10 | PRESIDENT |            1 |
+|     30 | CLERK     |            1 |
+|     10 | CLERK     |            1 |
++--------+-----------+--------------+
+9 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT deptno, job, COUNT(empno) FROM emp
+    ->     -> GROUP BY deptno, job
+    ->     -> ORDER BY deptno, job;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> GROUP BY deptno, job
+    -> ORDER BY deptno, job' at line 2
+D8_56506_Pratik>SELECT deptno, job, COUNT(empno) FROM emp
+    -> GROUP BY job, deptno
+    -> ORDER BY deptno, job;
++--------+-----------+--------------+
+| deptno | job       | COUNT(empno) |
++--------+-----------+--------------+
+|     10 | CLERK     |            1 |
+|     10 | MANAGER   |            1 |
+|     10 | PRESIDENT |            1 |
+|     20 | ANALYST   |            2 |
+|     20 | CLERK     |            2 |
+|     20 | MANAGER   |            1 |
+|     30 | CLERK     |            1 |
+|     30 | MANAGER   |            1 |
+|     30 | SALESMAN  |            4 |
++--------+-----------+--------------+
+9 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT deptno, job, COUNT(empno) FROM emp
+    -> GROUP BY deptno, job
+    -> ORDER BY deptno, job;
++--------+-----------+--------------+
+| deptno | job       | COUNT(empno) |
++--------+-----------+--------------+
+|     10 | CLERK     |            1 |
+|     10 | MANAGER   |            1 |
+|     10 | PRESIDENT |            1 |
+|     20 | ANALYST   |            2 |
+|     20 | CLERK     |            2 |
+|     20 | MANAGER   |            1 |
+|     30 | CLERK     |            1 |
+|     30 | MANAGER   |            1 |
+|     30 | SALESMAN  |            4 |
++--------+-----------+--------------+
+9 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT deptno, job, COUNT(empno) FROM emp
+    -> ORDER BY job, deptno
+    -> ;
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'classwork.emp.deptno'; this is incompatible with sql_mode=only_full_group_by
+D8_56506_Pratik>SELECT deptno, job, COUNT(empno) FROM emp
+    -> GROUP BY deptno, job
+    -> ORDER BY deptno, job;
++--------+-----------+--------------+
+| deptno | job       | COUNT(empno) |
++--------+-----------+--------------+
+|     10 | CLERK     |            1 |
+|     10 | MANAGER   |            1 |
+|     10 | PRESIDENT |            1 |
+|     20 | ANALYST   |            2 |
+|     20 | CLERK     |            2 |
+|     20 | MANAGER   |            1 |
+|     30 | CLERK     |            1 |
+|     30 | MANAGER   |            1 |
+|     30 | SALESMAN  |            4 |
++--------+-----------+--------------+
+9 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT deptno, job, COUNT(empno) FROM emp
+    -> GROUP BY job, deptno
+    -> ORDER BY job, deptno;
++--------+-----------+--------------+
+| deptno | job       | COUNT(empno) |
++--------+-----------+--------------+
+|     20 | ANALYST   |            2 |
+|     10 | CLERK     |            1 |
+|     20 | CLERK     |            2 |
+|     30 | CLERK     |            1 |
+|     10 | MANAGER   |            1 |
+|     20 | MANAGER   |            1 |
+|     30 | MANAGER   |            1 |
+|     10 | PRESIDENT |            1 |
+|     30 | SALESMAN  |            4 |
++--------+-----------+--------------+
+9 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT deptno, job, COUNT(empno) FROM emp
+    -> GROUP BY job;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'classwork.emp.deptno' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+D8_56506_Pratik>SELECT deptno, job, COUNT(empno) FROM emp
+    -> ORDER BY job, job;
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'classwork.emp.deptno'; this is incompatible with sql_mode=only_full_group_by
+D8_56506_Pratik>show tables;
++----------------------+
+| Tables_in_classwork  |
++----------------------+
+| bonus                |
+| books                |
+| categories           |
+| countries            |
+| customercustomerdemo |
+| customerdemographics |
+| customers            |
+| departments          |
+| dept                 |
+| dummy                |
+| emp                  |
+| employees            |
+| employeeterritories  |
+| job_history          |
+| jobs                 |
+| locations            |
+| orderdetails         |
+| orders               |
+| products             |
+| region               |
+| regions              |
+| salespeople          |
+| salgrade             |
+| shippers             |
+| suppliers            |
+| territories          |
++----------------------+
+26 rows in set (0.04 sec)
+
+D8_56506_Pratik>describe jobs
+    -> ;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| JOB_ID     | varchar(10)  | NO   | PRI |         |       |
+| JOB_TITLE  | varchar(35)  | NO   |     | NULL    |       |
+| MIN_SALARY | decimal(6,0) | YES  |     | NULL    |       |
+| MAX_SALARY | decimal(6,0) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+4 rows in set (0.04 sec)
+
+D8_56506_Pratik>select JOB_ID, JOB_TITLE from jobs
+    -> GROUP BY JOB_ID, JOB_TITLE, MAX_SALARY
+    -> ORDER BY MAX_SALARY;
++------------+---------------------------------+
+| JOB_ID     | JOB_TITLE                       |
++------------+---------------------------------+
+| ST_CLERK   | Stock Clerk                     |
+| PU_CLERK   | Purchasing Clerk                |
+| SH_CLERK   | Shipping Clerk                  |
+| AD_ASST    | Administration Assistant        |
+| ST_MAN     | Stock Manager                   |
+| FI_ACCOUNT | Accountant                      |
+| AC_ACCOUNT | Public Accountant               |
+| MK_REP     | Marketing Representative        |
+| HR_REP     | Human Resources Representative  |
+| IT_PROG    | Programmer                      |
+| PR_REP     | Public Relations Representative |
+| SA_REP     | Sales Representative            |
+| PU_MAN     | Purchasing Manager              |
+| MK_MAN     | Marketing Manager               |
+| FI_MGR     | Finance Manager                 |
+| AC_MGR     | Accounting Manager              |
+| SA_MAN     | Sales Manager                   |
+| AD_VP      | Administration Vice President   |
+| AD_PRES    | President                       |
++------------+---------------------------------+
+19 rows in set (0.04 sec)
+
+D8_56506_Pratik>select JOB_ID, JOB_TITLE from jobs
+    -> GROUP BY JOB_ID, JOB_TITLE, MAX_SALARY
+    -> ORDER BY JOB_ID;
++------------+---------------------------------+
+| JOB_ID     | JOB_TITLE                       |
++------------+---------------------------------+
+| AC_ACCOUNT | Public Accountant               |
+| AC_MGR     | Accounting Manager              |
+| AD_ASST    | Administration Assistant        |
+| AD_PRES    | President                       |
+| AD_VP      | Administration Vice President   |
+| FI_ACCOUNT | Accountant                      |
+| FI_MGR     | Finance Manager                 |
+| HR_REP     | Human Resources Representative  |
+| IT_PROG    | Programmer                      |
+| MK_MAN     | Marketing Manager               |
+| MK_REP     | Marketing Representative        |
+| PR_REP     | Public Relations Representative |
+| PU_CLERK   | Purchasing Clerk                |
+| PU_MAN     | Purchasing Manager              |
+| SA_MAN     | Sales Manager                   |
+| SA_REP     | Sales Representative            |
+| SH_CLERK   | Shipping Clerk                  |
+| ST_CLERK   | Stock Clerk                     |
+| ST_MAN     | Stock Manager                   |
++------------+---------------------------------+
+19 rows in set (0.00 sec)
+
+D8_56506_Pratik>select JOB_ID, JOB_TITLE, MAX_SALARY from jobs
+    -> GROUP BY JOB_ID, JOB_TITLE, MAX_SALARY
+    -> ORDER BY MAX_SALARY;
++------------+---------------------------------+------------+
+| JOB_ID     | JOB_TITLE                       | MAX_SALARY |
++------------+---------------------------------+------------+
+| ST_CLERK   | Stock Clerk                     |       5000 |
+| PU_CLERK   | Purchasing Clerk                |       5500 |
+| SH_CLERK   | Shipping Clerk                  |       5500 |
+| AD_ASST    | Administration Assistant        |       6000 |
+| ST_MAN     | Stock Manager                   |       8500 |
+| FI_ACCOUNT | Accountant                      |       9000 |
+| AC_ACCOUNT | Public Accountant               |       9000 |
+| MK_REP     | Marketing Representative        |       9000 |
+| HR_REP     | Human Resources Representative  |       9000 |
+| IT_PROG    | Programmer                      |      10000 |
+| PR_REP     | Public Relations Representative |      10500 |
+| SA_REP     | Sales Representative            |      12000 |
+| PU_MAN     | Purchasing Manager              |      15000 |
+| MK_MAN     | Marketing Manager               |      15000 |
+| FI_MGR     | Finance Manager                 |      16000 |
+| AC_MGR     | Accounting Manager              |      16000 |
+| SA_MAN     | Sales Manager                   |      20000 |
+| AD_VP      | Administration Vice President   |      30000 |
+| AD_PRES    | President                       |      40000 |
++------------+---------------------------------+------------+
+19 rows in set (0.00 sec)
+
+D8_56506_Pratik>help select;
+Name: 'SELECT'
+Description:
+Syntax:
+SELECT
+    [ALL | DISTINCT | DISTINCTROW ]
+    [HIGH_PRIORITY]
+    [STRAIGHT_JOIN]
+    [SQL_SMALL_RESULT] [SQL_BIG_RESULT] [SQL_BUFFER_RESULT]
+    [SQL_NO_CACHE] [SQL_CALC_FOUND_ROWS]
+    select_expr [, select_expr] ...
+    [into_option]
+    [FROM table_references
+      [PARTITION partition_list]]
+    [WHERE where_condition]
+    [GROUP BY {col_name | expr | position}, ... [WITH ROLLUP]]
+    [HAVING where_condition]
+    [WINDOW window_name AS (window_spec)
+        [, window_name AS (window_spec)] ...]
+    [ORDER BY {col_name | expr | position}
+      [ASC | DESC], ... [WITH ROLLUP]]
+    [LIMIT {[offset,] row_count | row_count OFFSET offset}]
+    [into_option]
+    [FOR {UPDATE | SHARE}
+        [OF tbl_name [, tbl_name] ...]
+        [NOWAIT | SKIP LOCKED]
+      | LOCK IN SHARE MODE]
+    [into_option]
+
+into_option: {
+    INTO OUTFILE 'file_name'
+        [CHARACTER SET charset_name]
+        export_options
+  | INTO DUMPFILE 'file_name'
+  | INTO var_name [, var_name] ...
+}
+
+SELECT is used to retrieve rows selected from one or more tables, and
+can include UNION statements and subqueries. See [HELP UNION], and
+https://dev.mysql.com/doc/refman/8.0/en/subqueries.html. A SELECT
+statement can start with a WITH clause to define common table
+expressions accessible within the SELECT. See
+https://dev.mysql.com/doc/refman/8.0/en/with.html.
+
+The most commonly used clauses of SELECT statements are these:
+
+o Each select_expr indicates a column that you want to retrieve. There
+  must be at least one select_expr.
+
+o table_references indicates the table or tables from which to retrieve
+  rows. Its syntax is described in [HELP JOIN].
+
+o SELECT supports explicit partition selection using the PARTITION
+  clause with a list of partitions or subpartitions (or both) following
+  the name of the table in a table_reference (see [HELP JOIN]). In this
+  case, rows are selected only from the partitions listed, and any
+  other partitions of the table are ignored. For more information and
+  examples, see
+  https://dev.mysql.com/doc/refman/8.0/en/partitioning-selection.html.
+
+o The WHERE clause, if given, indicates the condition or conditions
+  that rows must satisfy to be selected. where_condition is an
+  expression that evaluates to true for each row to be selected. The
+  statement selects all rows if there is no WHERE clause.
+
+  In the WHERE expression, you can use any of the functions and
+  operators that MySQL supports, except for aggregate (group)
+  functions. See
+  https://dev.mysql.com/doc/refman/8.0/en/expressions.html, and
+  https://dev.mysql.com/doc/refman/8.0/en/functions.html.
+
+SELECT can also be used to retrieve rows computed without reference to
+any table.
+
+URL: https://dev.mysql.com/doc/refman/8.0/en/select.html
+
+
+D8_56506_Pratik>SELECT sal FROM employees
+    -> WHERE deptno IN(10,20)
+    -> GROUP BY deptno;
+ERROR 1054 (42S22): Unknown column 'sal' in 'field list'
+D8_56506_Pratik>SELECT sal, AVG(sal) FROM emp
+    -> WHERE deptno IN(10,20)
+    -> GROUP BY deptno;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'classwork.emp.sal' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+D8_56506_Pratik>SELECT deptno, AVG(sal) FROM emp
+    -> WHERE deptno IN (10, 20)
+    -> GROUP BY deptno;
++--------+-------------+
+| deptno | AVG(sal)    |
++--------+-------------+
+|     20 | 2175.000000 |
+|     10 | 2916.666667 |
++--------+-------------+
+2 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT deptno, AVG(sal) FROM emp
+    -> WHERE deptno IN (10, 20)
+    -> HAVING deptno IN(10, 20);
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'classwork.emp.deptno'; this is incompatible with sql_mode=only_full_group_by
+D8_56506_Pratik>SELECT deptno, AVG(sal) FROM emp
+    -> GROUP BY deptno
+    -> HAVING deptno IN(10, 20);
++--------+-------------+
+| deptno | AVG(sal)    |
++--------+-------------+
+|     20 | 2175.000000 |
+|     10 | 2916.666667 |
++--------+-------------+
+2 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT deptno, SUM(sal) FROM emp
+    -> GROUP BY deptno
+    -> ORDER BY SUM(sal) DESC
+    -> LIMIT 1;
++--------+----------+
+| deptno | SUM(sal) |
++--------+----------+
+|     20 | 10875.00 |
++--------+----------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT jobs, AVG(sal) FROM emp
+    -> GROUP BY job;
+ERROR 1054 (42S22): Unknown column 'jobs' in 'field list'
+D8_56506_Pratik>SELECT job, AVG(sal) FROM emp
+    -> GROUP BY job;
++-----------+-------------+
+| job       | AVG(sal)    |
++-----------+-------------+
+| CLERK     | 1037.500000 |
+| SALESMAN  | 1400.000000 |
+| MANAGER   | 2758.333333 |
+| ANALYST   | 3000.000000 |
+| PRESIDENT | 5000.000000 |
++-----------+-------------+
+5 rows in set (0.00 sec)
+
+D8_56506_Pratik>SELECT jobs, AVG(sal) FROM emp
+    -> GROUP BY job
+    -> LIMIT 1;
+ERROR 1054 (42S22): Unknown column 'jobs' in 'field list'
+D8_56506_Pratik>SELECT job, AVG(sal) FROM emp
+    -> GROUP BY job
+    -> LIMIT 1;
++-------+-------------+
+| job   | AVG(sal)    |
++-------+-------------+
+| CLERK | 1037.500000 |
++-------+-------------+
+1 row in set (0.00 sec)
+
+D8_56506_Pratik>SELECT job, AVG(sal + IFNULL(comm,0.0)) FROM emp
+    -> GROUP BY job
+    -> ORDER BY AVG(sal + (comm,0.0))
+    -> LIMIT 1;
+ERROR 1241 (21000): Operand should contain 1 column(s)
+D8_56506_Pratik>SELECT job, AVG(sal + IFNULL(comm,0.0)) FROM emp
+    -> GROUP BY job
+    -> ORDER BY AVG(sal + IFNULL(comm,0.0))
+    -> LIMIT 1;
++-------+-----------------------------+
+| job   | AVG(sal + IFNULL(comm,0.0)) |
++-------+-----------------------------+
+| CLERK |                 1037.500000 |
++-------+-----------------------------+
+1 row in set (0.04 sec)
+
+D8_56506_Pratik>

@@ -1,0 +1,1405 @@
+Microsoft Windows [Version 10.0.19043.1237]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Piyush>mysql -u sunbeam -p
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 25
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+sunbeam>SELECT USER(), DATABASE();
++-------------------+------------+
+| USER()            | DATABASE() |
++-------------------+------------+
+| sunbeam@localhost | NULL       |
++-------------------+------------+
+1 row in set (0.00 sec)
+
+sunbeam>use classwork
+Database changed
+sunbeam>ELECT * FROM emp WHERE  job = 'ANALYST' OR job = 'MANAGER';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ELECT * FROM emp WHERE  job = 'ANALYST' OR job = 'MANAGER'' at line 1
+sunbeam>use emp
+ERROR 1044 (42000): Access denied for user 'sunbeam'@'localhost' to database 'emp'
+sunbeam>use employees
+ERROR 1044 (42000): Access denied for user 'sunbeam'@'localhost' to database 'employees'
+sunbeam>exit
+Bye
+
+C:\Users\Piyush>mysql -u root -p
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 26
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+root>grant all privileges on employees.* to sunbeam@localhost;
+Query OK, 0 rows affected (0.01 sec)
+
+root>flush privileges
+    -> ;
+Query OK, 0 rows affected (0.01 sec)
+
+root>show databases;
++--------------------+
+| Database           |
++--------------------+
+| classwork          |
+| hr                 |
+| information_schema |
+| mysql              |
+| northwind          |
+| performance_schema |
+| sakila             |
+| sales              |
+| spj                |
+| sys                |
+| world              |
++--------------------+
+11 rows in set (0.00 sec)
+
+root>grant all privileges on hr.* to sunbeam@localhost;
+Query OK, 0 rows affected (0.01 sec)
+
+root>grant all privileges on northwind.* to sunbeam@localhost;
+Query OK, 0 rows affected (0.01 sec)
+
+root>grant all privileges on sales.* to sunbeam@localhost;
+Query OK, 0 rows affected (0.01 sec)
+
+root>grant all privileges on spj.* to sunbeam@localhost;
+Query OK, 0 rows affected (0.01 sec)
+
+root>grant all privileges on classwork.* to sunbeam@localhost;
+Query OK, 0 rows affected (0.01 sec)
+
+root>exit
+Bye
+
+C:\Users\Piyush>mysql -u sunbeam -p
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 27
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+sunbeam>show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| classwork          |
+| hr                 |
+| information_schema |
+| northwind          |
+| sales              |
+| spj                |
++--------------------+
+6 rows in set (0.00 sec)
+
+sunbeam>use classwork
+Database changed
+sunbeam>show tables;
++---------------------+
+| Tables_in_classwork |
++---------------------+
+| bonus               |
+| books               |
+| dept                |
+| dummy               |
+| emp                 |
+| salgrade            |
++---------------------+
+6 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE  job = 'ANALYST' OR job = 'MANAGER';
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hire       | sal     | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7566 | JONES | MANAGER | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE | MANAGER | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7782 | CLARK | MANAGER | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7788 | SCOTT | ANALYST | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7902 | FORD  | ANALYST | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+5 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE ename = 'JAMES' OR ename = 'KING' OR ename = 'MARTIN' OR ename = 'FORD';
++-------+--------+-----------+------+------------+---------+---------+--------+
+| empno | ename  | job       | mgr  | hire       | sal     | comm    | deptno |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+4 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE ename IN ('JAMES', 'KING', 'MARTIN', 'FORD');
++-------+--------+-----------+------+------------+---------+---------+--------+
+| empno | ename  | job       | mgr  | hire       | sal     | comm    | deptno |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+4 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE job = 'MANAGER' OR deptno = 10;
++-------+--------+-----------+------+------------+---------+------+--------+
+| empno | ename  | job       | mgr  | hire       | sal     | comm | deptno |
++-------+--------+-----------+------+------------+---------+------+--------+
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+-----------+------+------------+---------+------+--------+
+5 rows in set (0.00 sec)
+
+sunbeam>^BSELECT * FROM emp WHERE sal < 1000 OR sal > 3500;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '☻SELECT * FROM emp WHERE sal < 1000 OR sal > 3500' at line 1
+sunbeam>SELECT * FROM emp WHERE sal < 1000 OR sal > 3500;
++-------+-------+-----------+------+------------+---------+------+--------+
+| empno | ename | job       | mgr  | hire       | sal     | comm | deptno |
++-------+-------+-----------+------+------------+---------+------+--------+
+|  7369 | SMITH | CLERK     | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7900 | JAMES | CLERK     | 7698 | 1981-12-03 |  950.00 | NULL |     30 |
++-------+-------+-----------+------+------------+---------+------+--------+
+3 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE job = 'ANALYST' OR job = 'MANAGER';
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hire       | sal     | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7566 | JONES | MANAGER | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE | MANAGER | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7782 | CLARK | MANAGER | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7788 | SCOTT | ANALYST | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7902 | FORD  | ANALYST | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+5 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE job NOT IN ('SALESMAN', 'MANAGER');
++-------+--------+-----------+------+------------+---------+------+--------+
+| empno | ename  | job       | mgr  | hire       | sal     | comm | deptno |
++-------+--------+-----------+------+------------+---------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+-----------+------+------------+---------+------+--------+
+7 rows in set (0.00 sec)
+
+sunbeam>
+sunbeam>SELECT * FROM emp WHERE NOT (job IN ('SALESMAN', 'MANAGER'));
++-------+--------+-----------+------+------------+---------+------+--------+
+| empno | ename  | job       | mgr  | hire       | sal     | comm | deptno |
++-------+--------+-----------+------+------------+---------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+-----------+------+------------+---------+------+--------+
+7 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE job NOT IN ('SALESMAN', 'MANAGER');
++-------+--------+-----------+------+------------+---------+------+--------+
+| empno | ename  | job       | mgr  | hire       | sal     | comm | deptno |
++-------+--------+-----------+------+------------+---------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+-----------+------+------------+---------+------+--------+
+7 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE NOT (job IN ('SALESMAN', 'MANAGER'));
++-------+--------+-----------+------+------------+---------+------+--------+
+| empno | ename  | job       | mgr  | hire       | sal     | comm | deptno |
++-------+--------+-----------+------+------------+---------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+-----------+------+------------+---------+------+--------+
+7 rows in set (0.00 sec)
+
+sunbeam>
+sunbeam>SELECT * FROM emp WHERE NOT (job = 'SALESMAN' OR job = 'MANAGER');
++-------+--------+-----------+------+------------+---------+------+--------+
+| empno | ename  | job       | mgr  | hire       | sal     | comm | deptno |
++-------+--------+-----------+------+------------+---------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+-----------+------+------------+---------+------+--------+
+7 rows in set (0.00 sec)
+
+sunbeam>SELECT USER(), DATABASE();
++-------------------+------------+
+| USER()            | DATABASE() |
++-------------------+------------+
+| sunbeam@localhost | classwork  |
++-------------------+------------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE job = 'MANAGER' AND deptno = 20;
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hire       | sal     | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7566 | JONES | MANAGER | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE deptno = 30 AND sal < 1500;
++-------+--------+----------+------+------------+---------+---------+--------+
+| empno | ename  | job      | mgr  | hire       | sal     | comm    | deptno |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7900 | JAMES  | CLERK    | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
++-------+--------+----------+------+------------+---------+---------+--------+
+3 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE sal >= 1000 AND sal <= 2000;
++-------+--------+----------+------+------------+---------+---------+--------+
+| empno | ename  | job      | mgr  | hire       | sal     | comm    | deptno |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+----------+------+------------+---------+---------+--------+
+6 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE hire >= '1982-01-01' AND hire <= '1982-12-31'
+    -> ;
++-------+--------+---------+------+------------+---------+------+--------+
+| empno | ename  | job     | mgr  | hire       | sal     | comm | deptno |
++-------+--------+---------+------+------------+---------+------+--------+
+|  7788 | SCOTT  | ANALYST | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7934 | MILLER | CLERK   | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+---------+------+------------+---------+------+--------+
+2 rows in set (0.00 sec)
+
+sunbeam>select ename from emp order by ename;
++--------+
+| ename  |
++--------+
+| ADAMS  |
+| ALLEN  |
+| BLAKE  |
+| CLARK  |
+| FORD   |
+| JAMES  |
+| JONES  |
+| KING   |
+| MARTIN |
+| MILLER |
+| SCOTT  |
+| SMITH  |
+| TURNER |
+| WARD   |
++--------+
+14 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE ename BETWEEN 'B' AND 'J';
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hire       | sal     | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7698 | BLAKE | MANAGER | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7782 | CLARK | MANAGER | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7902 | FORD  | ANALYST | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+3 rows in set (0.00 sec)
+
+sunbeam>INSERT INTO emp(ename) VALUES ('B'), ('J');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+sunbeam>SELECT * FROM emp WHERE ename BETWEEN 'B' AND 'J';
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hire       | sal     | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7698 | BLAKE | MANAGER | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7782 | CLARK | MANAGER | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7902 | FORD  | ANALYST | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
+|  NULL | B     | NULL    | NULL | NULL       |    NULL | NULL |   NULL |
+|  NULL | J     | NULL    | NULL | NULL       |    NULL | NULL |   NULL |
++-------+-------+---------+------+------------+---------+------+--------+
+5 rows in set (0.00 sec)
+
+sunbeam>select ename from emp order by ename;
++--------+
+| ename  |
++--------+
+| ADAMS  |
+| ALLEN  |
+| B      |
+| BLAKE  |
+| CLARK  |
+| FORD   |
+| J      |
+| JAMES  |
+| JONES  |
+| KING   |
+| MARTIN |
+| MILLER |
+| SCOTT  |
+| SMITH  |
+| TURNER |
+| WARD   |
++--------+
+16 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE ename BETWEEN 'B' AND 'J';
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hire       | sal     | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7698 | BLAKE | MANAGER | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7782 | CLARK | MANAGER | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7902 | FORD  | ANALYST | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
+|  NULL | B     | NULL    | NULL | NULL       |    NULL | NULL |   NULL |
+|  NULL | J     | NULL    | NULL | NULL       |    NULL | NULL |   NULL |
++-------+-------+---------+------+------------+---------+------+--------+
+5 rows in set (0.00 sec)
+
+sunbeam>SELECT ename FROM emp WHERE ename BETWEEN 'B' AND 'K';
++-------+
+| ename |
++-------+
+| JONES |
+| BLAKE |
+| CLARK |
+| JAMES |
+| FORD  |
+| B     |
+| J     |
++-------+
+7 rows in set (0.00 sec)
+
+sunbeam>SELECT ename FROM emp WHERE ename BETWEEN 'B' AND 'K' AND ename != 'K';
++-------+
+| ename |
++-------+
+| JONES |
+| BLAKE |
+| CLARK |
+| JAMES |
+| FORD  |
+| B     |
+| J     |
++-------+
+7 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE ename LIKE 'M%';
++-------+--------+----------+------+------------+---------+---------+--------+
+| empno | ename  | job      | mgr  | hire       | sal     | comm    | deptno |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+----------+------+------------+---------+---------+--------+
+2 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE ename LIKE '%H';
++-------+-------+-------+------+------------+--------+------+--------+
+| empno | ename | job   | mgr  | hire       | sal    | comm | deptno |
++-------+-------+-------+------+------------+--------+------+--------+
+|  7369 | SMITH | CLERK | 7902 | 1980-12-17 | 800.00 | NULL |     20 |
++-------+-------+-------+------+------------+--------+------+--------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE ename LIKE '%U%';
++-------+--------+----------+------+------------+---------+------+--------+
+| empno | ename  | job      | mgr  | hire       | sal     | comm | deptno |
++-------+--------+----------+------+------------+---------+------+--------+
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 | 0.00 |     30 |
++-------+--------+----------+------+------------+---------+------+--------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE ename BETWEEN 'S' AND 'Z'
+    -> ;
++-------+--------+----------+------+------------+---------+--------+--------+
+| empno | ename  | job      | mgr  | hire       | sal     | comm   | deptno |
++-------+--------+----------+------+------------+---------+--------+--------+
+|  7369 | SMITH  | CLERK    | 7902 | 1980-12-17 |  800.00 |   NULL |     20 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 | 500.00 |     30 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000.00 |   NULL |     20 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |   0.00 |     30 |
++-------+--------+----------+------+------------+---------+--------+--------+
+4 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE ename BETWEEN 'S' AND 'Z'
+    -> OR ename LIKE 'Z%';
++-------+--------+----------+------+------------+---------+--------+--------+
+| empno | ename  | job      | mgr  | hire       | sal     | comm   | deptno |
++-------+--------+----------+------+------------+---------+--------+--------+
+|  7369 | SMITH  | CLERK    | 7902 | 1980-12-17 |  800.00 |   NULL |     20 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 | 500.00 |     30 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000.00 |   NULL |     20 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |   0.00 |     30 |
++-------+--------+----------+------+------------+---------+--------+--------+
+4 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE ename LIKE '%A%A%';
++-------+-------+-------+------+------------+---------+------+--------+
+| empno | ename | job   | mgr  | hire       | sal     | comm | deptno |
++-------+-------+-------+------+------------+---------+------+--------+
+|  7876 | ADAMS | CLERK | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
++-------+-------+-------+------+------------+---------+------+--------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE ename LIKE '____';
++-------+-------+-----------+------+------------+---------+--------+--------+
+| empno | ename | job       | mgr  | hire       | sal     | comm   | deptno |
++-------+-------+-----------+------+------------+---------+--------+--------+
+|  7521 | WARD  | SALESMAN  | 7698 | 1981-02-22 | 1250.00 | 500.00 |     30 |
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 |   NULL |     10 |
+|  7902 | FORD  | ANALYST   | 7566 | 1981-12-03 | 3000.00 |   NULL |     20 |
++-------+-------+-----------+------+------------+---------+--------+--------+
+3 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE ename LIKE '__R%';
++-------+--------+----------+------+------------+---------+---------+--------+
+| empno | ename  | job      | mgr  | hire       | sal     | comm    | deptno |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
++-------+--------+----------+------+------------+---------+---------+--------+
+4 rows in set (0.00 sec)
+
+sunbeam>
+sunbeam>SELECT * FROM emp WHERE ename LIKE '__R_';
++-------+-------+----------+------+------------+---------+--------+--------+
+| empno | ename | job      | mgr  | hire       | sal     | comm   | deptno |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7521 | WARD  | SALESMAN | 7698 | 1981-02-22 | 1250.00 | 500.00 |     30 |
+|  7902 | FORD  | ANALYST  | 7566 | 1981-12-03 | 3000.00 |   NULL |     20 |
++-------+-------+----------+------+------------+---------+--------+--------+
+2 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE sal BETWEEN 1000 AND 2000
+    -> ORDER BY sal DESC LIMIT 1;
++-------+-------+----------+------+------------+---------+--------+--------+
+| empno | ename | job      | mgr  | hire       | sal     | comm   | deptno |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN | SALESMAN | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
++-------+-------+----------+------+------------+---------+--------+--------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE job = 'CLERK'
+    -> ORDER BY sal LIMIT 1;
++-------+-------+-------+------+------------+--------+------+--------+
+| empno | ename | job   | mgr  | hire       | sal    | comm | deptno |
++-------+-------+-------+------+------------+--------+------+--------+
+|  7369 | SMITH | CLERK | 7902 | 1980-12-17 | 800.00 | NULL |     20 |
++-------+-------+-------+------+------------+--------+------+--------+
+1 row in set (0.00 sec)
+
+sunbeam>
+sunbeam>SELECT sal FROM emp WHERE deptno IN (20, 30);
++---------+
+| sal     |
++---------+
+|  800.00 |
+| 1600.00 |
+| 1250.00 |
+| 2975.00 |
+| 1250.00 |
+| 2850.00 |
+| 3000.00 |
+| 1500.00 |
+| 1100.00 |
+|  950.00 |
+| 3000.00 |
++---------+
+11 rows in set (0.00 sec)
+
+sunbeam>SELECT sal FROM emp WHERE deptno IN (20, 30)
+    -> ORDER BY sal LIMIT 4, 1;
++---------+
+| sal     |
++---------+
+| 1250.00 |
++---------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT DISTINCT sal FROM emp
+    -> WHERE deptno IN (20, 30)
+    -> ORDER BY sal LIMIT 4, 1;
++---------+
+| sal     |
++---------+
+| 1500.00 |
++---------+
+1 row in set (0.00 sec)
+
+sunbeam>show tables;
++---------------------+
+| Tables_in_classwork |
++---------------------+
+| bonus               |
+| books               |
+| dept                |
+| dummy               |
+| emp                 |
+| salgrade            |
++---------------------+
+6 rows in set (0.00 sec)
+
+sunbeam>exit
+Bye
+
+C:\Users\Piyush>mysql -u root -p
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 28
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+root>show databases;
++--------------------+
+| Database           |
++--------------------+
+| classwork          |
+| hr                 |
+| information_schema |
+| mysql              |
+| northwind          |
+| performance_schema |
+| sakila             |
+| sales              |
+| spj                |
+| sys                |
+| world              |
++--------------------+
+11 rows in set (0.00 sec)
+
+root>use classwork
+Database changed
+root>show taqbles;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'taqbles' at line 1
+root>show tables;
++---------------------+
+| Tables_in_classwork |
++---------------------+
+| bonus               |
+| books               |
+| dept                |
+| dummy               |
+| emp                 |
+| salgrade            |
++---------------------+
+6 rows in set (0.00 sec)
+
+root>exit
+Bye
+
+C:\Users\Piyush>mysql -u sunbeam -p
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 29
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+sunbeam>use classwork
+Database changed
+sunbeam>show tables;
++---------------------+
+| Tables_in_classwork |
++---------------------+
+| bonus               |
+| books               |
+| dept                |
+| dummy               |
+| emp                 |
+| salgrade            |
++---------------------+
+6 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp;
++-------+--------+-----------+------+------------+---------+---------+--------+
+| empno | ename  | job       | mgr  | hire       | sal     | comm    | deptno |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
+|  NULL | B      | NULL      | NULL | NULL       |    NULL |    NULL |   NULL |
+|  NULL | J      | NULL      | NULL | NULL       |    NULL |    NULL |   NULL |
++-------+--------+-----------+------+------------+---------+---------+--------+
+16 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp;UPDATE emp SET empno=1, sal=1000, comm=100.0 WHERE ename = 'B';
++-------+--------+-----------+------+------------+---------+---------+--------+
+| empno | ename  | job       | mgr  | hire       | sal     | comm    | deptno |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
+|  NULL | B      | NULL      | NULL | NULL       |    NULL |    NULL |   NULL |
+|  NULL | J      | NULL      | NULL | NULL       |    NULL |    NULL |   NULL |
++-------+--------+-----------+------+------------+---------+---------+--------+
+16 rows in set (0.00 sec)
+
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+sunbeam>UPDATE emp SET empno=1, sal=1000, comm=100.0 WHERE ename = 'B';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+sunbeam>SELECT * FROM emp;
++-------+--------+-----------+------+------------+---------+---------+--------+
+| empno | ename  | job       | mgr  | hire       | sal     | comm    | deptno |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
+|     1 | B      | NULL      | NULL | NULL       | 1000.00 |  100.00 |   NULL |
+|  NULL | J      | NULL      | NULL | NULL       |    NULL |    NULL |   NULL |
++-------+--------+-----------+------+------------+---------+---------+--------+
+16 rows in set (0.00 sec)
+
+sunbeam>UPDATE books SET price = price + 50
+    -> WHERE subject = 'C Programming';
+Query OK, 4 rows affected (0.01 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+sunbeam>SELECT id,name,subject,price FROM books;
++------+---------------------------------+-------------------+---------+
+| id   | name                            | subject           | price   |
++------+---------------------------------+-------------------+---------+
+| 1001 | Exploring C                     | C Programming     | 173.456 |
+| 1002 | Pointers in C                   | C Programming     | 421.019 |
+| 1003 | ANSI C Programming              | C Programming     | 384.215 |
+| 1004 | ANSI C Programming              | C Programming     | 190.121 |
+| 2001 | C++ Complete Reference          | C++ Programming   | 417.764 |
+| 2002 | C++ Primer                      | C++ Programming   | 620.665 |
+| 2003 | C++ Programming Language        | C++ Programming   | 987.213 |
+| 3001 | Java Complete Reference         | Java Programming  | 525.121 |
+| 3002 | Core Java Volume I              | Java Programming  | 575.651 |
+| 3003 | Java Programming Language       | Java Programming  | 458.238 |
+| 4001 | Operating System Concepts       | Operating Systems | 567.391 |
+| 4002 | Design of UNIX Operating System | Operating Systems | 421.938 |
+| 4003 | UNIX Internals                  | Operating Systems | 352.822 |
++------+---------------------------------+-------------------+---------+
+13 rows in set (0.00 sec)
+
+sunbeam>UPDATE books SET price = price + price * 0.05;
+Query OK, 13 rows affected (0.01 sec)
+Rows matched: 13  Changed: 13  Warnings: 0
+
+sunbeam>SELECT id,name,subject,price FROM books;
++------+---------------------------------+-------------------+----------+
+| id   | name                            | subject           | price    |
++------+---------------------------------+-------------------+----------+
+| 1001 | Exploring C                     | C Programming     |  182.129 |
+| 1002 | Pointers in C                   | C Programming     |  442.070 |
+| 1003 | ANSI C Programming              | C Programming     |  403.426 |
+| 1004 | ANSI C Programming              | C Programming     |  199.627 |
+| 2001 | C++ Complete Reference          | C++ Programming   |  438.652 |
+| 2002 | C++ Primer                      | C++ Programming   |  651.698 |
+| 2003 | C++ Programming Language        | C++ Programming   | 1036.574 |
+| 3001 | Java Complete Reference         | Java Programming  |  551.377 |
+| 3002 | Core Java Volume I              | Java Programming  |  604.434 |
+| 3003 | Java Programming Language       | Java Programming  |  481.150 |
+| 4001 | Operating System Concepts       | Operating Systems |  595.761 |
+| 4002 | Design of UNIX Operating System | Operating Systems |  443.035 |
+| 4003 | UNIX Internals                  | Operating Systems |  370.463 |
++------+---------------------------------+-------------------+----------+
+13 rows in set (0.00 sec)
+
+sunbeam>UPDATE books SET price = price + 50
+    -> UPDATE books SET price = price + 50
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UPDATE books SET price = price + 50' at line 2
+sunbeam>DELETE FROM emp WHERE ename IN ('B', 'J');
+Query OK, 2 rows affected (0.01 sec)
+
+sunbeam>DELETE FROM newemp;
+ERROR 1146 (42S02): Table 'classwork.newemp' doesn't exist
+sunbeam>SELECT * FROM emp;
++-------+--------+-----------+------+------------+---------+---------+--------+
+| empno | ename  | job       | mgr  | hire       | sal     | comm    | deptno |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+14 rows in set (0.00 sec)
+
+sunbeam>UPDATE books SET price = NULL WHERE id = 1001;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+sunbeam>SELECT * FROM books;
++------+---------------------------------+-------------------+-------------------+----------+
+| id   | name                            | author            | subject           | price    |
++------+---------------------------------+-------------------+-------------------+----------+
+| 1001 | Exploring C                     | Yashwant Kanetkar | C Programming     |     NULL |
+| 1002 | Pointers in C                   | Yashwant Kanetkar | C Programming     |  442.070 |
+| 1003 | ANSI C Programming              | E Balaguruswami   | C Programming     |  403.426 |
+| 1004 | ANSI C Programming              | Dennis Ritchie    | C Programming     |  199.627 |
+| 2001 | C++ Complete Reference          | Herbert Schildt   | C++ Programming   |  438.652 |
+| 2002 | C++ Primer                      | Stanley Lippman   | C++ Programming   |  651.698 |
+| 2003 | C++ Programming Language        | Bjarne Stroustrup | C++ Programming   | 1036.574 |
+| 3001 | Java Complete Reference         | Herbert Schildt   | Java Programming  |  551.377 |
+| 3002 | Core Java Volume I              | Cay Horstmann     | Java Programming  |  604.434 |
+| 3003 | Java Programming Language       | James Gosling     | Java Programming  |  481.150 |
+| 4001 | Operating System Concepts       | Peter Galvin      | Operating Systems |  595.761 |
+| 4002 | Design of UNIX Operating System | Mauris J Bach     | Operating Systems |  443.035 |
+| 4003 | UNIX Internals                  | Uresh Vahalia     | Operating Systems |  370.463 |
++------+---------------------------------+-------------------+-------------------+----------+
+13 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM dummy;
++-------+
+| dummy |
++-------+
+|     0 |
++-------+
+1 row in set (0.00 sec)
+
+sunbeam>DESCRIBE dummy;
++-------+------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra |
++-------+------+------+-----+---------+-------+
+| dummy | int  | YES  |     | NULL    |       |
++-------+------+------+-----+---------+-------+
+1 row in set (0.01 sec)
+
+sunbeam>TRUNCATE TABLE books;
+Query OK, 0 rows affected (0.07 sec)
+
+sunbeam>SELECT * FROM books;
+Empty set (0.01 sec)
+
+sunbeam>DESCRIBE books;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int         | NO   | PRI | NULL    |       |
+| name    | varchar(50) | YES  |     | NULL    |       |
+| author  | varchar(50) | YES  |     | NULL    |       |
+| subject | varchar(50) | YES  |     | NULL    |       |
+| price   | float(7,3)  | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+sunbeam>DROP TABLE dummy;
+Query OK, 0 rows affected (0.05 sec)
+
+sunbeam>SHOW TABLES;
++---------------------+
+| Tables_in_classwork |
++---------------------+
+| bonus               |
+| books               |
+| dept                |
+| emp                 |
+| salgrade            |
++---------------------+
+5 rows in set (0.00 sec)
+
+sunbeam>DESCRIBE dummy;
+ERROR 1146 (42S02): Table 'classwork.dummy' doesn't exist
+sunbeam>HELP SELECT;
+Name: 'SELECT'
+Description:
+Syntax:
+SELECT
+    [ALL | DISTINCT | DISTINCTROW ]
+    [HIGH_PRIORITY]
+    [STRAIGHT_JOIN]
+    [SQL_SMALL_RESULT] [SQL_BIG_RESULT] [SQL_BUFFER_RESULT]
+    [SQL_NO_CACHE] [SQL_CALC_FOUND_ROWS]
+    select_expr [, select_expr] ...
+    [into_option]
+    [FROM table_references
+      [PARTITION partition_list]]
+    [WHERE where_condition]
+    [GROUP BY {col_name | expr | position}, ... [WITH ROLLUP]]
+    [HAVING where_condition]
+    [WINDOW window_name AS (window_spec)
+        [, window_name AS (window_spec)] ...]
+    [ORDER BY {col_name | expr | position}
+      [ASC | DESC], ... [WITH ROLLUP]]
+    [LIMIT {[offset,] row_count | row_count OFFSET offset}]
+    [into_option]
+    [FOR {UPDATE | SHARE}
+        [OF tbl_name [, tbl_name] ...]
+        [NOWAIT | SKIP LOCKED]
+      | LOCK IN SHARE MODE]
+    [into_option]
+
+into_option: {
+    INTO OUTFILE 'file_name'
+        [CHARACTER SET charset_name]
+        export_options
+  | INTO DUMPFILE 'file_name'
+  | INTO var_name [, var_name] ...
+}
+
+SELECT is used to retrieve rows selected from one or more tables, and
+can include UNION statements and subqueries. See [HELP UNION], and
+https://dev.mysql.com/doc/refman/8.0/en/subqueries.html. A SELECT
+statement can start with a WITH clause to define common table
+expressions accessible within the SELECT. See
+https://dev.mysql.com/doc/refman/8.0/en/with.html.
+
+The most commonly used clauses of SELECT statements are these:
+
+o Each select_expr indicates a column that you want to retrieve. There
+  must be at least one select_expr.
+
+o table_references indicates the table or tables from which to retrieve
+  rows. Its syntax is described in [HELP JOIN].
+
+o SELECT supports explicit partition selection using the PARTITION
+  clause with a list of partitions or subpartitions (or both) following
+  the name of the table in a table_reference (see [HELP JOIN]). In this
+  case, rows are selected only from the partitions listed, and any
+  other partitions of the table are ignored. For more information and
+  examples, see
+  https://dev.mysql.com/doc/refman/8.0/en/partitioning-selection.html.
+
+o The WHERE clause, if given, indicates the condition or conditions
+  that rows must satisfy to be selected. where_condition is an
+  expression that evaluates to true for each row to be selected. The
+  statement selects all rows if there is no WHERE clause.
+
+  In the WHERE expression, you can use any of the functions and
+  operators that MySQL supports, except for aggregate (group)
+  functions. See
+  https://dev.mysql.com/doc/refman/8.0/en/expressions.html, and
+  https://dev.mysql.com/doc/refman/8.0/en/functions.html.
+
+SELECT can also be used to retrieve rows computed without reference to
+any table.
+
+URL: https://dev.mysql.com/doc/refman/8.0/en/select.html
+
+
+sunbeam>HELP INSERT;
+Name: 'INSERT'
+Description:
+Syntax:
+INSERT [LOW_PRIORITY | DELAYED | HIGH_PRIORITY] [IGNORE]
+    [INTO] tbl_name
+    [PARTITION (partition_name [, partition_name] ...)]
+    [(col_name [, col_name] ...)]
+    { {VALUES | VALUE} (value_list) [, (value_list)] ...
+      |
+      VALUES row_constructor_list
+    }
+    [AS row_alias[(col_alias [, col_alias] ...)]]
+    [ON DUPLICATE KEY UPDATE assignment_list]
+
+INSERT [LOW_PRIORITY | DELAYED | HIGH_PRIORITY] [IGNORE]
+    [INTO] tbl_name
+    [PARTITION (partition_name [, partition_name] ...)]
+    [AS row_alias[(col_alias [, col_alias] ...)]]
+    SET assignment_list
+    [ON DUPLICATE KEY UPDATE assignment_list]
+
+INSERT [LOW_PRIORITY | HIGH_PRIORITY] [IGNORE]
+    [INTO] tbl_name
+    [PARTITION (partition_name [, partition_name] ...)]
+    [(col_name [, col_name] ...)]
+    [AS row_alias[(col_alias [, col_alias] ...)]]
+    {SELECT ... | TABLE table_name}
+    [ON DUPLICATE KEY UPDATE assignment_list]
+
+value:
+    {expr | DEFAULT}
+
+value_list:
+    value [, value] ...
+
+row_constructor_list:
+    ROW(value_list)[, ROW(value_list)][, ...]
+
+assignment:
+    col_name = [row_alias.]value
+
+assignment_list:
+    assignment [, assignment] ...
+
+INSERT inserts new rows into an existing table. The INSERT ... VALUES,
+INSERT ... VALUES ROW(), and INSERT ... SET forms of the statement
+insert rows based on explicitly specified values. The INSERT ... SELECT
+form inserts rows selected from another table or tables. You can also
+use INSERT ... TABLE in MySQL 8.0.19 and later to insert rows from a
+single table. INSERT with an ON DUPLICATE KEY UPDATE clause enables
+existing rows to be updated if a row to be inserted would cause a
+duplicate value in a UNIQUE index or PRIMARY KEY. In MySQL 8.0.19 and
+later, a row alias with one or more optional column alises can be used
+with ON DUPLICATE KEY UPDATE to refer to the row to be inserted.
+
+For additional information about INSERT ... SELECT and INSERT ... ON
+DUPLICATE KEY UPDATE, see [HELP INSERT SELECT], and
+https://dev.mysql.com/doc/refman/8.0/en/insert-on-duplicate.html.
+
+In MySQL 8.0, the DELAYED keyword is accepted but ignored by the
+server. For the reasons for this, see [HELP INSERT DELAYED],
+
+Inserting into a table requires the INSERT privilege for the table. If
+the ON DUPLICATE KEY UPDATE clause is used and a duplicate key causes
+an UPDATE to be performed instead, the statement requires the UPDATE
+privilege for the columns to be updated. For columns that are read but
+not modified you need only the SELECT privilege (such as for a column
+referenced only on the right hand side of an col_name=expr assignment
+in an ON DUPLICATE KEY UPDATE clause).
+
+When inserting into a partitioned table, you can control which
+partitions and subpartitions accept new rows. The PARTITION clause
+takes a list of the comma-separated names of one or more partitions or
+subpartitions (or both) of the table. If any of the rows to be inserted
+by a given INSERT statement do not match one of the partitions listed,
+the INSERT statement fails with the error Found a row not matching the
+given partition set. For more information and examples, see
+https://dev.mysql.com/doc/refman/8.0/en/partitioning-selection.html.
+
+URL: https://dev.mysql.com/doc/refman/8.0/en/insert.html
+
+
+sunbeam>HELP Functions;
+You asked for help about help category: "Functions"
+For more information, type 'help <item>', where <item> is one of the following
+categories:
+   Aggregate Functions and Modifiers
+   Bit Functions
+   Cast Functions and Operators
+   Comparison Operators
+   Date and Time Functions
+   Encryption Functions
+   Enterprise Encryption Functions
+   Flow Control Functions
+   GROUP BY Functions and Modifiers
+   GTID
+   Information Functions
+   Internal Functions
+   Locking Functions
+   Logical Operators
+   Miscellaneous Functions
+   Numeric Functions
+   Performance Schema Functions
+   Spatial Functions
+   String Functions
+   Window Functions
+   XML
+
+sunbeam>HELP String Functions;
+You asked for help about help category: "String Functions"
+For more information, type 'help <item>', where <item> is one of the following
+topics:
+   ASCII
+   BIN
+   BIT_LENGTH
+   CHAR FUNCTION
+   CHARACTER_LENGTH
+   CHAR_LENGTH
+   CONCAT
+   CONCAT_WS
+   ELT
+   EXPORT_SET
+   FIELD
+   FIND_IN_SET
+   FORMAT
+   FROM_BASE64
+   HEX
+   INSERT FUNCTION
+   INSTR
+   LCASE
+   LEFT
+   LENGTH
+   LIKE
+   LOAD_FILE
+   LOCATE
+   LOWER
+   LPAD
+   LTRIM
+   MAKE_SET
+   MATCH AGAINST
+   MID
+   NOT LIKE
+   NOT REGEXP
+   OCT
+   OCTET_LENGTH
+   ORD
+   POSITION
+   QUOTE
+   REGEXP
+   REGEXP_INSTR
+   REGEXP_LIKE
+   REGEXP_REPLACE
+   REGEXP_SUBSTR
+   REPEAT FUNCTION
+   REPLACE FUNCTION
+   REVERSE
+   RIGHT
+   RPAD
+   RTRIM
+   SOUNDEX
+   SOUNDS LIKE
+   SPACE
+   STRCMP
+   SUBSTR
+   SUBSTRING
+   SUBSTRING_INDEX
+   TO_BASE64
+   TRIM
+   UCASE
+   UNHEX
+   UPPER
+   WEIGHT_STRING
+
+sunbeam>HELP UPPER;
+Name: 'UPPER'
+Description:
+Syntax:
+UPPER(str)
+
+Returns the string str with all characters changed to uppercase
+according to the current character set mapping. The default is utf8mb4.
+
+mysql> SELECT UPPER('Hej');
+        -> 'HEJ'
+
+See the description of LOWER() for information that also applies to
+UPPER(). This included information about how to perform lettercase
+conversion of binary strings (BINARY, VARBINARY, BLOB) for which these
+functions are ineffective, and information about case folding for
+Unicode character sets.
+
+URL: https://dev.mysql.com/doc/refman/8.0/en/string-functions.html
+
+
+sunbeam>SELECT UPPER('MySql');
++----------------+
+| UPPER('MySql') |
++----------------+
+| MYSQL          |
++----------------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT SUBSTRING('SUNBEAM', 4, 2);
++----------------------------+
+| SUBSTRING('SUNBEAM', 4, 2) |
++----------------------------+
+| BE                         |
++----------------------------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT 2 + 4 * 5 FROM DUAL;
++-----------+
+| 2 + 4 * 5 |
++-----------+
+|        22 |
++-----------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT VERSION() FROM DUAL;
++-----------+
+| VERSION() |
++-----------+
+| 8.0.26    |
++-----------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT NOW() FROM DUAL;
++---------------------+
+| NOW()               |
++---------------------+
+| 2021-10-06 13:04:40 |
++---------------------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT LOWER('India');
++----------------+
+| LOWER('India') |
++----------------+
+| india          |
++----------------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT ename, LOWER(ename) FROM emp;
++--------+--------------+
+| ename  | LOWER(ename) |
++--------+--------------+
+| SMITH  | smith        |
+| ALLEN  | allen        |
+| WARD   | ward         |
+| JONES  | jones        |
+| MARTIN | martin       |
+| BLAKE  | blake        |
+| CLARK  | clark        |
+| SCOTT  | scott        |
+| KING   | king         |
+| TURNER | turner       |
+| ADAMS  | adams        |
+| JAMES  | james        |
+| FORD   | ford         |
+| MILLER | miller       |
++--------+--------------+
+14 rows in set (0.00 sec)
+
+sunbeam>SELECT LEFT('Sunbeam', 2), RIGHT('Sunbeam', 2);
++--------------------+---------------------+
+| LEFT('Sunbeam', 2) | RIGHT('Sunbeam', 2) |
++--------------------+---------------------+
+| Su                 | am                  |
++--------------------+---------------------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT ename, LEFT(ename, 2), RIGHT(ename, 2) FROM emp;
++--------+----------------+-----------------+
+| ename  | LEFT(ename, 2) | RIGHT(ename, 2) |
++--------+----------------+-----------------+
+| SMITH  | SM             | TH              |
+| ALLEN  | AL             | EN              |
+| WARD   | WA             | RD              |
+| JONES  | JO             | ES              |
+| MARTIN | MA             | IN              |
+| BLAKE  | BL             | KE              |
+| CLARK  | CL             | RK              |
+| SCOTT  | SC             | TT              |
+| KING   | KI             | NG              |
+| TURNER | TU             | ER              |
+| ADAMS  | AD             | MS              |
+| JAMES  | JA             | ES              |
+| FORD   | FO             | RD              |
+| MILLER | MI             | ER              |
++--------+----------------+-----------------+
+14 rows in set (0.00 sec)
+
+sunbeam>SELECT ename, LEFT(ename,1) FROM emp
+    -> WHERE LEFT(ename,1) BETWEEN 'B' AND 'K';
++-------+---------------+
+| ename | LEFT(ename,1) |
++-------+---------------+
+| JONES | J             |
+| BLAKE | B             |
+| CLARK | C             |
+| KING  | K             |
+| JAMES | J             |
+| FORD  | F             |
++-------+---------------+
+6 rows in set (0.00 sec)
+
+sunbeam>SELECT SUBSTRING('SUNBEAM', 2, 3);
++----------------------------+
+| SUBSTRING('SUNBEAM', 2, 3) |
++----------------------------+
+| UNB                        |
++----------------------------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT SUBSTRING('SUNBEAM', -5, 3);
++-----------------------------+
+| SUBSTRING('SUNBEAM', -5, 3) |
++-----------------------------+
+| NBE                         |
++-----------------------------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT SUBSTRING('SUNBEAM', 4, 0);
++----------------------------+
+| SUBSTRING('SUNBEAM', 4, 0) |
++----------------------------+
+|                            |
++----------------------------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT SUBSTRING('SUNBEAM', 4, -2);
++-----------------------------+
+| SUBSTRING('SUNBEAM', 4, -2) |
++-----------------------------+
+|                             |
++-----------------------------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT ename, SUBSTRING(ename, 2, 4) FROM emp;
++--------+------------------------+
+| ename  | SUBSTRING(ename, 2, 4) |
++--------+------------------------+
+| SMITH  | MITH                   |
+| ALLEN  | LLEN                   |
+| WARD   | ARD                    |
+| JONES  | ONES                   |
+| MARTIN | ARTI                   |
+| BLAKE  | LAKE                   |
+| CLARK  | LARK                   |
+| SCOTT  | COTT                   |
+| KING   | ING                    |
+| TURNER | URNE                   |
+| ADAMS  | DAMS                   |
+| JAMES  | AMES                   |
+| FORD   | ORD                    |
+| MILLER | ILLE                   |
++--------+------------------------+
+14 rows in set (0.00 sec)
+
+sunbeam>SELECT CONCAT('SUNBEAM', ' ', 'INFOTECH');
++------------------------------------+
+| CONCAT('SUNBEAM', ' ', 'INFOTECH') |
++------------------------------------+
+| SUNBEAM INFOTECH                   |
++------------------------------------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT CONCAT('SUNBEAM', 2021);
++-------------------------+
+| CONCAT('SUNBEAM', 2021) |
++-------------------------+
+| SUNBEAM2021             |
++-------------------------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT CONCAT(ename, ' is working in dept ', deptno, ' as ', job, '.') FROM emp;
++-----------------------------------------------------------------+
+| CONCAT(ename, ' is working in dept ', deptno, ' as ', job, '.') |
++-----------------------------------------------------------------+
+| SMITH is working in dept 20 as CLERK.                           |
+| ALLEN is working in dept 30 as SALESMAN.                        |
+| WARD is working in dept 30 as SALESMAN.                         |
+| JONES is working in dept 20 as MANAGER.                         |
+| MARTIN is working in dept 30 as SALESMAN.                       |
+| BLAKE is working in dept 30 as MANAGER.                         |
+| CLARK is working in dept 10 as MANAGER.                         |
+| SCOTT is working in dept 20 as ANALYST.                         |
+| KING is working in dept 10 as PRESIDENT.                        |
+| TURNER is working in dept 30 as SALESMAN.                       |
+| ADAMS is working in dept 20 as CLERK.                           |
+| JAMES is working in dept 30 as CLERK.                           |
+| FORD is working in dept 20 as ANALYST.                          |
+| MILLER is working in dept 10 as CLERK.                          |
++-----------------------------------------------------------------+
+14 rows in set (0.00 sec)
+
+sunbeam>SELECT CONCAT(ename, ' - ', job) FROM emp;
++---------------------------+
+| CONCAT(ename, ' - ', job) |
++---------------------------+
+| SMITH - CLERK             |
+| ALLEN - SALESMAN          |
+| WARD - SALESMAN           |
+| JONES - MANAGER           |
+| MARTIN - SALESMAN         |
+| BLAKE - MANAGER           |
+| CLARK - MANAGER           |
+| SCOTT - ANALYST           |
+| KING - PRESIDENT          |
+| TURNER - SALESMAN         |
+| ADAMS - CLERK             |
+| JAMES - CLERK             |
+| FORD - ANALYST            |
+| MILLER - CLERK            |
++---------------------------+
+14 rows in set (0.00 sec)
+
+sunbeam>
+

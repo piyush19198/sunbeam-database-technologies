@@ -1,0 +1,1038 @@
+1. Write a query that lists each order number followed by the name of the
+customer who made the order
+
+
+d8_56780>select o.onum, c.cname from orders o inner join customers c on c.cnum=o.cnum;
++------+----------+
+| onum | cname    |
++------+----------+
+| 3001 | Cisneros |
+| 3003 | Hoffman  |
+| 3002 | Pereira  |
+| 3005 | Liu      |
+| 3006 | Cisneros |
+| 3009 | Giovanni |
+| 3007 | Grass    |
+| 3008 | Clemens  |
+| 3010 | Grass    |
+| 3011 | Clemens  |
++------+----------+
+10 rows in set (0.01 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+2. Write a query that gives the names of both the salesperson and the
+customer for each order along with the order number.
+
+
+select s.sname,c.cname,o.onum from orders o 
+left join salespeople s on o.snum=s.snum
+left join customers c on c.cnum=o.cnum ;
+
+
+d8_56780>select s.sname,c.cname,o.onum from orders o
+    -> left join salespeople s on o.snum=s.snum
+    -> left join customers c on c.cnum=o.cnum ;
++---------+----------+------+
+| sname   | cname    | onum |
++---------+----------+------+
+| Rifkin  | Cisneros | 3001 |
+| Peel    | Hoffman  | 3003 |
+| Motika  | Pereira  | 3002 |
+| Serres  | Liu      | 3005 |
+| Rifkin  | Cisneros | 3006 |
+| Axelrod | Giovanni | 3009 |
+| Serres  | Grass    | 3007 |
+| Peel    | Clemens  | 3008 |
+| Serres  | Grass    | 3010 |
+| Peel    | Clemens  | 3011 |
++---------+----------+------+
+10 rows in set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+3.Write a query that produces all customers serviced by salespeople with a
+commission above 12%. Output the customer’s name, the salesperson’s
+name, and the salesperson’s rate of commission.
+
+
+select c.cname,s.snum,comm*100 from customers c 
+inner join salespeople s on c.snum=s.snum
+where comm>.12;
+
+
+d8_56780>select c.cname,s.snum,comm*100 com from customers c
+    -> inner join salespeople s on c.snum=s.snum
+    -> where comm>.12;
++----------+------+-------+
+| cname    | snum | com   |
++----------+------+-------+
+| Liu      | 1002 | 13.00 |
+| Grass    | 1002 | 13.00 |
+| Cisneros | 1007 | 15.00 |
++----------+------+-------+
+3 rows in set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4. Write a query that calculates the amount of the salesperson’s commission
+on each order by a customer with a rating above 100.
+
+
+select s.sname, s.comm, o.onum, c.rating, o.amt*s.comm from salespeople s
+left join orders o on s.snum=o.snum 
+left join customers c on c.cnum=o.cnum
+where c.rating>100;
+
+
+d8_56780>select s.sname, s.comm, o.onum, c.rating, o.amt*s.comm from salespeople s
+    -> left join orders o on s.snum=o.snum
+    -> left join customers c on c.cnum=o.cnum
+    -> where c.rating>100;
++---------+------+------+--------+--------------+
+| sname   | comm | onum | rating | o.amt*s.comm |
++---------+------+------+--------+--------------+
+| Serres  | 0.13 | 3010 |    300 |      40.2935 |
+| Serres  | 0.13 | 3007 |    300 |       9.8475 |
+| Serres  | 0.13 | 3005 |    200 |     670.8585 |
+| Rifkin  | 0.15 | 3006 |    300 |     164.7240 |
+| Rifkin  | 0.15 | 3001 |    300 |       2.8035 |
+| Axelrod | 0.10 | 3009 |    200 |     171.3230 |
++---------+------+------+--------+--------------+
+6 rows in set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5. Write a query that produces all pairs of salespeople who are living in the
+same city. Exclude combinations of salespeople with themselves as well as
+duplicate rows with the order reversed.
+
+
+
+select s.sname emp1, t.sname emp2, s.city from salespeople s 
+inner join salespeople t on s.city=t.city
+where s.sname!=t.sname
+and s.snum<t.snum;
+
+
+
+d8_56780>select s.sname emp1, t.sname emp2, s.city from salespeople s
+    -> inner join salespeople t on s.city=t.city
+    -> where s.sname!=t.sname
+    -> and s.snum<t.snum;
++------+--------+--------+
+| emp1 | emp2   | city   |
++------+--------+--------+
+| Peel | Motika | London |
++------+--------+--------+
+1 row in set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6. Display department name and manager first name.
+
+
+d8_56780>select d.department_name,e.first_name from departments d inner join employees e on d.manager_id=e.employee_id;
++------------------+------------+
+| department_name  | first_name |
++------------------+------------+
+| Administration   | Jennifer   |
+| Marketing        | Michael    |
+| Purchasing       | Den        |
+| Human Resources  | Susan      |
+| Shipping         | Adam       |
+| IT               | Alexander  |
+| Public Relations | Hermann    |
+| Sales            | John       |
+| Executive        | Steven     |
+| Finance          | Nancy      |
+| Accounting       | Shelley    |
++------------------+------------+
+11 rows in set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7. Display department name, manager name, and city
+
+
+select d.department_name,e.first_name,l.city from departments d 
+join employees e on d.manager_id = e.employee_id 
+join locations l on l.location_id=d.location_id;
+
+
+d8_56780>select d.department_name,e.first_name,l.city from departments d
+    -> join employees e on d.manager_id = e.employee_id
+    -> join locations l on l.location_id=d.location_id;
++------------------+------------+---------------------+
+| department_name  | first_name | city                |
++------------------+------------+---------------------+
+| Administration   | Jennifer   | Seattle             |
+| Marketing        | Michael    | Toronto             |
+| Purchasing       | Den        | Seattle             |
+| Human Resources  | Susan      | London              |
+| Shipping         | Adam       | South San Francisco |
+| IT               | Alexander  | Southlake           |
+| Public Relations | Hermann    | Munich              |
+| Sales            | John       | OX9 9ZB             |
+| Executive        | Steven     | Seattle             |
+| Finance          | Nancy      | Seattle             |
+| Accounting       | Shelley    | Seattle             |
++------------------+------------+---------------------+
+11 rows in set (0.02 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8.Display country name, city, and department name.
+
+
+select c.country_name,l.city,d.department_name from countries c
+inner join locations l on l.country_id=c.country_id
+inner join departments d on l.location_id=d.location_id;
+
+
+d8_56780>select c.country_name,l.city,d.department_name from countries c
+    -> inner join locations l on l.country_id=c.country_id
+    -> inner join departments d on l.location_id=d.location_id;
++--------------------------+---------------------+----------------------+
+| country_name             | city                | department_name      |
++--------------------------+---------------------+----------------------+
+| United States of America | Seattle             | Administration       |
+| Canada                   | Toronto             | Marketing            |
+| United States of America | Seattle             | Purchasing           |
+| United Kingdom           | London              | Human Resources      |
+| United States of America | South San Francisco | Shipping             |
+| United States of America | Southlake           | IT                   |
+| Germany                  | Munich              | Public Relations     |
+| United States of America | Seattle             | Executive            |
+| United States of America | Seattle             | Finance              |
+| United States of America | Seattle             | Accounting           |
+| United States of America | Seattle             | Treasury             |
+| United States of America | Seattle             | Corporate Tax        |
+| United States of America | Seattle             | Control And Credit   |
+| United States of America | Seattle             | Shareholder Services |
+| United States of America | Seattle             | Benefits             |
+| United States of America | Seattle             | Manufacturing        |
+| United States of America | Seattle             | Construction         |
+| United States of America | Seattle             | Contracting          |
+| United States of America | Seattle             | Operations           |
+| United States of America | Seattle             | IT Support           |
+| United States of America | Seattle             | NOC                  |
+| United States of America | Seattle             | IT Helpdesk          |
+| United States of America | Seattle             | Government Sales     |
+| United States of America | Seattle             | Retail Sales         |
+| United States of America | Seattle             | Recruiting           |
+| United States of America | Seattle             | Payroll              |
++--------------------------+---------------------+----------------------+
+26 rows in set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9. Display job title, department name, employee last name, starting date for
+all jobs from 1993 to 1998.
+
+
+select j.job_title, d.department_name, e.last_name, h.start_date 
+from job_history h
+inner join jobs j on j.job_id=h.job_id
+inner join departments d on d.department_id=h.department_id
+inner join employees e on e.employee_id=h.employee_id
+where start_date>='1993-01-01' and start_date<='1997-12-31';
+
+
+
+d8_56780>select j.job_title, d.department_name, e.last_name, h.start_date
+    -> from job_history h
+    -> inner join jobs j on j.job_id=h.job_id
+    -> inner join departments d on d.department_id=h.department_id
+    -> inner join employees e on e.employee_id=h.employee_id
+    -> where start_date>='1993-01-01' and start_date<='1997-12-31';
++--------------------------+-----------------+-----------+------------+
+| job_title                | department_name | last_name | start_date |
++--------------------------+-----------------+-----------+------------+
+| Programmer               | IT              | De Haan   | 1993-01-13 |
+| Accounting Manager       | Accounting      | Kochhar   | 1993-10-28 |
+| Marketing Representative | Marketing       | Hartstein | 1996-02-17 |
+| Public Accountant        | Executive       | Whalen    | 1994-07-01 |
++--------------------------+-----------------+-----------+------------+
+4 rows in set (0.03 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+10. Display job title and average salary of employees.
+
+
+d8_56780>select job_title,avg(salary) from employees e join jobs j on j.job_id=e.job_id group by job_title;
++---------------------------------+--------------+
+| job_title                       | avg(salary)  |
++---------------------------------+--------------+
+| President                       | 24000.000000 |
+| Administration Vice President   | 17000.000000 |
+| Programmer                      |  5760.000000 |
+| Finance Manager                 | 12000.000000 |
+| Accountant                      |  7920.000000 |
+| Purchasing Manager              | 11000.000000 |
+| Purchasing Clerk                |  2780.000000 |
+| Stock Manager                   |  7280.000000 |
+| Stock Clerk                     |  2785.000000 |
+| Sales Manager                   | 12200.000000 |
+| Sales Representative            |  8350.000000 |
+| Shipping Clerk                  |  3215.000000 |
+| Administration Assistant        |  4400.000000 |
+| Marketing Manager               | 13000.000000 |
+| Marketing Representative        |  6000.000000 |
+| Human Resources Representative  |  6500.000000 |
+| Public Relations Representative | 10000.000000 |
+| Accounting Manager              | 12000.000000 |
+| Public Accountant               |  8300.000000 |
++---------------------------------+--------------+
+19 rows in set (0.07 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+11. Display job title, employee name, and the difference between maximum
+salary for the job and salary of the employee.
+
+
+d8_56780>select j.job_title,e.first_name, j.max_salary-e.salary from employees e inner join jobs j on e.job_id=j.job_id;
++---------------------------------+-------------+-----------------------+
+| job_title                       | first_name  | j.max_salary-e.salary |
++---------------------------------+-------------+-----------------------+
+| President                       | Steven      |              16000.00 |
+| Administration Vice President   | Neena       |              13000.00 |
+| Administration Vice President   | Lex         |              13000.00 |
+| Administration Assistant        | Jennifer    |               1600.00 |
+| Finance Manager                 | Nancy       |               4000.00 |
+| Accountant                      | Daniel      |                  0.00 |
+| Accountant                      | John        |                800.00 |
+| Accountant                      | Ismael      |               1300.00 |
+| Accountant                      | Jose Manuel |               1200.00 |
+| Accountant                      | Luis        |               2100.00 |
+| Accounting Manager              | Shelley     |               4000.00 |
+| Public Accountant               | William     |                700.00 |
+| Sales Manager                   | John        |               6000.00 |
+| Sales Manager                   | Karen       |               6500.00 |
+| Sales Manager                   | Alberto     |               8000.00 |
+| Sales Manager                   | Gerald      |               9000.00 |
+| Sales Manager                   | Eleni       |               9500.00 |
+| Sales Representative            | Peter       |               2000.00 |
+| Sales Representative            | David       |               2500.00 |
+| Sales Representative            | Peter       |               3000.00 |
+| Sales Representative            | Christopher |               4000.00 |
+| Sales Representative            | Nanette     |               4500.00 |
+| Sales Representative            | Oliver      |               5000.00 |
+| Sales Representative            | Janette     |               2000.00 |
+| Sales Representative            | Patrick     |               2500.00 |
+| Sales Representative            | Allan       |               3000.00 |
+| Sales Representative            | Lindsey     |               4000.00 |
+| Sales Representative            | Louise      |               4500.00 |
+| Sales Representative            | Sarath      |               5000.00 |
+| Sales Representative            | Clara       |               1500.00 |
+| Sales Representative            | Danielle    |               2500.00 |
+| Sales Representative            | Mattea      |               4800.00 |
+| Sales Representative            | David       |               5200.00 |
+| Sales Representative            | Sundar      |               5600.00 |
+| Sales Representative            | Amit        |               5800.00 |
+| Sales Representative            | Lisa        |                500.00 |
+| Sales Representative            | Harrison    |               2000.00 |
+| Sales Representative            | Tayler      |               2400.00 |
+| Sales Representative            | William     |               4600.00 |
+| Sales Representative            | Elizabeth   |               4700.00 |
+| Sales Representative            | Sundita     |               5900.00 |
+| Sales Representative            | Ellen       |               1000.00 |
+| Sales Representative            | Alyssa      |               3200.00 |
+| Sales Representative            | Jonathon    |               3400.00 |
+| Sales Representative            | Jack        |               3600.00 |
+| Sales Representative            | Kimberely   |               5000.00 |
+| Sales Representative            | Charles     |               5800.00 |
+| Purchasing Manager              | Den         |               4000.00 |
+| Purchasing Clerk                | Alexander   |               2400.00 |
+| Purchasing Clerk                | Shelli      |               2600.00 |
+| Purchasing Clerk                | Sigal       |               2700.00 |
+| Purchasing Clerk                | Guy         |               2900.00 |
+| Purchasing Clerk                | Karen       |               3000.00 |
+| Stock Manager                   | Matthew     |                500.00 |
+| Stock Manager                   | Adam        |                300.00 |
+| Stock Manager                   | Payam       |                600.00 |
+| Stock Manager                   | Shanta      |               2000.00 |
+| Stock Manager                   | Kevin       |               2700.00 |
+| Stock Clerk                     | Julia       |               1800.00 |
+| Stock Clerk                     | Irene       |               2300.00 |
+| Stock Clerk                     | James       |               2600.00 |
+| Stock Clerk                     | Steven      |               2800.00 |
+| Stock Clerk                     | Laura       |               1700.00 |
+| Stock Clerk                     | Mozhe       |               2200.00 |
+| Stock Clerk                     | James       |               2500.00 |
+| Stock Clerk                     | TJ          |               2900.00 |
+| Stock Clerk                     | Jason       |               1700.00 |
+| Stock Clerk                     | Michael     |               2100.00 |
+| Stock Clerk                     | Ki          |               2600.00 |
+| Stock Clerk                     | Hazel       |               2800.00 |
+| Stock Clerk                     | Renske      |               1400.00 |
+| Stock Clerk                     | Stephen     |               1800.00 |
+| Stock Clerk                     | John        |               2300.00 |
+| Stock Clerk                     | Joshua      |               2500.00 |
+| Stock Clerk                     | Trenna      |               1500.00 |
+| Stock Clerk                     | Curtis      |               1900.00 |
+| Stock Clerk                     | Randall     |               2400.00 |
+| Stock Clerk                     | Peter       |               2500.00 |
+| Shipping Clerk                  | Winston     |               2300.00 |
+| Shipping Clerk                  | Jean        |               2400.00 |
+| Shipping Clerk                  | Martha      |               3000.00 |
+| Shipping Clerk                  | Girard      |               2700.00 |
+| Shipping Clerk                  | Nandita     |               1300.00 |
+| Shipping Clerk                  | Alexis      |               1400.00 |
+| Shipping Clerk                  | Julia       |               2100.00 |
+| Shipping Clerk                  | Anthony     |               2500.00 |
+| Shipping Clerk                  | Kelly       |               1700.00 |
+| Shipping Clerk                  | Jennifer    |               1900.00 |
+| Shipping Clerk                  | Timothy     |               2600.00 |
+| Shipping Clerk                  | Randall     |               3000.00 |
+| Shipping Clerk                  | Sarah       |               1500.00 |
+| Shipping Clerk                  | Britney     |               1600.00 |
+| Shipping Clerk                  | Samuel      |               2300.00 |
+| Shipping Clerk                  | Vance       |               2700.00 |
+| Shipping Clerk                  | Alana       |               2400.00 |
+| Shipping Clerk                  | Kevin       |               2500.00 |
+| Shipping Clerk                  | Donald      |               2900.00 |
+| Shipping Clerk                  | Douglas     |               2900.00 |
+| Programmer                      | Alexander   |               1000.00 |
+| Programmer                      | Bruce       |               4000.00 |
+| Programmer                      | David       |               5200.00 |
+| Programmer                      | Valli       |               5200.00 |
+| Programmer                      | Diana       |               5800.00 |
+| Marketing Manager               | Michael     |               2000.00 |
+| Marketing Representative        | Pat         |               3000.00 |
+| Human Resources Representative  | Susan       |               2500.00 |
+| Public Relations Representative | Hermann     |                500.00 |
++---------------------------------+-------------+-----------------------+
+107 rows in set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+12. Display last name, job title of employees who have commission percentage
+and belongs to department 30.
+
+
+select e.employee_id,e.last_name,j.job_title from employees e
+left outer join jobs j on e.job_id=j.job_id
+where e.department_id=30 and e.commission_pct!=0;
+
+
+d8_56780>select e.employee_id,e.last_name,j.job_title from employees e
+    -> left outer join jobs j on e.job_id=j.job_id
+    -> where e.department_id=30 and e.commission_pct!=0;
+Empty set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+13. Display details of jobs that were done by any employee who is currently
+drawing more than 15000 of salary.
+
+
+select j.* from job_history j join employees e on j.employee_id=e.employee_id where salary >=15000;
+
+
+d8_56780>select j.* from job_history j join employees e on j.employee_id=e.employee_id where salary >=15000;
++-------------+------------+------------+------------+---------------+
+| EMPLOYEE_ID | START_DATE | END_DATE   | JOB_ID     | DEPARTMENT_ID |
++-------------+------------+------------+------------+---------------+
+|         102 | 1993-01-13 | 1998-07-24 | IT_PROG    |            60 |
+|         101 | 1989-09-21 | 1993-10-27 | AC_ACCOUNT |           110 |
+|         101 | 1993-10-28 | 1997-03-15 | AC_MGR     |           110 |
++-------------+------------+------------+------------+---------------+
+3 rows in set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+14. Display department name, manager name, and salary of the manager for
+all managers whose experience is more than 5 years.
+
+
+select d.department_name, e.first_name, e.salary
+from departments d
+inner join employees e on d.manager_id=e.manager_id
+where (sysdate()-hire_date)/365 > 5;
+
+
+
+d8_56780>select d.department_name, e.first_name, e.salary
+    -> from departments d
+    -> inner join employees e on d.manager_id=e.manager_id
+    -> where (sysdate()-hire_date)/365 > 5;
++----------------------+-------------+----------+
+| department_name      | first_name  | salary   |
++----------------------+-------------+----------+
+| Marketing            | Pat         |  6000.00 |
+| Purchasing           | Alexander   |  3100.00 |
+| Purchasing           | Shelli      |  2900.00 |
+| Purchasing           | Sigal       |  2800.00 |
+| Purchasing           | Guy         |  2600.00 |
+| Purchasing           | Karen       |  2500.00 |
+| Shipping             | Laura       |  3300.00 |
+| Shipping             | Mozhe       |  2800.00 |
+| Shipping             | James       |  2500.00 |
+| Shipping             | TJ          |  2100.00 |
+| Shipping             | Nandita     |  4200.00 |
+| Shipping             | Alexis      |  4100.00 |
+| Shipping             | Julia       |  3400.00 |
+| Shipping             | Anthony     |  3000.00 |
+| IT                   | Bruce       |  6000.00 |
+| IT                   | David       |  4800.00 |
+| IT                   | Valli       |  4800.00 |
+| IT                   | Diana       |  4200.00 |
+| Sales                | Peter       | 10000.00 |
+| Sales                | David       |  9500.00 |
+| Sales                | Peter       |  9000.00 |
+| Sales                | Christopher |  8000.00 |
+| Sales                | Nanette     |  7500.00 |
+| Sales                | Oliver      |  7000.00 |
+| Executive            | Neena       | 17000.00 |
+| Executive            | Lex         | 17000.00 |
+| Executive            | Den         | 11000.00 |
+| Executive            | Matthew     |  8000.00 |
+| Executive            | Adam        |  8200.00 |
+| Executive            | Payam       |  7900.00 |
+| Executive            | Shanta      |  6500.00 |
+| Executive            | Kevin       |  5800.00 |
+| Executive            | John        | 14000.00 |
+| Executive            | Karen       | 13500.00 |
+| Executive            | Alberto     | 12000.00 |
+| Executive            | Gerald      | 11000.00 |
+| Executive            | Eleni       | 10500.00 |
+| Executive            | Michael     | 13000.00 |
+| Finance              | Daniel      |  9000.00 |
+| Finance              | John        |  8200.00 |
+| Finance              | Ismael      |  7700.00 |
+| Finance              | Jose Manuel |  7800.00 |
+| Finance              | Luis        |  6900.00 |
+| Accounting           | William     |  8300.00 |
+| Treasury             | Steven      | 24000.00 |
+| Corporate Tax        | Steven      | 24000.00 |
+| Control And Credit   | Steven      | 24000.00 |
+| Shareholder Services | Steven      | 24000.00 |
+| Benefits             | Steven      | 24000.00 |
+| Manufacturing        | Steven      | 24000.00 |
+| Construction         | Steven      | 24000.00 |
+| Contracting          | Steven      | 24000.00 |
+| Operations           | Steven      | 24000.00 |
+| IT Support           | Steven      | 24000.00 |
+| NOC                  | Steven      | 24000.00 |
+| IT Helpdesk          | Steven      | 24000.00 |
+| Government Sales     | Steven      | 24000.00 |
+| Retail Sales         | Steven      | 24000.00 |
+| Recruiting           | Steven      | 24000.00 |
+| Payroll              | Steven      | 24000.00 |
++----------------------+-------------+----------+
+60 rows in set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+15. Display employee name if the employee joined before his manager.
+
+select e.last_name,m.last_name ,e.hire_date,m.hire_date
+from employees e
+inner join employees m
+where m.employee_id=e.manager_id and e.hire_date<m.hire_date;
+
+
+
+d8_56780>select e.last_name,m.last_name ,e.hire_date,m.hire_date
+    -> from employees e
+    -> inner join employees m
+    -> where m.employee_id=e.manager_id and e.hire_date<m.hire_date;
+Empty set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+16. Display employee name, job title for the jobs employee did in the past
+where the job was done less than six months.
+
+
+select e.first_name,j.job_title from employees e
+join job_history h on h.employee_id=e.employee_id
+join jobs j on h.job_id=j.job_id 
+where timestampdiff(month,start_date,end_date)<6;
+
+
+d8_56780>select e.first_name,j.job_title from employees e
+    -> join job_history h on h.employee_id=e.employee_id
+    -> join jobs j on h.job_id=j.job_id
+    -> where timestampdiff(month,start_date,end_date)<6;
+Empty set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+17. Display employee name and country in which he is working.
+
+select e.first_name,e.last_name,c.country_name from employees e 
+inner join departments d on e.department_id=d.department_id
+inner join locations l on l.location_id=d.location_id
+inner join countries c on c.country_id=l.country_id;
+
+
+d8_56780>select e.first_name,c.country_name from employees e
+    -> inner join departments d on e.department_id=d.department_id
+    -> inner join locations l on l.location_id=d.location_id
+    -> inner join countries c on c.country_id=l.country_id;
++-------------+--------------------------+
+| first_name  | country_name             |
++-------------+--------------------------+
+| Jennifer    | United States of America |
+| Michael     | Canada                   |
+| Pat         | Canada                   |
+| Den         | United States of America |
+| Alexander   | United States of America |
+| Shelli      | United States of America |
+| Sigal       | United States of America |
+| Guy         | United States of America |
+| Karen       | United States of America |
+| Susan       | United Kingdom           |
+| Matthew     | United States of America |
+| Adam        | United States of America |
+| Payam       | United States of America |
+| Shanta      | United States of America |
+| Kevin       | United States of America |
+| Julia       | United States of America |
+| Irene       | United States of America |
+| James       | United States of America |
+| Steven      | United States of America |
+| Laura       | United States of America |
+| Mozhe       | United States of America |
+| James       | United States of America |
+| TJ          | United States of America |
+| Jason       | United States of America |
+| Michael     | United States of America |
+| Ki          | United States of America |
+| Hazel       | United States of America |
+| Renske      | United States of America |
+| Stephen     | United States of America |
+| John        | United States of America |
+| Joshua      | United States of America |
+| Trenna      | United States of America |
+| Curtis      | United States of America |
+| Randall     | United States of America |
+| Peter       | United States of America |
+| Winston     | United States of America |
+| Jean        | United States of America |
+| Martha      | United States of America |
+| Girard      | United States of America |
+| Nandita     | United States of America |
+| Alexis      | United States of America |
+| Julia       | United States of America |
+| Anthony     | United States of America |
+| Kelly       | United States of America |
+| Jennifer    | United States of America |
+| Timothy     | United States of America |
+| Randall     | United States of America |
+| Sarah       | United States of America |
+| Britney     | United States of America |
+| Samuel      | United States of America |
+| Vance       | United States of America |
+| Alana       | United States of America |
+| Kevin       | United States of America |
+| Donald      | United States of America |
+| Douglas     | United States of America |
+| Alexander   | United States of America |
+| Bruce       | United States of America |
+| David       | United States of America |
+| Valli       | United States of America |
+| Diana       | United States of America |
+| Hermann     | Germany                  |
+| Steven      | United States of America |
+| Neena       | United States of America |
+| Lex         | United States of America |
+| Nancy       | United States of America |
+| Daniel      | United States of America |
+| John        | United States of America |
+| Ismael      | United States of America |
+| Jose Manuel | United States of America |
+| Luis        | United States of America |
+| Shelley     | United States of America |
+| William     | United States of America |
++-------------+--------------------------+
+72 rows in set (0.02 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+18. Display department name, average salary and number of employees with
+commission within the department.
+
+
+select d.department_name,avg(salary),count(commission_pct) from departments d
+inner join employees e on e.department_id=d.department_id
+where commission_pct!=0
+group by department_name;
+
+
+d8_56780>select d.department_name,avg(salary),count(commission_pct) from departments d
+    -> inner join employees e on e.department_id=d.department_id
+    -> where commission_pct!=0
+    -> group by department_name;
++-----------------+-------------+-----------------------+
+| department_name | avg(salary) | count(commission_pct) |
++-----------------+-------------+-----------------------+
+| Sales           | 8955.882353 |                    34 |
++-----------------+-------------+-----------------------+
+1 row in set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+19. Display the month in which more than 5 employees joined in any
+department located in Sydney.
+
+
+select to_char(e.hire_date,'MON-YY')
+from employees e
+inner join departments d on d.department_id=e.department_id
+inner join locations l on l.location_id=d.location_id
+where city='Seattle'
+group by to_char(e.hire_date,'MON-YY')
+having count(*)>5;
+
+
+d8_56780>select to_char(e.hire_date,'MON-YY')
+    -> from employees e
+    -> inner join departments d on d.department_id=e.department_id
+    -> inner join locations l on l.location_id=d.location_id
+    -> where city='Seattle'
+    -> group by to_char(e.hire_date,'MON-YY')
+    -> having count(*)>5;
+ERROR 1305 (42000): FUNCTION hr.to_char does not exist
+d8_56780>
+
+
+
+
+
+
+
+
+
+20. Display employee name, job title, start date, and end date of past jobs of
+all employees with commission percentage null.
+
+
+select e.first_name,j.job_title,h.start_date, h.end_date
+from job_history h 
+inner join jobs j on j.job_id=h.job_id 
+inner join employees e on h.employee_id=e.employee_id
+where commission_pct is not null;
+
+
+
+
+d8_56780>select e.first_name,j.job_title,h.start_date, h.end_date
+    -> from job_history h
+    -> inner join jobs j on j.job_id=h.job_id
+    -> inner join employees e on h.employee_id=e.employee_id
+    -> where commission_pct is null;
+Empty set (0.00 sec)
+
+
+

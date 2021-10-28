@@ -1,0 +1,276 @@
+1. Find number of customers in each city.
+
+select city, count(cid) 'Number of Customers' from customers
+inner join city_pin on cpin=pin
+group by city;
+
+D8_56780>select city, count(cid) 'Number of Customers' from customers
+    -> inner join city_pin on cpin=pin
+    -> group by city;
++--------+---------------------+
+| city   | Number of Customers |
++--------+---------------------+
+| Mumbai |                   3 |
+| Pune   |                   4 |
+| Karad  |                   2 |
++--------+---------------------+
+3 rows in set (0.00 sec)
+
+D8_56780>
+
+
+
+2. Find number of pending and number of delivered orders whose total amount
+is more than 100.
+
+select ostatus Status,count(oid) Count from orders
+where oamount>100
+group by ostatus
+having ostatus in('pending','delivered');
+
+D8_56780>select ostatus Status,count(oid) Count from orders
+    -> where oamount>100
+    -> group by ostatus
+    -> having ostatus in('pending','delivered');
++-----------+-------+
+| Status    | Count |
++-----------+-------+
+| delivered |     3 |
+| pending   |     1 |
++-----------+-------+
+2 rows in set (0.00 sec)
+
+D8_56780>
+
+
+
+3. Display top 3 products that produce highest revenue (quantity * rate)
+
+select pname, sum(p.prate*o.pqty) Revenue from products p
+inner join order_items o on p.pid=o.pid
+group by p.pname
+order by Revenue desc
+limit 3;
+
+D8_56780>select pname, sum(p.prate*o.pqty) Revenue from products p
+    -> inner join order_items o on p.pid=o.pid
+    -> group by p.pname
+    -> order by Revenue desc
+    -> limit 3;
++-----------+---------+
+| pname     | Revenue |
++-----------+---------+
+| Notebook  |     840 |
+| Marker    |     450 |
+| SketchPen |     250 |
++-----------+---------+
+3 rows in set (0.00 sec)
+
+D8_56780>
+
+
+
+4. Find total number of orders by customer John, Mac and Donald. 
+
+select c.cname,count(o.oid) from customers c
+inner join orders o on o.cid=c.cid
+group by c.cname
+having cname in ('John','Mac','Donald');
+
+D8_56780>select c.cname,count(o.oid) from customers c
+    -> inner join orders o on o.cid=c.cid
+    -> group by c.cname
+    -> having cname in ('John','Mac','Donald');
++--------+--------------+
+| cname  | count(o.oid) |
++--------+--------------+
+| John   |            1 |
+| Mac    |            1 |
+| Donald |            1 |
++--------+--------------+
+3 rows in set (0.00 sec)
+
+D8_56780>
+
+
+
+5. Mark last order of John as Delivered. 
+
+update orders set ostatus="Delivered" 
+where cid=(select cid from customers where cname="John");
+
+D8_56780>update orders set ostatus="Delivered"
+    -> where cid=(select cid from customers where cname="John");
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+D8_56780>select ostatus, cid from orders;
++------------+------+
+| ostatus    | cid  |
++------------+------+
+| Delivered  |  101 |
+| dispatched |  102 |
+| dispatched |  104 |
+| delivered  |  119 |
+| delivered  |  105 |
+| delivered  |  108 |
+| delivered  |  108 |
+| dispatched |  103 |
+| pending    |  107 |
++------------+------+
+9 rows in set (0.00 sec)
+
+D8_56780>
+
+
+
+6. Display the customer name and their total order amount where order status is
+delivered and total is more than 300
+
+select c.cname, sum(o.oamount) from customers c
+inner join orders o on o.cid=c.cid
+where ostatus='delivered'
+group by c.cname
+having sum(o.oamount)>300;
+
+D8_56780>select c.cname, sum(o.oamount) from customers c
+    -> inner join orders o on o.cid=c.cid
+    -> where ostatus='delivered'
+    -> group by c.cname
+    -> having sum(o.oamount)>300;
++--------+----------------+
+| cname  | sum(o.oamount) |
++--------+----------------+
+| Millar |         500.00 |
+| Merry  |         450.00 |
++--------+----------------+
+2 rows in set (0.00 sec)
+
+D8_56780>
+
+
+
+7. Update the last order of Adam from Pending to dispatch and then dispatch to
+Delivered (in two different queries). 
+
+update orders set ostatus="Dispatched" 
+where cid=(select cid from customers where cname='Adam') 
+order by odate desc 
+limit 1;
+
+D8_56780>select oid,ostatus from orders;
++-----+------------+
+| oid | ostatus    |
++-----+------------+
+|   1 | Delivered  |
+|   2 | dispatched |
+|   3 | dispatched |
+|   4 | delivered  |
+|   5 | delivered  |
+|   6 | delivered  |
+|   7 | delivered  |
+|   8 | dispatched |
+|   9 | Dispatched |
++-----+------------+
+9 rows in set (0.00 sec)
+
+D8_56780>
+
+update orders set ostatus="Delivered" 
+where cid=(select cid from customers where cname='Adam') 
+order by odate desc 
+limit 1;
+
+D8_56780>select oid,ostatus from orders;
++-----+------------+
+| oid | ostatus    |
++-----+------------+
+|   1 | Delivered  |
+|   2 | dispatched |
+|   3 | dispatched |
+|   4 | delivered  |
+|   5 | delivered  |
+|   6 | delivered  |
+|   7 | delivered  |
+|   8 | dispatched |
+|   9 | Delivered  |
++-----+------------+
+9 rows in set (0.00 sec)
+
+D8_56780>
+
+
+
+8. Display pins and cities of all customers whose name start and end with a
+vowel (a, e, i, o, u). 
+
+select city,pin from city_pin 
+where pin=any(select cpin from customers
+where upper(left(cname,1)) in ('A', 'E', 'I', 'O', 'U')
+and lower(right(cname,1)) in ('a', 'e', 'i', 'o', 'u'));
+
+D8_56780>select city,pin from city_pin
+    -> where pin=any(select cpin from customers
+    -> where upper(left(cname,1)) in ('A', 'E', 'I', 'O', 'U')
+    -> and lower(right(cname,1)) in ('a', 'e', 'i', 'o', 'u'));
++--------+--------+
+| city   | pin    |
++--------+--------+
+| Mumbai | 400027 |
++--------+--------+
+1 row in set (0.00 sec)
+
+D8_56780>
+
+
+
+9. Display cities, number of orders and total amount of orders from cities in 
+asc order of city name.
+
+select cp.city,count(o.oid),sum(o.oamount) from orders o
+inner join customers c on c.cid=o.cid
+inner join city_pin cp on cp.pin=c.cpin
+group by cp.city
+order by cp.city;
+
+D8_56780>select cp.city,count(o.oid),sum(o.oamount) from orders o
+    -> inner join customers c on c.cid=o.cid
+    -> inner join city_pin cp on cp.pin=c.cpin
+    -> group by cp.city
+    -> order by cp.city;
++--------+--------------+----------------+
+| city   | count(o.oid) | sum(o.oamount) |
++--------+--------------+----------------+
+| Karad  |            3 |         630.00 |
+| Mumbai |            2 |         600.00 |
+| Pune   |            3 |         240.00 |
++--------+--------------+----------------+
+3 rows in set (0.00 sec)
+
+D8_56780>
+
+
+
+10. Print total order amount from each city in descending order of amount. 
+
+select cp.city,sum(o.oamount) from orders o
+inner join customers c on c.cid=o.cid
+inner join city_pin cp on cp.pin=c.cpin
+group by cp.city
+order by sum(o.oamount) desc;
+
+D8_56780>select cp.city,sum(o.oamount) from orders o
+    -> inner join customers c on c.cid=o.cid
+    -> inner join city_pin cp on cp.pin=c.cpin
+    -> group by cp.city
+    -> order by sum(o.oamount) desc;
++--------+----------------+
+| city   | sum(o.oamount) |
++--------+----------------+
+| Karad  |         630.00 |
+| Mumbai |         600.00 |
+| Pune   |         240.00 |
++--------+----------------+
+3 rows in set (0.00 sec)
+
+D8_56780>

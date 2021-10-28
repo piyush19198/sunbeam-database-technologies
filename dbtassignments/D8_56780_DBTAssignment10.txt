@@ -1,0 +1,109 @@
+1. Write a SQL statement to rename the table EMP to EMPLOYEE
+
+alter table emp rename to employee;
+
+2. Write a SQL statement to add a column region to the table DEPT
+
+alter table dept add region char(20);
+
+3. Write a SQL statement to add a dummy_ID as the first column of the table DUMMY
+
+alter table dept add dummy_ID int first;
+
+4. Write a SQL statement to change the data type of the column sal to float in the table
+EMP.
+
+alter table employee modify sal float;
+
+5. Write a SQL statement to drop the column region from the table DEPT.
+
+alter table dept drop region;
+
+
+1. Write a procedure that computes the perimeter and the area of a rectangle. Define
+your own values for the length and width. (Assuming that L and W are the length
+and width of the rectangle, Perimeter = 2*(L+W) and Area = L*W.
+
+drop procedure if exists rect;
+delimiter $$
+create procedure rect(l_rect int,b_rect int)
+begin
+	declare area_rect int;
+	declare peri_rect int;
+	select l_rect * b_rect into area_rect;
+	select 2*(l_rect + b_rect) into peri_rect;
+	insert into result values(area_rect,peri_rect);
+end;
+$$
+delimiter ;
+
+2. Write a procedure that declares an integer variable called num, assigns a value to it,
+and computes and inserts into the temp table the value of the variable itself, its
+square, and its cube.
+
+drop procedure if exists sqcube;
+delimiter $$
+create procedure sqcube(num int)
+begin
+	declare sq int;
+	declare cub int;
+	select num*num into sq;
+	select num*num*num into cub;
+	insert into temp values(num,'NUMBER');
+	insert into temp values(sq,'SQUARE');
+	insert into temp values(cub,'CUBE');
+end
+$$
+delimiter ;
+
+3. Create a procedure to Convert a temperature in Fahrenheit (F) to its equivalent in
+Celsius (C) and vice versa. The required formulae are:- C= (F-32)*5/9 F= 9/5*C +
+32
+
+drop procedure if exists temper;
+delimiter $$
+create procedure temper(temp double)
+begin
+	declare cel double;
+	declare far double;
+	select (temp-32)*5/9 into cel;
+	select 9/5*temp+32 into far;
+	insert into temp values(cel,"FahrenheitToCelsius");
+	insert into temp values(far,"CelsiusToFahrenheit");
+end
+$$
+delimiter ;
+
+4. Create a procedure to Convert a number of inches into yards, feet, and inches. For
+example, 124 inches equals 3 yards, 1 foot, and 4 inches.
+
+drop procedure if exists conv;
+delimiter $$
+create procedure conv(num int)
+begin
+	declare y int;
+	declare f int;
+	declare i int;
+	declare b int;
+	
+	set y=num/36;
+	set b=num%36;
+	set f=b/12;
+	set i=num%12;
+	
+	select y,f,i;
+end
+$$
+delimiter ;
+
+5. Create a procedure that takes department ID and changes the manager ID for the
+department to the employee in the department with lowest salary
+
+drop procedure if exists mgrconv;
+delimiter $$
+create procedure mgrconv()
+begin
+	select
+end
+$$
+delimiter ;

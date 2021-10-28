@@ -1,0 +1,209 @@
+1. List all mobiles  working on Android?.(using subquery)
+
+select * from mobiles 
+where os_id = any(select os_id from operatingsystems where name='android');
+
+d8_56780>select * from mobiles
+    -> where os_id = any(select os_id from operatingsystems where name='android');
++-----------+-------------+---------+-------+-------+
+| Mobile_id | Model       | Company | Price | OS_Id |
++-----------+-------------+---------+-------+-------+
+|         2 | Note 10 Pro | Redmi   | 18000 |     1 |
+|         4 | M30s        | Samsung | 17000 |     1 |
+|         5 | A31         | Oppo    | 11500 |     1 |
+|         6 | Narzo       | RealMe  |  9000 |     1 |
++-----------+-------------+---------+-------+-------+
+4 rows in set (0.00 sec)
+
+
+
+2. Display the OperatingSystem which is used by 2 or more Mobiles. (Use having clause)
+
+select o.name,count(m.mobile_id) from operatingsystems o
+inner join mobiles m on m.os_id=o.os_id
+group by o.name
+having count(m.mobile_id)>=2;
+
+d8_56780>select o.name,count(m.mobile_id) from operatingsystems o
+    -> inner join mobiles m on m.os_id=o.os_id
+    -> group by o.name
+    -> having count(m.mobile_id)>=2;
++---------+--------------------+
+| name    | count(m.mobile_id) |
++---------+--------------------+
+| Android |                  4 |
++---------+--------------------+
+1 row in set (0.00 sec)
+
+
+
+3. Display the cheapest mobile.
+
+select model,price from mobiles where price =(select min(price) from mobiles);
+
+d8_56780>select model,price from mobiles where price =(select min(price) from mobiles);
++-------+-------+
+| model | price |
++-------+-------+
+| Narzo |  9000 |
++-------+-------+
+1 row in set (0.00 sec)
+
+
+
+4. Change the name of column "Price" to "Rate".
+
+alter table mobiles change Price Rate int;
+
+d8_56780>alter table mobiles change Price Rate int;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+d8_56780>show tables;
++-------------------+
+| Tables_in_labexam |
++-------------------+
+| mobiles           |
+| operatingsystems  |
++-------------------+
+2 rows in set (0.00 sec)
+
+d8_56780>describe mobiles;
++-----------+----------+------+-----+---------+-------+
+| Field     | Type     | Null | Key | Default | Extra |
++-----------+----------+------+-----+---------+-------+
+| Mobile_id | int      | NO   | PRI | NULL    |       |
+| Model     | char(20) | YES  |     | NULL    |       |
+| Company   | char(20) | YES  |     | NULL    |       |
+| Rate      | int      | YES  |     | NULL    |       |
+| OS_Id     | int      | YES  | MUL | NULL    |       |
++-----------+----------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+
+5. Display Operating system and count of mobiles using the OS whose cost is more than 15000.
+
+select os_id, count(mobile_id) from mobiles where price > 15000;
+
+
+
+6. Write query to add gst of 10% whose OS_id=1,gst of 18% whose os_id=2 and 20% to os_id=3 .(Use only case)
+
+select model,os_id,rate as withoutgst, 
+(case 
+when os_id = 1 then rate+(rate*.1)
+when os_id = 2 then rate+(rate*.18)
+when os_id = 3 then rate+(rate*.2)
+end) as gst
+from mobiles;
+
+d8_56780>select model,os_id,rate as withoutgst,
+    -> (case
+    -> when os_id = 1 then rate+(rate*.1)
+    -> when os_id = 2 then rate+(rate*.18)
+    -> when os_id = 3 then rate+(rate*.2)
+    -> end) as gst
+    -> from mobiles;
++-------------+-------+------------+----------+
+| model       | os_id | withoutgst | gst      |
++-------------+-------+------------+----------+
+| iPhone13    |     2 |      80000 | 94400.00 |
+| Note 10 Pro |     1 |      18000 |  19800.0 |
+| Lumia 420   |     3 |      19000 |  22800.0 |
+| M30s        |     1 |      17000 |  18700.0 |
+| A31         |     1 |      11500 |  12650.0 |
+| Narzo       |     1 |       9000 |   9900.0 |
++-------------+-------+------------+----------+
+6 rows in set (0.00 sec)
+
+
+
+
+7. List Company with names start with 'R' and ends with 'i'.
+
+select company from mobiles where company like 'R%i';
+
+d8_56780>select company from mobiles where company like 'R%i';
++---------+
+| company |
++---------+
+| Redmi   |
++---------+
+1 row in set (0.00 sec)
+
+
+
+8. List all the Mobiles which have price between 10000 to 20000
+
+(We changed name of Price column to Rate in Q4.)
+select model,rate from mobiles where rate between 10000 and 20000;
+
+d8_56780>select model,rate from mobiles where rate between 10000 and 20000;
++-------------+-------+
+| model       | rate  |
++-------------+-------+
+| Note 10 Pro | 18000 |
+| Lumia 420   | 19000 |
+| M30s        | 17000 |
+| A31         | 11500 |
++-------------+-------+
+4 rows in set (0.00 sec)
+
+
+
+9. List the Company with Name that start with 'N'.
+
+select company from mobiles where company like 'N%';
+
+d8_56780>select company from mobiles where company like 'N%';
++---------+
+| company |
++---------+
+| Nokia   |
++---------+
+1 row in set (0.00 sec)
+
+
+
+10. Display all Mobiles using android os and costs between 10000 to 17500.(use subquery)
+
+select model from mobiles 
+where os_id=(select os_id from operatingsystems where name='Android')
+and rate=any(select rate from mobiles where rate between 10000 and 17500);
+
+d8_56780>select model from mobiles
+    -> where os_id=(select os_id from operatingsystems where name='Android')
+    -> and rate=any(select rate from mobiles where rate between 10000 and 17500);
++-------+
+| model |
++-------+
+| M30s  |
+| A31   |
++-------+
+2 rows in set (0.00 sec)
+
+
+
+PLSQL 
+
+Write a stored function to find out the factorial of a given number and display the 
+output on the shell.
+
+drop procedure if exists facto;
+delimiter $$
+create procedure facto(fnum)
+begin
+	declare temp int;
+	declare result int;
+	set temp=1;
+	set result=1
+	while temp<fnum
+		begin
+			set result=result*temp;
+			set temp+1
+		end
+	select result;	
+end;
+$$
+delimiter ;

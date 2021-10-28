@@ -1,0 +1,702 @@
+1. Display first name and last name after converting the first letter of each
+name to upper case and the rest to lower case.
+
+select concat(upper(substring(first_name,1,1)),
+lower(substring(first_name,2))) as Name,
+concat(upper(substring(last_name,1,1)),
+lower(substring(last_name,2))) as Name from employees;
+
+
+
+
+d8_56780>select concat(upper(substring(first_name,1,1)),
+    -> lower(substring(first_name,2))) as Name,
+    -> concat(upper(substring(last_name,1,1)),
+    -> lower(substring(last_name,2))) as Name from employees;
++-------------+-------------+
+| Name        | Name        |
++-------------+-------------+
+| Ellen       | Abel        |
+| Sundar      | Ande        |
+| Mozhe       | Atkinson    |
+| David       | Austin      |
+| Hermann     | Baer        |
+| Shelli      | Baida       |
+| Amit        | Banda       |
+| Elizabeth   | Bates       |
+| Sarah       | Bell        |
+| David       | Bernstein   |
+| Laura       | Bissot      |
+| Harrison    | Bloom       |
+| Alexis      | Bull        |
+| Anthony     | Cabrio      |
+| Gerald      | Cambrault   |
+| Nanette     | Cambrault   |
+| John        | Chen        |
+| Kelly       | Chung       |
+| Karen       | Colmenares  |
+| Curtis      | Davies      |
+| Lex         | De haan     |
+| Julia       | Dellinger   |
+| Jennifer    | Dilly       |
+| Louise      | Doran       |
+| Bruce       | Ernst       |
+| Alberto     | Errazuriz   |
+| Britney     | Everett     |
+| Daniel      | Faviet      |
+| Pat         | Fay         |
+| Kevin       | Feeney      |
+| Jean        | Fleaur      |
+| Tayler      | Fox         |
+| Adam        | Fripp       |
+| Timothy     | Gates       |
+| Ki          | Gee         |
+| Girard      | Geoni       |
+| William     | Gietz       |
+| Douglas     | Grant       |
+| Kimberely   | Grant       |
+| Nancy       | Greenberg   |
+| Danielle    | Greene      |
+| Peter       | Hall        |
+| Michael     | Hartstein   |
+| Shelley     | Higgins     |
+| Guy         | Himuro      |
+| Alexander   | Hunold      |
+| Alyssa      | Hutton      |
+| Charles     | Johnson     |
+| Vance       | Jones       |
+| Payam       | Kaufling    |
+| Alexander   | Khoo        |
+| Janette     | King        |
+| Steven      | King        |
+| Neena       | Kochhar     |
+| Sundita     | Kumar       |
+| Renske      | Ladwig      |
+| James       | Landry      |
+| David       | Lee         |
+| Jack        | Livingston  |
+| Diana       | Lorentz     |
+| Jason       | Mallin      |
+| Steven      | Markle      |
+| James       | Marlow      |
+| Mattea      | Marvins     |
+| Randall     | Matos       |
+| Susan       | Mavris      |
+| Samuel      | Mccain      |
+| Allan       | Mcewen      |
+| Irene       | Mikkilineni |
+| Kevin       | Mourgos     |
+| Julia       | Nayer       |
+| Donald      | Oconnell    |
+| Christopher | Olsen       |
+| Tj          | Olson       |
+| Lisa        | Ozer        |
+| Karen       | Partners    |
+| Valli       | Pataballa   |
+| Joshua      | Patel       |
+| Randall     | Perkins     |
+| Hazel       | Philtanker  |
+| Luis        | Popp        |
+| Trenna      | Rajs        |
+| Den         | Raphaely    |
+| Michael     | Rogers      |
+| John        | Russell     |
+| Nandita     | Sarchand    |
+| Ismael      | Sciarra     |
+| John        | Seo         |
+| Sarath      | Sewall      |
+| Lindsey     | Smith       |
+| William     | Smith       |
+| Stephen     | Stiles      |
+| Martha      | Sullivan    |
+| Patrick     | Sully       |
+| Jonathon    | Taylor      |
+| Winston     | Taylor      |
+| Sigal       | Tobias      |
+| Peter       | Tucker      |
+| Oliver      | Tuvault     |
+| Jose manuel | Urman       |
+| Peter       | Vargas      |
+| Clara       | Vishney     |
+| Shanta      | Vollman     |
+| Alana       | Walsh       |
+| Matthew     | Weiss       |
+| Jennifer    | Whalen      |
+| Eleni       | Zlotkey     |
++-------------+-------------+
+107 rows in set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+2.Display the first word in job title.
+
+select substring_index(job_title,' ',1) from jobs;
+
+
+
+d8_56780>select substring_index(job_title,' ',1) from jobs;
++----------------------------------+
+| substring_index(job_title,' ',1) |
++----------------------------------+
+| President                        |
+| Administration                   |
+| Administration                   |
+| Finance                          |
+| Accountant                       |
+| Accounting                       |
+| Public                           |
+| Sales                            |
+| Sales                            |
+| Purchasing                       |
+| Purchasing                       |
+| Stock                            |
+| Stock                            |
+| Shipping                         |
+| Programmer                       |
+| Marketing                        |
+| Marketing                        |
+| Human                            |
+| Public                           |
++----------------------------------+
+19 rows in set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+3. Display the length of first name for employees where last name contain
+character ‘b’ after 3rd position.
+
+
+d8_56780>select first_name,last_name from employees where instr(last_name,'b')>3;
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| Gerald     | Cambrault |
+| Nanette    | Cambrault |
+| Nancy      | Greenberg |
+| Valli      | Pataballa |
++------------+-----------+
+4 rows in set (0.01 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+4. Display first name in upper case and email address in lower case for
+employees where the first name and email address are same irrespective of
+the case.
+
+
+d8_56780>select upper(first_name),lower(email) from employees where upper(first_name)=upper(email);
+Empty set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+5. Display first name, salary, and round the salary to thousands
+
+d8_56780>select first_name,round(salary,-3) from employees;
++-------------+------------------+
+| first_name  | round(salary,-3) |
++-------------+------------------+
+| Steven      |            24000 |
+| Neena       |            17000 |
+| Lex         |            17000 |
+| Alexander   |             9000 |
+| Bruce       |             6000 |
+| David       |             5000 |
+| Valli       |             5000 |
+| Diana       |             4000 |
+| Nancy       |            12000 |
+| Daniel      |             9000 |
+| John        |             8000 |
+| Ismael      |             8000 |
+| Jose Manuel |             8000 |
+| Luis        |             7000 |
+| Den         |            11000 |
+| Alexander   |             3000 |
+| Shelli      |             3000 |
+| Sigal       |             3000 |
+| Guy         |             3000 |
+| Karen       |             3000 |
+| Matthew     |             8000 |
+| Adam        |             8000 |
+| Payam       |             8000 |
+| Shanta      |             7000 |
+| Kevin       |             6000 |
+| Julia       |             3000 |
+| Irene       |             3000 |
+| James       |             2000 |
+| Steven      |             2000 |
+| Laura       |             3000 |
+| Mozhe       |             3000 |
+| James       |             3000 |
+| TJ          |             2000 |
+| Jason       |             3000 |
+| Michael     |             3000 |
+| Ki          |             2000 |
+| Hazel       |             2000 |
+| Renske      |             4000 |
+| Stephen     |             3000 |
+| John        |             3000 |
+| Joshua      |             3000 |
+| Trenna      |             4000 |
+| Curtis      |             3000 |
+| Randall     |             3000 |
+| Peter       |             3000 |
+| John        |            14000 |
+| Karen       |            14000 |
+| Alberto     |            12000 |
+| Gerald      |            11000 |
+| Eleni       |            11000 |
+| Peter       |            10000 |
+| David       |            10000 |
+| Peter       |             9000 |
+| Christopher |             8000 |
+| Nanette     |             8000 |
+| Oliver      |             7000 |
+| Janette     |            10000 |
+| Patrick     |            10000 |
+| Allan       |             9000 |
+| Lindsey     |             8000 |
+| Louise      |             8000 |
+| Sarath      |             7000 |
+| Clara       |            11000 |
+| Danielle    |            10000 |
+| Mattea      |             7000 |
+| David       |             7000 |
+| Sundar      |             6000 |
+| Amit        |             6000 |
+| Lisa        |            12000 |
+| Harrison    |            10000 |
+| Tayler      |            10000 |
+| William     |             7000 |
+| Elizabeth   |             7000 |
+| Sundita     |             6000 |
+| Ellen       |            11000 |
+| Alyssa      |             9000 |
+| Jonathon    |             9000 |
+| Jack        |             8000 |
+| Kimberely   |             7000 |
+| Charles     |             6000 |
+| Winston     |             3000 |
+| Jean        |             3000 |
+| Martha      |             3000 |
+| Girard      |             3000 |
+| Nandita     |             4000 |
+| Alexis      |             4000 |
+| Julia       |             3000 |
+| Anthony     |             3000 |
+| Kelly       |             4000 |
+| Jennifer    |             4000 |
+| Timothy     |             3000 |
+| Randall     |             3000 |
+| Sarah       |             4000 |
+| Britney     |             4000 |
+| Samuel      |             3000 |
+| Vance       |             3000 |
+| Alana       |             3000 |
+| Kevin       |             3000 |
+| Donald      |             3000 |
+| Douglas     |             3000 |
+| Jennifer    |             4000 |
+| Michael     |            13000 |
+| Pat         |             6000 |
+| Susan       |             7000 |
+| Hermann     |            10000 |
+| Shelley     |            12000 |
+| William     |             8000 |
++-------------+------------------+
+107 rows in set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6. Display employee ID and the date on which he ended his previous job.
+
+
+select j.EMPLOYEE_ID , MAX(j.END_DATE)
+from job_history j
+group by j.employee_id;
+
+
+d8_56780>select j.EMPLOYEE_ID , MAX(j.END_DATE)
+    -> from job_history j
+    -> group by j.employee_id;
++-------------+-----------------+
+| EMPLOYEE_ID | MAX(j.END_DATE) |
++-------------+-----------------+
+|           0 | 0000-00-00      |
+|         101 | 1997-03-15      |
+|         102 | 1998-07-24      |
+|         114 | 1999-12-31      |
+|         122 | 1999-12-31      |
+|         176 | 1999-12-31      |
+|         200 | 1998-12-31      |
+|         201 | 1999-12-19      |
++-------------+-----------------+
+8 rows in set (0.03 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7. Display first name and date of first salary of the employees.
+
+d8_56780>select first_name,last_day(hire_date) from employees;
++-------------+---------------------+
+| first_name  | last_day(hire_date) |
++-------------+---------------------+
+| Steven      | 1987-06-30          |
+| Neena       | 1987-06-30          |
+| Lex         | 1987-06-30          |
+| Alexander   | 1987-06-30          |
+| Bruce       | 1987-06-30          |
+| David       | 1987-06-30          |
+| Valli       | 1987-06-30          |
+| Diana       | 1987-06-30          |
+| Nancy       | 1987-06-30          |
+| Daniel      | 1987-06-30          |
+| John        | 1987-06-30          |
+| Ismael      | 1987-06-30          |
+| Jose Manuel | 1987-06-30          |
+| Luis        | 1987-06-30          |
+| Den         | 1987-07-31          |
+| Alexander   | 1987-07-31          |
+| Shelli      | 1987-07-31          |
+| Sigal       | 1987-07-31          |
+| Guy         | 1987-07-31          |
+| Karen       | 1987-07-31          |
+| Matthew     | 1987-07-31          |
+| Adam        | 1987-07-31          |
+| Payam       | 1987-07-31          |
+| Shanta      | 1987-07-31          |
+| Kevin       | 1987-07-31          |
+| Julia       | 1987-07-31          |
+| Irene       | 1987-07-31          |
+| James       | 1987-07-31          |
+| Steven      | 1987-07-31          |
+| Laura       | 1987-07-31          |
+| Mozhe       | 1987-07-31          |
+| James       | 1987-07-31          |
+| TJ          | 1987-07-31          |
+| Jason       | 1987-07-31          |
+| Michael     | 1987-07-31          |
+| Ki          | 1987-07-31          |
+| Hazel       | 1987-07-31          |
+| Renske      | 1987-07-31          |
+| Stephen     | 1987-07-31          |
+| John        | 1987-07-31          |
+| Joshua      | 1987-07-31          |
+| Trenna      | 1987-07-31          |
+| Curtis      | 1987-07-31          |
+| Randall     | 1987-07-31          |
+| Peter       | 1987-07-31          |
+| John        | 1987-08-31          |
+| Karen       | 1987-08-31          |
+| Alberto     | 1987-08-31          |
+| Gerald      | 1987-08-31          |
+| Eleni       | 1987-08-31          |
+| Peter       | 1987-08-31          |
+| David       | 1987-08-31          |
+| Peter       | 1987-08-31          |
+| Christopher | 1987-08-31          |
+| Nanette     | 1987-08-31          |
+| Oliver      | 1987-08-31          |
+| Janette     | 1987-08-31          |
+| Patrick     | 1987-08-31          |
+| Allan       | 1987-08-31          |
+| Lindsey     | 1987-08-31          |
+| Louise      | 1987-08-31          |
+| Sarath      | 1987-08-31          |
+| Clara       | 1987-08-31          |
+| Danielle    | 1987-08-31          |
+| Mattea      | 1987-08-31          |
+| David       | 1987-08-31          |
+| Sundar      | 1987-08-31          |
+| Amit        | 1987-08-31          |
+| Lisa        | 1987-08-31          |
+| Harrison    | 1987-08-31          |
+| Tayler      | 1987-08-31          |
+| William     | 1987-08-31          |
+| Elizabeth   | 1987-08-31          |
+| Sundita     | 1987-08-31          |
+| Ellen       | 1987-08-31          |
+| Alyssa      | 1987-08-31          |
+| Jonathon    | 1987-09-30          |
+| Jack        | 1987-09-30          |
+| Kimberely   | 1987-09-30          |
+| Charles     | 1987-09-30          |
+| Winston     | 1987-09-30          |
+| Jean        | 1987-09-30          |
+| Martha      | 1987-09-30          |
+| Girard      | 1987-09-30          |
+| Nandita     | 1987-09-30          |
+| Alexis      | 1987-09-30          |
+| Julia       | 1987-09-30          |
+| Anthony     | 1987-09-30          |
+| Kelly       | 1987-09-30          |
+| Jennifer    | 1987-09-30          |
+| Timothy     | 1987-09-30          |
+| Randall     | 1987-09-30          |
+| Sarah       | 1987-09-30          |
+| Britney     | 1987-09-30          |
+| Samuel      | 1987-09-30          |
+| Vance       | 1987-09-30          |
+| Alana       | 1987-09-30          |
+| Kevin       | 1987-09-30          |
+| Donald      | 1987-09-30          |
+| Douglas     | 1987-09-30          |
+| Jennifer    | 1987-09-30          |
+| Michael     | 1987-09-30          |
+| Pat         | 1987-09-30          |
+| Susan       | 1987-09-30          |
+| Hermann     | 1987-09-30          |
+| Shelley     | 1987-09-30          |
+| William     | 1987-10-31          |
++-------------+---------------------+
+107 rows in set (0.01 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8. Display first name and experience of the employees.
+
+
+d8_56780>select first_name,datediff(sysdate(),hire_date)/365 from employees;
++-------------+-----------------------------------+
+| first_name  | datediff(sysdate(),hire_date)/365 |
++-------------+-----------------------------------+
+| Steven      |                           34.3425 |
+| Neena       |                           34.3397 |
+| Lex         |                           34.3370 |
+| Alexander   |                           34.3342 |
+| Bruce       |                           34.3315 |
+| David       |                           34.3288 |
+| Valli       |                           34.3260 |
+| Diana       |                           34.3233 |
+| Nancy       |                           34.3205 |
+| Daniel      |                           34.3178 |
+| John        |                           34.3151 |
+| Ismael      |                           34.3123 |
+| Jose Manuel |                           34.3096 |
+| Luis        |                           34.3068 |
+| Den         |                           34.3041 |
+| Alexander   |                           34.3014 |
+| Shelli      |                           34.2986 |
+| Sigal       |                           34.2959 |
+| Guy         |                           34.2932 |
+| Karen       |                           34.2904 |
+| Matthew     |                           34.2877 |
+| Adam        |                           34.2849 |
+| Payam       |                           34.2822 |
+| Shanta      |                           34.2795 |
+| Kevin       |                           34.2767 |
+| Julia       |                           34.2740 |
+| Irene       |                           34.2712 |
+| James       |                           34.2685 |
+| Steven      |                           34.2658 |
+| Laura       |                           34.2630 |
+| Mozhe       |                           34.2603 |
+| James       |                           34.2575 |
+| TJ          |                           34.2548 |
+| Jason       |                           34.2521 |
+| Michael     |                           34.2493 |
+| Ki          |                           34.2466 |
+| Hazel       |                           34.2438 |
+| Renske      |                           34.2411 |
+| Stephen     |                           34.2384 |
+| John        |                           34.2356 |
+| Joshua      |                           34.2329 |
+| Trenna      |                           34.2301 |
+| Curtis      |                           34.2274 |
+| Randall     |                           34.2247 |
+| Peter       |                           34.2219 |
+| John        |                           34.2192 |
+| Karen       |                           34.2164 |
+| Alberto     |                           34.2137 |
+| Gerald      |                           34.2110 |
+| Eleni       |                           34.2082 |
+| Peter       |                           34.2055 |
+| David       |                           34.2027 |
+| Peter       |                           34.2000 |
+| Christopher |                           34.1973 |
+| Nanette     |                           34.1945 |
+| Oliver      |                           34.1918 |
+| Janette     |                           34.1890 |
+| Patrick     |                           34.1863 |
+| Allan       |                           34.1836 |
+| Lindsey     |                           34.1808 |
+| Louise      |                           34.1781 |
+| Sarath      |                           34.1753 |
+| Clara       |                           34.1726 |
+| Danielle    |                           34.1699 |
+| Mattea      |                           34.1671 |
+| David       |                           34.1644 |
+| Sundar      |                           34.1616 |
+| Amit        |                           34.1589 |
+| Lisa        |                           34.1562 |
+| Harrison    |                           34.1534 |
+| Tayler      |                           34.1507 |
+| William     |                           34.1479 |
+| Elizabeth   |                           34.1452 |
+| Sundita     |                           34.1425 |
+| Ellen       |                           34.1397 |
+| Alyssa      |                           34.1370 |
+| Jonathon    |                           34.1342 |
+| Jack        |                           34.1315 |
+| Kimberely   |                           34.1288 |
+| Charles     |                           34.1260 |
+| Winston     |                           34.1233 |
+| Jean        |                           34.1205 |
+| Martha      |                           34.1178 |
+| Girard      |                           34.1151 |
+| Nandita     |                           34.1123 |
+| Alexis      |                           34.1096 |
+| Julia       |                           34.1068 |
+| Anthony     |                           34.1041 |
+| Kelly       |                           34.1014 |
+| Jennifer    |                           34.0986 |
+| Timothy     |                           34.0959 |
+| Randall     |                           34.0932 |
+| Sarah       |                           34.0904 |
+| Britney     |                           34.0877 |
+| Samuel      |                           34.0849 |
+| Vance       |                           34.0822 |
+| Alana       |                           34.0795 |
+| Kevin       |                           34.0767 |
+| Donald      |                           34.0740 |
+| Douglas     |                           34.0712 |
+| Jennifer    |                           34.0685 |
+| Michael     |                           34.0658 |
+| Pat         |                           34.0630 |
+| Susan       |                           34.0603 |
+| Hermann     |                           34.0575 |
+| Shelley     |                           34.0548 |
+| William     |                           34.0521 |
++-------------+-----------------------------------+
+107 rows in set (0.00 sec)
+
+d8_56780>
+
+
+
+
+
+
+
+
+
+
+
+9. Display first name of employees who joined in 2001.
+10. Display employees who joined in the current year.
+11. Display the number of days between system date and 1st January 2011.
+12. Display number of employees joined after 15th of the month.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+13. Display third highest salary of employees
+
+
+SELECT * FROM `employees` ORDER BY `salary` DESC LIMIT 1 OFFSET 2;
+
+
+d8_56780>SELECT * FROM `employees` ORDER BY `salary` DESC LIMIT 1 OFFSET 2;
++-------------+------------+-----------+---------+--------------+------------+--------+----------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL   | PHONE_NUMBER | HIRE_DATE  | JOB_ID | SALARY   | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+---------+--------------+------------+--------+----------+----------------+------------+---------------+
+|         102 | Lex        | De Haan   | LDEHAAN | 515.123.4569 | 1987-06-19 | AD_VP  | 17000.00 |           0.00 |        100 |            90 |
++-------------+------------+-----------+---------+--------------+------------+--------+----------+----------------+------------+---------------+
+1 row in set (0.00 sec)
+
+d8_56780>

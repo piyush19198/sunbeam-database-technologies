@@ -1,0 +1,148 @@
+1. Display the Supplier name and the Quantity sold.
+
+select sp.`s#`,s.sname,sum(sp.qty) from s s
+inner join sp sp on s.`s#`=sp.`s#`
+group by sp.`s#`;
+
+d8_56780>select sp.`s#`,s.sname,sum(sp.qty) from s s
+    -> inner join sp sp on s.`s#`=sp.`s#`
+    -> group by sp.`s#`;
++------+-------+-------------+
+| s#   | sname | sum(sp.qty) |
++------+-------+-------------+
+| S1   | Smith |         900 |
+| S2   | Jones |        3200 |
+| S3   | Blake |         700 |
+| S4   | Clark |         600 |
+| S5   | Adams |        3300 |
++------+-------+-------------+
+5 rows in set (0.00 sec)
+
+d8_56780>
+
+
+
+2. Display the Part name and Quantity sold.
+
+select p.pname,sum(sp.qty) from p p 
+inner join sp sp on p.`p#`=sp.`p#`
+group by p.pname;
+
+d8_56780>select p.pname,sum(sp.qty) from p p
+    -> inner join sp sp on p.`p#`=sp.`p#`
+    -> group by p.pname;
++-------+-------------+
+| pname | sum(sp.qty) |
++-------+-------------+
+| Nut   |        1000 |
+| Screw |        5000 |
+| Cam   |        1100 |
+| Cog   |        1300 |
+| Bolt  |         300 |
++-------+-------------+
+5 rows in set (0.01 sec)
+
+d8_56780>
+
+
+
+3. Display the Project name and Quantity sold.
+
+select j.jname,sum(sp.qty) from j j
+inner join sp sp on j.`j#`=sp.`j#`
+group by j.jname;
+
+d8_56780>select j.jname,sum(sp.qty) from j j
+    -> inner join sp sp on j.`j#`=sp.`j#`
+    -> group by j.jname;
++----------+-------------+
+| jname    | sum(sp.qty) |
++----------+-------------+
+| Sorted   |         800 |
+| Console  |        3500 |
+| Punch    |        1200 |
+| Reader   |         500 |
+| Collator |        1100 |
+| Terminal |         400 |
+| Tape     |        1200 |
++----------+-------------+
+7 rows in set (0.00 sec)
+
+d8_56780>
+
+
+
+4. Display the Supplier name, Part name, Project name and Quantity sold.
+
+
+select s.sname,p.pname,j.jname,sp.qty from sp
+inner join s s on s.`s#`=sp.`s#`
+inner join p p on p.`p#`=sp.`p#`
+inner join j j on j.`j#`=sp.`j#`;
+
+d8_56780>select s.sname,p.pname,j.jname,sp.qty from sp
+    -> inner join s s on s.`s#`=sp.`s#`
+    -> inner join p p on p.`p#`=sp.`p#`
+    -> inner join j j on j.`j#`=sp.`j#`;
++-------+-------+----------+------+
+| sname | pname | jname    | qty  |
++-------+-------+----------+------+
+| Jones | Screw | Sorted   |  400 |
+| Blake | Screw | Sorted   |  200 |
+| Smith | Nut   | Sorted   |  200 |
+| Adams | Cog   | Punch    |  200 |
+| Jones | Cam   | Punch    |  100 |
+| Blake | Screw | Punch    |  500 |
+| Jones | Screw | Punch    |  200 |
+| Adams | Bolt  | Punch    |  200 |
+| Clark | Cog   | Reader   |  300 |
+| Jones | Screw | Reader   |  200 |
+| Adams | Cog   | Console  |  500 |
+| Adams | Cam   | Console  |  400 |
+| Adams | Screw | Console  |  200 |
+| Adams | Screw | Console  |  800 |
+| Jones | Screw | Console  |  500 |
+| Adams | Screw | Console  |  200 |
+| Adams | Bolt  | Console  |  100 |
+| Smith | Nut   | Console  |  700 |
+| Adams | Nut   | Console  |  100 |
+| Adams | Cam   | Collator |  500 |
+| Jones | Screw | Collator |  600 |
+| Jones | Screw | Terminal |  400 |
+| Clark | Cog   | Tape     |  300 |
+| Adams | Cam   | Tape     |  100 |
+| Jones | Screw | Tape     |  800 |
++-------+-------+----------+------+
+25 rows in set (0.00 sec)
+
+d8_56780>
+
+
+
+
+5. Display the Supplier name, Supplying Parts to a Project in the same City.
+
+select s.sname,p.pname,j.city from j j
+inner join s s on j.city=s.city
+inner join p p on p.city=j.city
+group by j.city;
+
+d8_56780>select s.sname,p.pname,j.city from j j
+    -> inner join s s on j.city=s.city
+    -> inner join p p on p.city=j.city
+    -> group by j.city;
++-------+-------+--------+
+| sname | pname | city   |
++-------+-------+--------+
+| Clark | Nut   | London |
+| Jones | Bolt  | Paris  |
++-------+-------+--------+
+2 rows in set (0.00 sec)
+
+d8_56780>
+
+
+
+6. Display the Part name that is ‘Red’ is color, and the Quantity sold.
+
+select pname 

@@ -1,0 +1,1243 @@
+Microsoft Windows [Version 10.0.19043.1237]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Piyush>mysql -u sunbeam -p
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 43
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+sunbeam>SELECT 'SunBeam' = 'SUNBEAM';
++-----------------------+
+| 'SunBeam' = 'SUNBEAM' |
++-----------------------+
+|                     1 |
++-----------------------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT BINARY 'SunBeam' = BINARY 'SUNBEAM';
++-------------------------------------+
+| BINARY 'SunBeam' = BINARY 'SUNBEAM' |
++-------------------------------------+
+|                                   0 |
++-------------------------------------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT BINARY 'SUNBEAM' = BINARY 'SUNBEAM';
++-------------------------------------+
+| BINARY 'SUNBEAM' = BINARY 'SUNBEAM' |
++-------------------------------------+
+|                                   1 |
++-------------------------------------+
+1 row in set (0.00 sec)
+
+sunbeam>show databases;
++--------------------+
+| Database           |
++--------------------+
+| classwork          |
+| hr                 |
+| information_schema |
+| northwind          |
+| sales              |
+| shopping           |
+| spj                |
++--------------------+
+7 rows in set (0.00 sec)
+
+sunbeam>use classwork
+Database changed
+sunbeam>shjow tables;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'shjow tables' at line 1
+sunbeam>show tables;
++---------------------+
+| Tables_in_classwork |
++---------------------+
+| bonus               |
+| books               |
+| dept                |
+| dummy               |
+| emp                 |
+| salgrade            |
++---------------------+
+6 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE ename = 'King';
++-------+-------+-----------+------+------------+---------+------+--------+
+| empno | ename | job       | mgr  | hire       | sal     | comm | deptno |
++-------+-------+-----------+------+------------+---------+------+--------+
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
++-------+-------+-----------+------+------------+---------+------+--------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE BINARY ename = BINARY 'King';
+Empty set (0.00 sec)
+
+sunbeam>SELECT * FROM emp WHERE BINARY ename = BINARY 'KING';
++-------+-------+-----------+------+------------+---------+------+--------+
+| empno | ename | job       | mgr  | hire       | sal     | comm | deptno |
++-------+-------+-----------+------+------------+---------+------+--------+
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
++-------+-------+-----------+------+------------+---------+------+--------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM emps e
+    -> CROSS JOIN depts d;
+ERROR 1146 (42S02): Table 'classwork.emps' doesn't exist
+sunbeam>SELECT e.ename, d.dname FROM emps e
+    -> SELECT e.ename, d.dname FROM emps e
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECT e.ename, d.dname FROM emps e' at line 2
+sunbeam>SELECT e.ename, d.dname FROM emp e
+    -> CROSS JOIN depts d;
+ERROR 1146 (42S02): Table 'classwork.depts' doesn't exist
+sunbeam>SELECT e.ename, d.dname FROM emps e
+    -> ;
+ERROR 1146 (42S02): Table 'classwork.emps' doesn't exist
+sunbeam>source C:/Users/Piyush/Desktop/CDAC/Gitlab Data/dbt/db/joins.sql
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+Query OK, 0 rows affected (0.09 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 0 rows affected (0.04 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 0 rows affected (0.05 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 0 rows affected (0.06 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 0 rows affected (0.05 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM emps e
+    -> CROSS JOIN depts d;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | ACC   |
+| Amit   | OPS   |
+| Amit   | QA    |
+| Amit   | DEV   |
+| Rahul  | ACC   |
+| Rahul  | OPS   |
+| Rahul  | QA    |
+| Rahul  | DEV   |
+| Nilesh | ACC   |
+| Nilesh | OPS   |
+| Nilesh | QA    |
+| Nilesh | DEV   |
+| Nitin  | ACC   |
+| Nitin  | OPS   |
+| Nitin  | QA    |
+| Nitin  | DEV   |
+| Sarang | ACC   |
+| Sarang | OPS   |
+| Sarang | QA    |
+| Sarang | DEV   |
++--------+-------+
+20 rows in set (0.00 sec)
+
+sunbeam>describe joins;
+ERROR 1146 (42S02): Table 'classwork.joins' doesn't exist
+sunbeam>show tables;
++---------------------+
+| Tables_in_classwork |
++---------------------+
+| addr                |
+| bonus               |
+| books               |
+| dept                |
+| depts               |
+| dummy               |
+| emp                 |
+| emp_meeting         |
+| emps                |
+| meeting             |
+| salgrade            |
++---------------------+
+11 rows in set (0.00 sec)
+
+sunbeam>describe emp
+    -> ;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| empno  | int          | YES  |     | NULL    |       |
+| ename  | varchar(40)  | YES  |     | NULL    |       |
+| job    | varchar(40)  | YES  |     | NULL    |       |
+| mgr    | int          | YES  |     | NULL    |       |
+| hire   | date         | YES  |     | NULL    |       |
+| sal    | decimal(8,2) | YES  |     | NULL    |       |
+| comm   | decimal(8,2) | YES  |     | NULL    |       |
+| deptno | int          | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+sunbeam>select ename,dname from depts cross join emps;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | ACC   |
+| Amit   | OPS   |
+| Amit   | QA    |
+| Amit   | DEV   |
+| Rahul  | ACC   |
+| Rahul  | OPS   |
+| Rahul  | QA    |
+| Rahul  | DEV   |
+| Nilesh | ACC   |
+| Nilesh | OPS   |
+| Nilesh | QA    |
+| Nilesh | DEV   |
+| Nitin  | ACC   |
+| Nitin  | OPS   |
+| Nitin  | QA    |
+| Nitin  | DEV   |
+| Sarang | ACC   |
+| Sarang | OPS   |
+| Sarang | QA    |
+| Sarang | DEV   |
++--------+-------+
+20 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM depts d
+    -> CROSS JOIN emps e;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | ACC   |
+| Amit   | OPS   |
+| Amit   | QA    |
+| Amit   | DEV   |
+| Rahul  | ACC   |
+| Rahul  | OPS   |
+| Rahul  | QA    |
+| Rahul  | DEV   |
+| Nilesh | ACC   |
+| Nilesh | OPS   |
+| Nilesh | QA    |
+| Nilesh | DEV   |
+| Nitin  | ACC   |
+| Nitin  | OPS   |
+| Nitin  | QA    |
+| Nitin  | DEV   |
+| Sarang | ACC   |
+| Sarang | OPS   |
+| Sarang | QA    |
+| Sarang | DEV   |
++--------+-------+
+20 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM emps AS e
+    -> CROSS JOIN depts AS d;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | ACC   |
+| Amit   | OPS   |
+| Amit   | QA    |
+| Amit   | DEV   |
+| Rahul  | ACC   |
+| Rahul  | OPS   |
+| Rahul  | QA    |
+| Rahul  | DEV   |
+| Nilesh | ACC   |
+| Nilesh | OPS   |
+| Nilesh | QA    |
+| Nilesh | DEV   |
+| Nitin  | ACC   |
+| Nitin  | OPS   |
+| Nitin  | QA    |
+| Nitin  | DEV   |
+| Sarang | ACC   |
+| Sarang | OPS   |
+| Sarang | QA    |
+| Sarang | DEV   |
++--------+-------+
+20 rows in set (0.00 sec)
+
+sunbeam>SELECT emps.ename, depts.dname FROM emps
+    -> CROSS JOIN depts;SELECT ename, dname FROM emps
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | ACC   |
+| Amit   | OPS   |
+| Amit   | QA    |
+| Amit   | DEV   |
+| Rahul  | ACC   |
+| Rahul  | OPS   |
+| Rahul  | QA    |
+| Rahul  | DEV   |
+| Nilesh | ACC   |
+| Nilesh | OPS   |
+| Nilesh | QA    |
+| Nilesh | DEV   |
+| Nitin  | ACC   |
+| Nitin  | OPS   |
+| Nitin  | QA    |
+| Nitin  | DEV   |
+| Sarang | ACC   |
+| Sarang | OPS   |
+| Sarang | QA    |
+| Sarang | DEV   |
++--------+-------+
+20 rows in set (0.00 sec)
+
+    -> CROSS JOIN depts;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | ACC   |
+| Amit   | OPS   |
+| Amit   | QA    |
+| Amit   | DEV   |
+| Rahul  | ACC   |
+| Rahul  | OPS   |
+| Rahul  | QA    |
+| Rahul  | DEV   |
+| Nilesh | ACC   |
+| Nilesh | OPS   |
+| Nilesh | QA    |
+| Nilesh | DEV   |
+| Nitin  | ACC   |
+| Nitin  | OPS   |
+| Nitin  | QA    |
+| Nitin  | DEV   |
+| Sarang | ACC   |
+| Sarang | OPS   |
+| Sarang | QA    |
+| Sarang | DEV   |
++--------+-------+
+20 rows in set (0.00 sec)
+
+sunbeam>SELECT ename, dname FROM emps
+    -> CROSS JOIN depts;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | ACC   |
+| Amit   | OPS   |
+| Amit   | QA    |
+| Amit   | DEV   |
+| Rahul  | ACC   |
+| Rahul  | OPS   |
+| Rahul  | QA    |
+| Rahul  | DEV   |
+| Nilesh | ACC   |
+| Nilesh | OPS   |
+| Nilesh | QA    |
+| Nilesh | DEV   |
+| Nitin  | ACC   |
+| Nitin  | OPS   |
+| Nitin  | QA    |
+| Nitin  | DEV   |
+| Sarang | ACC   |
+| Sarang | OPS   |
+| Sarang | QA    |
+| Sarang | DEV   |
++--------+-------+
+20 rows in set (0.00 sec)
+
+sunbeam>SELECT ename, dname, deptno FROM emps
+    -> CROSS JOIN depts;
+ERROR 1052 (23000): Column 'deptno' in field list is ambiguous
+sunbeam>SELECT ename, dname, depts.deptno FROM emps
+    -> CROSS JOIN depts;
++--------+-------+--------+
+| ename  | dname | deptno |
++--------+-------+--------+
+| Amit   | ACC   |     40 |
+| Amit   | OPS   |     30 |
+| Amit   | QA    |     20 |
+| Amit   | DEV   |     10 |
+| Rahul  | ACC   |     40 |
+| Rahul  | OPS   |     30 |
+| Rahul  | QA    |     20 |
+| Rahul  | DEV   |     10 |
+| Nilesh | ACC   |     40 |
+| Nilesh | OPS   |     30 |
+| Nilesh | QA    |     20 |
+| Nilesh | DEV   |     10 |
+| Nitin  | ACC   |     40 |
+| Nitin  | OPS   |     30 |
+| Nitin  | QA    |     20 |
+| Nitin  | DEV   |     10 |
+| Sarang | ACC   |     40 |
+| Sarang | OPS   |     30 |
+| Sarang | QA    |     20 |
+| Sarang | DEV   |     10 |
++--------+-------+--------+
+20 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM emps e
+    -> INNER JOIN depts d ON e.deptno = d.deptno;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | DEV   |
+| Rahul  | DEV   |
+| Nilesh | QA    |
++--------+-------+
+3 rows in set (0.00 sec)
+
+sunbeam>select e.ename,d.dname from depts inner join emps e inner join depts d on d.deptno=e.deptno;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | DEV   |
+| Amit   | DEV   |
+| Amit   | DEV   |
+| Amit   | DEV   |
+| Rahul  | DEV   |
+| Rahul  | DEV   |
+| Rahul  | DEV   |
+| Rahul  | DEV   |
+| Nilesh | QA    |
+| Nilesh | QA    |
+| Nilesh | QA    |
+| Nilesh | QA    |
++--------+-------+
+12 rows in set (0.00 sec)
+
+sunbeam>select e.ename,d.dname from depts inner join emps e inner join depts d on d.deptno!=e.deptno;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | ACC   |
+| Amit   | ACC   |
+| Amit   | ACC   |
+| Amit   | ACC   |
+| Amit   | OPS   |
+| Amit   | OPS   |
+| Amit   | OPS   |
+| Amit   | OPS   |
+| Amit   | QA    |
+| Amit   | QA    |
+| Amit   | QA    |
+| Amit   | QA    |
+| Rahul  | ACC   |
+| Rahul  | ACC   |
+| Rahul  | ACC   |
+| Rahul  | ACC   |
+| Rahul  | OPS   |
+| Rahul  | OPS   |
+| Rahul  | OPS   |
+| Rahul  | OPS   |
+| Rahul  | QA    |
+| Rahul  | QA    |
+| Rahul  | QA    |
+| Rahul  | QA    |
+| Nilesh | ACC   |
+| Nilesh | ACC   |
+| Nilesh | ACC   |
+| Nilesh | ACC   |
+| Nilesh | OPS   |
+| Nilesh | OPS   |
+| Nilesh | OPS   |
+| Nilesh | OPS   |
+| Nilesh | DEV   |
+| Nilesh | DEV   |
+| Nilesh | DEV   |
+| Nilesh | DEV   |
+| Nitin  | ACC   |
+| Nitin  | ACC   |
+| Nitin  | ACC   |
+| Nitin  | ACC   |
+| Nitin  | OPS   |
+| Nitin  | OPS   |
+| Nitin  | OPS   |
+| Nitin  | OPS   |
+| Nitin  | QA    |
+| Nitin  | QA    |
+| Nitin  | QA    |
+| Nitin  | QA    |
+| Nitin  | DEV   |
+| Nitin  | DEV   |
+| Nitin  | DEV   |
+| Nitin  | DEV   |
+| Sarang | ACC   |
+| Sarang | ACC   |
+| Sarang | ACC   |
+| Sarang | ACC   |
+| Sarang | OPS   |
+| Sarang | OPS   |
+| Sarang | OPS   |
+| Sarang | OPS   |
+| Sarang | QA    |
+| Sarang | QA    |
+| Sarang | QA    |
+| Sarang | QA    |
+| Sarang | DEV   |
+| Sarang | DEV   |
+| Sarang | DEV   |
+| Sarang | DEV   |
++--------+-------+
+68 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM emps e
+    -> INNER JOIN depts d ON e.deptno != d.deptno;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | ACC   |
+| Amit   | OPS   |
+| Amit   | QA    |
+| Rahul  | ACC   |
+| Rahul  | OPS   |
+| Rahul  | QA    |
+| Nilesh | ACC   |
+| Nilesh | OPS   |
+| Nilesh | DEV   |
+| Nitin  | ACC   |
+| Nitin  | OPS   |
+| Nitin  | QA    |
+| Nitin  | DEV   |
+| Sarang | ACC   |
+| Sarang | OPS   |
+| Sarang | QA    |
+| Sarang | DEV   |
++--------+-------+
+17 rows in set (0.00 sec)
+
+sunbeam>select e.ename,d.dname from depts inner join emps e inner join depts d on e.deptno!=d.deptno;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | ACC   |
+| Amit   | ACC   |
+| Amit   | ACC   |
+| Amit   | ACC   |
+| Amit   | OPS   |
+| Amit   | OPS   |
+| Amit   | OPS   |
+| Amit   | OPS   |
+| Amit   | QA    |
+| Amit   | QA    |
+| Amit   | QA    |
+| Amit   | QA    |
+| Rahul  | ACC   |
+| Rahul  | ACC   |
+| Rahul  | ACC   |
+| Rahul  | ACC   |
+| Rahul  | OPS   |
+| Rahul  | OPS   |
+| Rahul  | OPS   |
+| Rahul  | OPS   |
+| Rahul  | QA    |
+| Rahul  | QA    |
+| Rahul  | QA    |
+| Rahul  | QA    |
+| Nilesh | ACC   |
+| Nilesh | ACC   |
+| Nilesh | ACC   |
+| Nilesh | ACC   |
+| Nilesh | OPS   |
+| Nilesh | OPS   |
+| Nilesh | OPS   |
+| Nilesh | OPS   |
+| Nilesh | DEV   |
+| Nilesh | DEV   |
+| Nilesh | DEV   |
+| Nilesh | DEV   |
+| Nitin  | ACC   |
+| Nitin  | ACC   |
+| Nitin  | ACC   |
+| Nitin  | ACC   |
+| Nitin  | OPS   |
+| Nitin  | OPS   |
+| Nitin  | OPS   |
+| Nitin  | OPS   |
+| Nitin  | QA    |
+| Nitin  | QA    |
+| Nitin  | QA    |
+| Nitin  | QA    |
+| Nitin  | DEV   |
+| Nitin  | DEV   |
+| Nitin  | DEV   |
+| Nitin  | DEV   |
+| Sarang | ACC   |
+| Sarang | ACC   |
+| Sarang | ACC   |
+| Sarang | ACC   |
+| Sarang | OPS   |
+| Sarang | OPS   |
+| Sarang | OPS   |
+| Sarang | OPS   |
+| Sarang | QA    |
+| Sarang | QA    |
+| Sarang | QA    |
+| Sarang | QA    |
+| Sarang | DEV   |
+| Sarang | DEV   |
+| Sarang | DEV   |
+| Sarang | DEV   |
++--------+-------+
+68 rows in set (0.00 sec)
+
+sunbeam>select e.ename,d.dname from depts d inner join emps e inner join depts d on e.deptno!=d.deptno;
+ERROR 1066 (42000): Not unique table/alias: 'd'
+sunbeam>select e.ename,d.dname from emps e inner join depts d inner join depts d on e.deptno!=d.deptno;
+ERROR 1066 (42000): Not unique table/alias: 'd'
+sunbeam>select e.ename,d.dname from emps e inner join depts inner join depts d on e.deptno!=d.deptno;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | ACC   |
+| Amit   | ACC   |
+| Amit   | ACC   |
+| Amit   | ACC   |
+| Amit   | OPS   |
+| Amit   | OPS   |
+| Amit   | OPS   |
+| Amit   | OPS   |
+| Amit   | QA    |
+| Amit   | QA    |
+| Amit   | QA    |
+| Amit   | QA    |
+| Rahul  | ACC   |
+| Rahul  | ACC   |
+| Rahul  | ACC   |
+| Rahul  | ACC   |
+| Rahul  | OPS   |
+| Rahul  | OPS   |
+| Rahul  | OPS   |
+| Rahul  | OPS   |
+| Rahul  | QA    |
+| Rahul  | QA    |
+| Rahul  | QA    |
+| Rahul  | QA    |
+| Nilesh | ACC   |
+| Nilesh | ACC   |
+| Nilesh | ACC   |
+| Nilesh | ACC   |
+| Nilesh | OPS   |
+| Nilesh | OPS   |
+| Nilesh | OPS   |
+| Nilesh | OPS   |
+| Nilesh | DEV   |
+| Nilesh | DEV   |
+| Nilesh | DEV   |
+| Nilesh | DEV   |
+| Nitin  | ACC   |
+| Nitin  | ACC   |
+| Nitin  | ACC   |
+| Nitin  | ACC   |
+| Nitin  | OPS   |
+| Nitin  | OPS   |
+| Nitin  | OPS   |
+| Nitin  | OPS   |
+| Nitin  | QA    |
+| Nitin  | QA    |
+| Nitin  | QA    |
+| Nitin  | QA    |
+| Nitin  | DEV   |
+| Nitin  | DEV   |
+| Nitin  | DEV   |
+| Nitin  | DEV   |
+| Sarang | ACC   |
+| Sarang | ACC   |
+| Sarang | ACC   |
+| Sarang | ACC   |
+| Sarang | OPS   |
+| Sarang | OPS   |
+| Sarang | OPS   |
+| Sarang | OPS   |
+| Sarang | QA    |
+| Sarang | QA    |
+| Sarang | QA    |
+| Sarang | QA    |
+| Sarang | DEV   |
+| Sarang | DEV   |
+| Sarang | DEV   |
+| Sarang | DEV   |
++--------+-------+
+68 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM depts d
+    -> RIGHT OUTER JOIN emps e ON e.deptno = d.deptno;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | DEV   |
+| Rahul  | DEV   |
+| Nilesh | QA    |
+| Nitin  | NULL  |
+| Sarang | NULL  |
++--------+-------+
+5 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM depts d
+    -> RIGHT JOIN emps e ON e.deptno = d.deptno;SELECT e.ename, d.dname FROM emps e
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | DEV   |
+| Rahul  | DEV   |
+| Nilesh | QA    |
+| Nitin  | NULL  |
+| Sarang | NULL  |
++--------+-------+
+5 rows in set (0.00 sec)
+
+    -> LEFT JOIN depts d ON e.deptno = d.deptno;SELECT e.ename, d.dname FROM emps e
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | DEV   |
+| Rahul  | DEV   |
+| Nilesh | QA    |
+| Nitin  | NULL  |
+| Sarang | NULL  |
++--------+-------+
+5 rows in set (0.00 sec)
+
+    -> FULL OUTER JOIN depts d ON e.deptno = d.deptno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FULL OUTER JOIN depts d ON e.deptno = d.deptno' at line 2
+sunbeam>SELECT e.ename, d.dname FROM emps e
+    -> FULL OUTER JOIN depts d ON e.deptno = d.deptno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FULL OUTER JOIN depts d ON e.deptno = d.deptno' at line 2
+sunbeam>(SELECT dname AS name FROM depts)
+    -> UNION ALL
+    -> (SELECT ename FROM emps);
++--------+
+| name   |
++--------+
+| DEV    |
+| QA     |
+| OPS    |
+| ACC    |
+| Amit   |
+| Rahul  |
+| Nilesh |
+| Nitin  |
+| Sarang |
++--------+
+9 rows in set (0.00 sec)
+
+sunbeam>(SELECT e.ename, d.dname FROM emps e
+    -> LEFT OUTER JOIN depts d ON e.deptno = d.deptno)
+    -> UNION ALL
+    -> (SELECT e.ename, d.dname FROM emps e
+    -> RIGHT OUTER JOIN depts d ON e.deptno = d.deptno);
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | DEV   |
+| Rahul  | DEV   |
+| Nilesh | QA    |
+| Nitin  | NULL  |
+| Sarang | NULL  |
+| Rahul  | DEV   |
+| Amit   | DEV   |
+| Nilesh | QA    |
+| NULL   | OPS   |
+| NULL   | ACC   |
++--------+-------+
+10 rows in set (0.00 sec)
+
+sunbeam>(SELECT e.ename, d.dname FROM emps e
+    -> LEFT OUTER JOIN depts d ON e.deptno = d.deptno)
+    -> UNION ALL
+    -> (SELECT e.ename, d.dname FROM emps e
+    -> RIGHT OUTER JOIN depts d ON e.deptno = d.deptno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+sunbeam>(SELECT e.ename, d.dname FROM emps e
+    -> LEFT OUTER JOIN depts d ON e.deptno = d.deptno)
+    -> UNION
+    -> (SELECT e.ename, d.dname FROM emps e
+    -> RIGHT OUTER JOIN depts d ON e.deptno = d.deptno);
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | DEV   |
+| Rahul  | DEV   |
+| Nilesh | QA    |
+| Nitin  | NULL  |
+| Sarang | NULL  |
+| NULL   | OPS   |
+| NULL   | ACC   |
++--------+-------+
+7 rows in set (0.00 sec)
+
+sunbeam>
+sunbeam>(SELECT e.ename, d.dname FROM emps e
+    -> LEFT OUTER JOIN depts d ON e.deptno = d.deptno)
+    -> UNION
+    -> (SELECT e.ename, d.dname FROM emps e
+    -> RIGHT OUTER JOIN depts d ON e.deptno = d.deptno);
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | DEV   |
+| Rahul  | DEV   |
+| Nilesh | QA    |
+| Nitin  | NULL  |
+| Sarang | NULL  |
+| NULL   | OPS   |
+| NULL   | ACC   |
++--------+-------+
+7 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, m.ename AS mname FROM emps e
+    -> INNER JOIN emps m ON e.mgr = m.empno;
++--------+--------+
+| ename  | mname  |
++--------+--------+
+| Rahul  | Nilesh |
+| Nilesh | Nitin  |
+| Amit   | Nitin  |
+| Nitin  | Sarang |
++--------+--------+
+4 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, m.ename AS mname FROM emps e
+    -> LEFT JOIN emps m ON e.mgr = m.empno;
++--------+--------+
+| ename  | mname  |
++--------+--------+
+| Amit   | Nitin  |
+| Rahul  | Nilesh |
+| Nilesh | Nitin  |
+| Nitin  | Sarang |
+| Sarang | NULL   |
++--------+--------+
+5 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, m.ename AS mname FROM emps e
+    -> INNER JOIN emps m ON e.mgr = m.empno;
++--------+--------+
+| ename  | mname  |
++--------+--------+
+| Rahul  | Nilesh |
+| Nilesh | Nitin  |
+| Amit   | Nitin  |
+| Nitin  | Sarang |
++--------+--------+
+4 rows in set (0.00 sec)
+
+sunbeam>
+sunbeam>
+sunbeam>SELECT e.ename, d.dname FROM emps e
+    -> INNER JOIN depts d ON e.deptno = d.deptno;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | DEV   |
+| Rahul  | DEV   |
+| Nilesh | QA    |
++--------+-------+
+3 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname, a.dist FROM emps e
+    -> LEFT JOIN depts d ON e.deptno = d.deptno
+    -> INNER JOIN addr a ON e.empno = a.empno;
++--------+-------+----------+
+| ename  | dname | dist     |
++--------+-------+----------+
+| Amit   | DEV   | Kolhapur |
+| Rahul  | DEV   | Satara   |
+| Nilesh | QA    | Pune     |
+| Nitin  | NULL  | Satara   |
+| Sarang | NULL  | Satara   |
++--------+-------+----------+
+5 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emps;
++-------+--------+--------+------+
+| empno | ename  | deptno | mgr  |
++-------+--------+--------+------+
+|     1 | Amit   |     10 |    4 |
+|     2 | Rahul  |     10 |    3 |
+|     3 | Nilesh |     20 |    4 |
+|     4 | Nitin  |     50 |    5 |
+|     5 | Sarang |     50 | NULL |
++-------+--------+--------+------+
+5 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM emp_meeting;
++--------+-------+
+| meetno | empno |
++--------+-------+
+|    100 |     3 |
+|    100 |     4 |
+|    200 |     1 |
+|    200 |     2 |
+|    200 |     3 |
+|    200 |     4 |
+|    200 |     5 |
+|    300 |     1 |
+|    300 |     2 |
+|    300 |     4 |
++--------+-------+
+10 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM meeting;
++--------+-------------+-------------------+
+| meetno | topic       | venue             |
++--------+-------------+-------------------+
+|    100 | Scheduling  | Director Cabin    |
+|    200 | Annual meet | Board Room        |
+|    300 | App Design  | Co-director Cabin |
++--------+-------------+-------------------+
+3 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, m.topic FROM emp_meeting em
+    -> INNER JOIN emps e ON em.empno = e.empno
+    -> INNER JOIN meeting m ON em.meetno = m.meetno;
++--------+-------------+
+| ename  | topic       |
++--------+-------------+
+| Amit   | App Design  |
+| Amit   | Annual meet |
+| Rahul  | App Design  |
+| Rahul  | Annual meet |
+| Nilesh | Annual meet |
+| Nilesh | Scheduling  |
+| Nitin  | App Design  |
+| Nitin  | Annual meet |
+| Nitin  | Scheduling  |
+| Sarang | Annual meet |
++--------+-------------+
+10 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, m.topic, a.dist
+    -> FROM emp_meeting em
+    -> INNER JOIN emps e ON em.empno = e.empno
+    -> INNER JOIN meeting m ON em.meetno = m.meetno
+    -> INNER JOIN addr a ON e.empno = a.empno;
++--------+-------------+----------+
+| ename  | topic       | dist     |
++--------+-------------+----------+
+| Amit   | Annual meet | Kolhapur |
+| Amit   | App Design  | Kolhapur |
+| Rahul  | Annual meet | Satara   |
+| Rahul  | App Design  | Satara   |
+| Nilesh | Scheduling  | Pune     |
+| Nilesh | Annual meet | Pune     |
+| Nitin  | Scheduling  | Satara   |
+| Nitin  | Annual meet | Satara   |
+| Nitin  | App Design  | Satara   |
+| Sarang | Annual meet | Satara   |
++--------+-------------+----------+
+10 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, m.topic FROM emp_meeting em
+    -> INNER JOIN emps e ON em.empno = e.empno
+    -> ;
+ERROR 1054 (42S22): Unknown column 'm.topic' in 'field list'
+sunbeam>SELECT e.ename, m.topic, a.dist, a.tal
+    -> FROM emp_meeting em
+    -> INNER JOIN emps e ON em.empno = e.empno
+    -> INNER JOIN meeting m ON em.meetno = m.meetno
+    -> INNER JOIN addr a ON e.empno = a.empno;
++--------+-------------+----------+--------+
+| ename  | topic       | dist     | tal    |
++--------+-------------+----------+--------+
+| Amit   | Annual meet | Kolhapur | Gad    |
+| Amit   | App Design  | Kolhapur | Gad    |
+| Rahul  | Annual meet | Satara   | Karad  |
+| Rahul  | App Design  | Satara   | Karad  |
+| Nilesh | Scheduling  | Pune     | Junnar |
+| Nilesh | Annual meet | Pune     | Junnar |
+| Nitin  | Scheduling  | Satara   | Wai    |
+| Nitin  | Annual meet | Satara   | Wai    |
+| Nitin  | App Design  | Satara   | Wai    |
+| Sarang | Annual meet | Satara   | Karad  |
++--------+-------------+----------+--------+
+10 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, m.topic, d.dname
+    -> FROM emp_meeting em
+    -> INNER JOIN emps e ON em.empno = e.empno
+    -> INNER JOIN meeting m ON em.meetno = m.meetno
+    -> LEFT JOIN depts d ON e.deptno = d.deptno;
++--------+-------------+-------+
+| ename  | topic       | dname |
++--------+-------------+-------+
+| Amit   | App Design  | DEV   |
+| Amit   | Annual meet | DEV   |
+| Rahul  | App Design  | DEV   |
+| Rahul  | Annual meet | DEV   |
+| Nilesh | Annual meet | QA    |
+| Nilesh | Scheduling  | QA    |
+| Nitin  | App Design  | NULL  |
+| Nitin  | Annual meet | NULL  |
+| Nitin  | Scheduling  | NULL  |
+| Sarang | Annual meet | NULL  |
++--------+-------------+-------+
+10 rows in set (0.00 sec)
+
+sunbeam>SELECT d.dname, COUNT(e.empno) FROM emps e
+    -> INNER JOIN depts d ON e.deptno = d.deptno
+    -> GROUP BY d.dname;
++-------+----------------+
+| dname | COUNT(e.empno) |
++-------+----------------+
+| DEV   |              2 |
+| QA    |              1 |
++-------+----------------+
+2 rows in set (0.00 sec)
+
+sunbeam>SELECT d.dname, COUNT(e.empno) FROM emps e
+    -> RIGHT JOIN depts d ON e.deptno = d.deptno
+    -> GROUP BY d.dname;
++-------+----------------+
+| dname | COUNT(e.empno) |
++-------+----------------+
+| DEV   |              2 |
+| QA    |              1 |
+| OPS   |              0 |
+| ACC   |              0 |
++-------+----------------+
+4 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, m.topic FROM emp_meeting em
+    -> INNER JOIN emps e ON em.empno = e.empno
+    -> INNER JOIN meeting m ON em.meetno = m.meetno;
++--------+-------------+
+| ename  | topic       |
++--------+-------------+
+| Amit   | App Design  |
+| Amit   | Annual meet |
+| Rahul  | App Design  |
+| Rahul  | Annual meet |
+| Nilesh | Annual meet |
+| Nilesh | Scheduling  |
+| Nitin  | App Design  |
+| Nitin  | Annual meet |
+| Nitin  | Scheduling  |
+| Sarang | Annual meet |
++--------+-------------+
+10 rows in set (0.00 sec)
+
+sunbeam>SELECT em.empno, COUNT(em.meetno)
+    -> FROM emp_meeting em
+    -> GROUP BY em.empno;
++-------+------------------+
+| empno | COUNT(em.meetno) |
++-------+------------------+
+|     3 |                2 |
+|     4 |                3 |
+|     1 |                2 |
+|     2 |                2 |
+|     5 |                1 |
++-------+------------------+
+5 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, COUNT(em.meetno)
+    -> FROM emp_meeting em
+    -> INNER JOIN emps e ON e.empno = em.empno
+    -> GROUP BY e.ename;
++--------+------------------+
+| ename  | COUNT(em.meetno) |
++--------+------------------+
+| Nilesh |                2 |
+| Nitin  |                3 |
+| Amit   |                2 |
+| Rahul  |                2 |
+| Sarang |                1 |
++--------+------------------+
+5 rows in set (0.00 sec)
+
+sunbeam>
+sunbeam>SELECT e.ename, COUNT(em.meetno)
+    -> FROM emp_meeting em
+    -> INNER JOIN emps e ON e.empno = em.empno
+    -> GROUP BY e.ename
+    -> ORDER BY COUNT(em.meetno) DESC;
++--------+------------------+
+| ename  | COUNT(em.meetno) |
++--------+------------------+
+| Nitin  |                3 |
+| Nilesh |                2 |
+| Amit   |                2 |
+| Rahul  |                2 |
+| Sarang |                1 |
++--------+------------------+
+5 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM emps e
+    -> INNER JOIN depts d ON e.deptno = d.deptno;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | DEV   |
+| Rahul  | DEV   |
+| Nilesh | QA    |
++--------+-------+
+3 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM emps e
+    -> INNER JOIN depts d ON e.deptno = d.deptno
+    -> WHERE d.dname = 'DEV';
++-------+-------+
+| ename | dname |
++-------+-------+
+| Amit  | DEV   |
+| Rahul | DEV   |
++-------+-------+
+2 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM emps e
+    -> INNER JOIN depts d ON e.deptno = d.deptno;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | DEV   |
+| Rahul  | DEV   |
+| Nilesh | QA    |
++--------+-------+
+3 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM emps e
+    -> JOIN depts d ON e.deptno = d.deptno;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | DEV   |
+| Rahul  | DEV   |
+| Nilesh | QA    |
++--------+-------+
+3 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM emps e
+    -> CROSS JOIN depts d ON e.deptno = d.deptno;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | DEV   |
+| Rahul  | DEV   |
+| Nilesh | QA    |
++--------+-------+
+3 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM emps e
+    -> CROSS JOIN depts d WHERE e.deptno = d.deptno;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | DEV   |
+| Rahul  | DEV   |
+| Nilesh | QA    |
++--------+-------+
+3 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM emps e, depts d
+    -> WHERE e.deptno = d.deptno;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | DEV   |
+| Rahul  | DEV   |
+| Nilesh | QA    |
++--------+-------+
+3 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM emps e
+    -> INNER JOIN depts d USING (deptno);
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | DEV   |
+| Rahul  | DEV   |
+| Nilesh | QA    |
++--------+-------+
+3 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM emps e
+    -> NATURAL JOIN depts d;
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Amit   | DEV   |
+| Rahul  | DEV   |
+| Nilesh | QA    |
++--------+-------+
+3 rows in set (0.00 sec)
+
+sunbeam>SELECT e.ename, d.dname FROM emps e
+    -> CROSS JOIN depts d WHERE e.ename IN ('AMIT', 'NILESH');
++--------+-------+
+| ename  | dname |
++--------+-------+
+| Nilesh | DEV   |
+| Amit   | DEV   |
+| Nilesh | QA    |
+| Amit   | QA    |
+| Nilesh | OPS   |
+| Amit   | OPS   |
+| Nilesh | ACC   |
+| Amit   | ACC   |
++--------+-------+
+8 rows in set (0.00 sec)
+
+sunbeam>

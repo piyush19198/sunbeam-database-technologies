@@ -1,0 +1,47 @@
+1. Create an index that will enable a user to pull orders for ‘1990-10-03’ out 
+of the Orders table quickly.
+
+create index odate on orders(odate);
+
+d8_56780>create index odate on orders(odate);
+Query OK, 0 rows affected (0.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+d8_56780>
+
+2. If the Orders table has already been created, how can you force the 
+onum field to be unique (assume all current values are unique)?
+
+alter table salespeople modify onum int unique;
+
+d8_56780>
+
+3. Create an index that would permit salesperson to retrieve his orders.
+
+explain format=json
+select onum from orders where snum='1003';
+
+create index idx_sonum on orders(snum);
+
+4. Create an index to speed up searching order on a given date by given customer.
+
+explain format=json
+select cnum,odate from orders where cnum='2006' and odate='1990-10-04';
+
+create index idx_cnumodate on orders(odate,cnum);
+
+5. Write a SQL statement to add a primary key for the columns SNUM in the
+SALESPEOPLE table.
+
+alter table salespeople modify snum int primary key;
+
+6. Write a SQL statement to add a primary key for the columns CNUM in the
+CUSTOMERS table.
+
+alter table customers modify cnum int primary key;
+
+7. Create DEPT table with deptno as Primary Key
+
+create table DEPT(
+deptno int primary key
+);

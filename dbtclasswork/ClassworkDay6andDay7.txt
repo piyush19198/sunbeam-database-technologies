@@ -1,0 +1,1843 @@
+Microsoft Windows [Version 10.0.19043.1266]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Piyush>mysql -u sunbeam -p
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+sunbeam>SELECT empno, ename, sal, CASE
+    -> WHEN sal < 1500 THEN 'POOR'
+    -> WHEN sal BETWEEN 1500 AND 2500 THEN 'MIDDLE'
+    -> ELSE 'RICH'
+    -> END AS category
+    -> FROM emp;
+ERROR 1046 (3D000): No database selected
+sunbeam>CREATE VIEW v_empcategory AS
+    -> SELECT empno, ename, sal, CASE
+    -> WHEN sal < 1500 THEN 'POOR'
+    -> WHEN sal BETWEEN 1500 AND 2500 THEN 'MIDDLE'
+    -> ELSE 'RICH'
+    -> END AS category
+    -> FROM emp;
+ERROR 1046 (3D000): No database selected
+sunbeam>SHOW TABLES;
+ERROR 1046 (3D000): No database selected
+sunbeam>SHOW FULL TABLES;
+ERROR 1046 (3D000): No database selected
+sunbeam>SELECT * FROM v_empcategory;
+ERROR 1046 (3D000): No database selected
+sunbeam>SELECT category, COUNT(empno) FROM v_empcategory
+    -> GROUP BY category;
+ERROR 1046 (3D000): No database selected
+sunbeam>EXPLAIN FORMAT=JSON
+    -> SELECT category, COUNT(empno) FROM v_empcategory
+    -> GROUP BY category;
+ERROR 1046 (3D000): No database selected
+sunbeam>use classwork
+Database changed
+sunbeam>SELECT empno, ename, sal, CASE
+    -> WHEN sal < 1500 THEN 'POOR'
+    -> WHEN sal BETWEEN 1500 AND 2500 THEN 'MIDDLE'
+    -> ELSE 'RICH'
+    -> END AS category
+    -> FROM emp;
++-------+--------+---------+----------+
+| empno | ename  | sal     | category |
++-------+--------+---------+----------+
+|  7369 | SMITH  |  800.00 | POOR     |
+|  7499 | ALLEN  | 1600.00 | MIDDLE   |
+|  7521 | WARD   | 1250.00 | POOR     |
+|  7566 | JONES  | 2975.00 | RICH     |
+|  7654 | MARTIN | 1250.00 | POOR     |
+|  7698 | BLAKE  | 2850.00 | RICH     |
+|  7782 | CLARK  | 2450.00 | MIDDLE   |
+|  7788 | SCOTT  | 3000.00 | RICH     |
+|  7839 | KING   | 5000.00 | RICH     |
+|  7844 | TURNER | 1500.00 | MIDDLE   |
+|  7876 | ADAMS  | 1100.00 | POOR     |
+|  7900 | JAMES  |  950.00 | POOR     |
+|  7902 | FORD   | 3000.00 | RICH     |
+|  7934 | MILLER | 1300.00 | POOR     |
++-------+--------+---------+----------+
+14 rows in set (0.02 sec)
+
+sunbeam>CREATE VIEW v_empcategory AS
+    -> SELECT empno, ename, sal, CASE
+    -> WHEN sal < 1500 THEN 'POOR'
+    -> WHEN sal BETWEEN 1500 AND 2500 THEN 'MIDDLE'
+    -> ELSE 'RICH'
+    -> END AS category
+    -> FROM emp;
+Query OK, 0 rows affected (0.02 sec)
+
+sunbeam>SHOW TABLES;
++---------------------+
+| Tables_in_classwork |
++---------------------+
+| addr                |
+| bonus               |
+| books               |
+| dept                |
+| depts               |
+| dummy               |
+| emp                 |
+| emp_meeting         |
+| emps                |
+| meeting             |
+| salgrade            |
+| v_empcategory       |
++---------------------+
+12 rows in set (0.01 sec)
+
+sunbeam>SHOW FULL TABLES;
++---------------------+------------+
+| Tables_in_classwork | Table_type |
++---------------------+------------+
+| addr                | BASE TABLE |
+| bonus               | BASE TABLE |
+| books               | BASE TABLE |
+| dept                | BASE TABLE |
+| depts               | BASE TABLE |
+| dummy               | BASE TABLE |
+| emp                 | BASE TABLE |
+| emp_meeting         | BASE TABLE |
+| emps                | BASE TABLE |
+| meeting             | BASE TABLE |
+| salgrade            | BASE TABLE |
+| v_empcategory       | VIEW       |
++---------------------+------------+
+12 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM v_empcategory;
++-------+--------+---------+----------+
+| empno | ename  | sal     | category |
++-------+--------+---------+----------+
+|  7369 | SMITH  |  800.00 | POOR     |
+|  7499 | ALLEN  | 1600.00 | MIDDLE   |
+|  7521 | WARD   | 1250.00 | POOR     |
+|  7566 | JONES  | 2975.00 | RICH     |
+|  7654 | MARTIN | 1250.00 | POOR     |
+|  7698 | BLAKE  | 2850.00 | RICH     |
+|  7782 | CLARK  | 2450.00 | MIDDLE   |
+|  7788 | SCOTT  | 3000.00 | RICH     |
+|  7839 | KING   | 5000.00 | RICH     |
+|  7844 | TURNER | 1500.00 | MIDDLE   |
+|  7876 | ADAMS  | 1100.00 | POOR     |
+|  7900 | JAMES  |  950.00 | POOR     |
+|  7902 | FORD   | 3000.00 | RICH     |
+|  7934 | MILLER | 1300.00 | POOR     |
++-------+--------+---------+----------+
+14 rows in set (0.00 sec)
+
+sunbeam>SELECT category, COUNT(empno) FROM v_empcategory
+    -> GROUP BY category;
++----------+--------------+
+| category | COUNT(empno) |
++----------+--------------+
+| POOR     |            6 |
+| MIDDLE   |            3 |
+| RICH     |            5 |
++----------+--------------+
+3 rows in set (0.00 sec)
+
+sunbeam>EXPLAIN FORMAT=JSON
+    -> SELECT category, COUNT(empno) FROM v_empcategory
+    -> GROUP BY category;
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| EXPLAIN
+
+
+
+
+
+                   |
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| {
+  "query_block": {
+    "select_id": 1,
+    "cost_info": {
+      "query_cost": "1.65"
+    },
+    "grouping_operation": {
+      "using_temporary_table": true,
+      "using_filesort": false,
+      "table": {
+        "table_name": "emp",
+        "access_type": "ALL",
+        "rows_examined_per_scan": 14,
+        "rows_produced_per_join": 14,
+        "filtered": "100.00",
+        "cost_info": {
+          "read_cost": "0.25",
+          "eval_cost": "1.40",
+          "prefix_cost": "1.65",
+          "data_read_per_join": "4K"
+        },
+        "used_columns": [
+          "empno",
+          "sal"
+        ]
+      }
+    }
+  }
+} |
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set, 1 warning (0.00 sec)
+
+sunbeam>SHOW CREATE VIEW v_empcategory;
++---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+
+| View          | Create View
+
+
+                                 | character_set_client | collation_connection |
++---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+
+| v_empcategory | CREATE ALGORITHM=UNDEFINED DEFINER=`sunbeam`@`localhost` SQL SECURITY DEFINER VIEW `v_empcategory` AS select `emp`.`empno` AS `empno`,`emp`.`ename` AS `ename`,`emp`.`sal` AS `sal`,(case when (`emp`.`sal` < 1500) then 'POOR' when (`emp`.`sal` between 1500 and 2500) then 'MIDDLE' else 'RICH' end) AS `category` from `emp` | cp850                | cp850_general_ci     |
++---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT * FROM v_empcategory;
++-------+--------+---------+----------+
+| empno | ename  | sal     | category |
++-------+--------+---------+----------+
+|  7369 | SMITH  |  800.00 | POOR     |
+|  7499 | ALLEN  | 1600.00 | MIDDLE   |
+|  7521 | WARD   | 1250.00 | POOR     |
+|  7566 | JONES  | 2975.00 | RICH     |
+|  7654 | MARTIN | 1250.00 | POOR     |
+|  7698 | BLAKE  | 2850.00 | RICH     |
+|  7782 | CLARK  | 2450.00 | MIDDLE   |
+|  7788 | SCOTT  | 3000.00 | RICH     |
+|  7839 | KING   | 5000.00 | RICH     |
+|  7844 | TURNER | 1500.00 | MIDDLE   |
+|  7876 | ADAMS  | 1100.00 | POOR     |
+|  7900 | JAMES  |  950.00 | POOR     |
+|  7902 | FORD   | 3000.00 | RICH     |
+|  7934 | MILLER | 1300.00 | POOR     |
++-------+--------+---------+----------+
+14 rows in set (0.00 sec)
+
+sunbeam>ALTER VIEW v_empcategory AS
+    -> SELECT empno, sal, CASE
+    -> WHEN sal < 1500 THEN 'POOR'
+    -> WHEN sal BETWEEN 1500 AND 2500 THEN 'MIDDLE'
+    -> ELSE 'RICH'
+    -> END AS category
+    -> FROM emp;
+Query OK, 0 rows affected (0.01 sec)
+
+sunbeam>SELECT * FROM v_empcategory;
++-------+---------+----------+
+| empno | sal     | category |
++-------+---------+----------+
+|  7369 |  800.00 | POOR     |
+|  7499 | 1600.00 | MIDDLE   |
+|  7521 | 1250.00 | POOR     |
+|  7566 | 2975.00 | RICH     |
+|  7654 | 1250.00 | POOR     |
+|  7698 | 2850.00 | RICH     |
+|  7782 | 2450.00 | MIDDLE   |
+|  7788 | 3000.00 | RICH     |
+|  7839 | 5000.00 | RICH     |
+|  7844 | 1500.00 | MIDDLE   |
+|  7876 | 1100.00 | POOR     |
+|  7900 |  950.00 | POOR     |
+|  7902 | 3000.00 | RICH     |
+|  7934 | 1300.00 | POOR     |
++-------+---------+----------+
+14 rows in set (0.00 sec)
+
+sunbeam>DROP VIEW v_empcategory;
+Query OK, 0 rows affected (0.01 sec)
+
+sunbeam>SHOW FULL TABLES;
++---------------------+------------+
+| Tables_in_classwork | Table_type |
++---------------------+------------+
+| addr                | BASE TABLE |
+| bonus               | BASE TABLE |
+| books               | BASE TABLE |
+| dept                | BASE TABLE |
+| depts               | BASE TABLE |
+| dummy               | BASE TABLE |
+| emp                 | BASE TABLE |
+| emp_meeting         | BASE TABLE |
+| emps                | BASE TABLE |
+| meeting             | BASE TABLE |
+| salgrade            | BASE TABLE |
++---------------------+------------+
+11 rows in set (0.00 sec)
+
+sunbeam>CREATE VIEW v_empsal AS
+    -> SELECT empno, ename, sal FROM emp;
+Query OK, 0 rows affected (0.01 sec)
+
+sunbeam>SELECT * FROM v_empsal;
++-------+--------+---------+
+| empno | ename  | sal     |
++-------+--------+---------+
+|  7369 | SMITH  |  800.00 |
+|  7499 | ALLEN  | 1600.00 |
+|  7521 | WARD   | 1250.00 |
+|  7566 | JONES  | 2975.00 |
+|  7654 | MARTIN | 1250.00 |
+|  7698 | BLAKE  | 2850.00 |
+|  7782 | CLARK  | 2450.00 |
+|  7788 | SCOTT  | 3000.00 |
+|  7839 | KING   | 5000.00 |
+|  7844 | TURNER | 1500.00 |
+|  7876 | ADAMS  | 1100.00 |
+|  7900 | JAMES  |  950.00 |
+|  7902 | FORD   | 3000.00 |
+|  7934 | MILLER | 1300.00 |
++-------+--------+---------+
+14 rows in set (0.00 sec)
+
+sunbeam>CREATE VIEW v_richemp AS
+    -> SELECT * FROM emp WHERE sal > 2500;
+Query OK, 0 rows affected (0.02 sec)
+
+sunbeam>SELECT * FROM v_richemp;
++-------+-------+-----------+------+------------+---------+------+--------+
+| empno | ename | job       | mgr  | hire       | sal     | comm | deptno |
++-------+-------+-----------+------+------------+---------+------+--------+
+|  7566 | JONES | MANAGER   | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE | MANAGER   | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7788 | SCOTT | ANALYST   | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7902 | FORD  | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
++-------+-------+-----------+------+------------+---------+------+--------+
+5 rows in set (0.00 sec)
+
+sunbeam>CREATE VIEW v_empincome AS
+    -> SELECT empno, ename, sal, comm, sal + IFNULL(comm,0.0) income FROM emp;
+Query OK, 0 rows affected (0.01 sec)
+
+sunbeam>SELECT * FROM v_empincome;
++-------+--------+---------+---------+---------+
+| empno | ename  | sal     | comm    | income  |
++-------+--------+---------+---------+---------+
+|  7369 | SMITH  |  800.00 |    NULL |  800.00 |
+|  7499 | ALLEN  | 1600.00 |  300.00 | 1900.00 |
+|  7521 | WARD   | 1250.00 |  500.00 | 1750.00 |
+|  7566 | JONES  | 2975.00 |    NULL | 2975.00 |
+|  7654 | MARTIN | 1250.00 | 1400.00 | 2650.00 |
+|  7698 | BLAKE  | 2850.00 |    NULL | 2850.00 |
+|  7782 | CLARK  | 2450.00 |    NULL | 2450.00 |
+|  7788 | SCOTT  | 3000.00 |    NULL | 3000.00 |
+|  7839 | KING   | 5000.00 |    NULL | 5000.00 |
+|  7844 | TURNER | 1500.00 |    0.00 | 1500.00 |
+|  7876 | ADAMS  | 1100.00 |    NULL | 1100.00 |
+|  7900 | JAMES  |  950.00 |    NULL |  950.00 |
+|  7902 | FORD   | 3000.00 |    NULL | 3000.00 |
+|  7934 | MILLER | 1300.00 |    NULL | 1300.00 |
++-------+--------+---------+---------+---------+
+14 rows in set (0.00 sec)
+
+sunbeam>CREATE VIEW v_empjobsummary AS
+    -> SELECT job, SUM(sal) salsum, AVG(sal) salavg, MAX(sal) salmax, MIN(sal) salmin
+    -> FROM emp
+    -> GROUP BY job;
+Query OK, 0 rows affected (0.01 sec)
+
+sunbeam>SELECT * FROM v_empjobsummary;
++-----------+---------+-------------+---------+---------+
+| job       | salsum  | salavg      | salmax  | salmin  |
++-----------+---------+-------------+---------+---------+
+| CLERK     | 4150.00 | 1037.500000 | 1300.00 |  800.00 |
+| SALESMAN  | 5600.00 | 1400.000000 | 1600.00 | 1250.00 |
+| MANAGER   | 8275.00 | 2758.333333 | 2975.00 | 2450.00 |
+| ANALYST   | 6000.00 | 3000.000000 | 3000.00 | 3000.00 |
+| PRESIDENT | 5000.00 | 5000.000000 | 5000.00 | 5000.00 |
++-----------+---------+-------------+---------+---------+
+5 rows in set (0.00 sec)
+
+sunbeam>INSERT INTO emp(empno,ename,job,sal,deptno) VALUES (1000, 'JILL', 'DEV', 2000,
+    -> 40);
+Query OK, 1 row affected (0.01 sec)
+
+sunbeam>SELECT * FROM v_empjobsummary;
++-----------+---------+-------------+---------+---------+
+| job       | salsum  | salavg      | salmax  | salmin  |
++-----------+---------+-------------+---------+---------+
+| CLERK     | 4150.00 | 1037.500000 | 1300.00 |  800.00 |
+| SALESMAN  | 5600.00 | 1400.000000 | 1600.00 | 1250.00 |
+| MANAGER   | 8275.00 | 2758.333333 | 2975.00 | 2450.00 |
+| ANALYST   | 6000.00 | 3000.000000 | 3000.00 | 3000.00 |
+| PRESIDENT | 5000.00 | 5000.000000 | 5000.00 | 5000.00 |
+| DEV       | 2000.00 | 2000.000000 | 2000.00 | 2000.00 |
++-----------+---------+-------------+---------+---------+
+6 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM v_empsal;
++-------+--------+---------+
+| empno | ename  | sal     |
++-------+--------+---------+
+|  7369 | SMITH  |  800.00 |
+|  7499 | ALLEN  | 1600.00 |
+|  7521 | WARD   | 1250.00 |
+|  7566 | JONES  | 2975.00 |
+|  7654 | MARTIN | 1250.00 |
+|  7698 | BLAKE  | 2850.00 |
+|  7782 | CLARK  | 2450.00 |
+|  7788 | SCOTT  | 3000.00 |
+|  7839 | KING   | 5000.00 |
+|  7844 | TURNER | 1500.00 |
+|  7876 | ADAMS  | 1100.00 |
+|  7900 | JAMES  |  950.00 |
+|  7902 | FORD   | 3000.00 |
+|  7934 | MILLER | 1300.00 |
+|  1000 | JILL   | 2000.00 |
++-------+--------+---------+
+15 rows in set (0.00 sec)
+
+sunbeam>INSERT INTO v_empsal VALUES (1001, 'JOY', 2300);
+Query OK, 1 row affected (0.01 sec)
+
+sunbeam>SELECT * FROM emp;
++-------+--------+-----------+------+------------+---------+---------+--------+
+| empno | ename  | job       | mgr  | hire       | sal     | comm    | deptno |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
+|  1000 | JILL   | DEV       | NULL | NULL       | 2000.00 |    NULL |     40 |
+|  1001 | JOY    | NULL      | NULL | NULL       | 2300.00 |    NULL |   NULL |
++-------+--------+-----------+------+------------+---------+---------+--------+
+16 rows in set (0.00 sec)
+
+sunbeam>SELECT * FROM v_empjobsummary;
++-----------+---------+-------------+---------+---------+
+| job       | salsum  | salavg      | salmax  | salmin  |
++-----------+---------+-------------+---------+---------+
+| CLERK     | 4150.00 | 1037.500000 | 1300.00 |  800.00 |
+| SALESMAN  | 5600.00 | 1400.000000 | 1600.00 | 1250.00 |
+| MANAGER   | 8275.00 | 2758.333333 | 2975.00 | 2450.00 |
+| ANALYST   | 6000.00 | 3000.000000 | 3000.00 | 3000.00 |
+| PRESIDENT | 5000.00 | 5000.000000 | 5000.00 | 5000.00 |
+| DEV       | 2000.00 | 2000.000000 | 2000.00 | 2000.00 |
+| NULL      | 2300.00 | 2300.000000 | 2300.00 | 2300.00 |
++-----------+---------+-------------+---------+---------+
+7 rows in set (0.00 sec)
+
+sunbeam>DELETE FROM v_empjobsummary WHERE job = 'DEV';
+ERROR 1288 (HY000): The target table v_empjobsummary of the DELETE is not updatable
+sunbeam>SELECT * FROM v_empjobsummary;
++-----------+---------+-------------+---------+---------+
+| job       | salsum  | salavg      | salmax  | salmin  |
++-----------+---------+-------------+---------+---------+
+| CLERK     | 4150.00 | 1037.500000 | 1300.00 |  800.00 |
+| SALESMAN  | 5600.00 | 1400.000000 | 1600.00 | 1250.00 |
+| MANAGER   | 8275.00 | 2758.333333 | 2975.00 | 2450.00 |
+| ANALYST   | 6000.00 | 3000.000000 | 3000.00 | 3000.00 |
+| PRESIDENT | 5000.00 | 5000.000000 | 5000.00 | 5000.00 |
+| DEV       | 2000.00 | 2000.000000 | 2000.00 | 2000.00 |
+| NULL      | 2300.00 | 2300.000000 | 2300.00 | 2300.00 |
++-----------+---------+-------------+---------+---------+
+7 rows in set (0.00 sec)
+
+sunbeam>DELETE FROM v_empjobsummary WHERE job = 'DEV';
+ERROR 1288 (HY000): The target table v_empjobsummary of the DELETE is not updatable
+sunbeam>SHOW FULL TABLES;
++---------------------+------------+
+| Tables_in_classwork | Table_type |
++---------------------+------------+
+| addr                | BASE TABLE |
+| bonus               | BASE TABLE |
+| books               | BASE TABLE |
+| dept                | BASE TABLE |
+| depts               | BASE TABLE |
+| dummy               | BASE TABLE |
+| emp                 | BASE TABLE |
+| emp_meeting         | BASE TABLE |
+| emps                | BASE TABLE |
+| meeting             | BASE TABLE |
+| salgrade            | BASE TABLE |
+| v_empincome         | VIEW       |
+| v_empjobsummary     | VIEW       |
+| v_empsal            | VIEW       |
+| v_richemp           | VIEW       |
++---------------------+------------+
+15 rows in set (0.00 sec)
+
+sunbeam>SHOW CREATE VIEW v_richemp;
++-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+
+| View      | Create View                                                                                                                                                                                                                                                                                                                              | character_set_client | collation_connection |
++-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+
+| v_richemp | CREATE ALGORITHM=UNDEFINED DEFINER=`sunbeam`@`localhost` SQL SECURITY DEFINER VIEW `v_richemp` AS select `emp`.`empno` AS `empno`,`emp`.`ename` AS `ename`,`emp`.`job` AS `job`,`emp`.`mgr` AS `mgr`,`emp`.`hire` AS `hire`,`emp`.`sal` AS `sal`,`emp`.`comm` AS `comm`,`emp`.`deptno` AS `deptno` from `emp` where (`emp`.`sal` > 2500) | cp850                | cp850_general_ci     |
++-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+
+1 row in set (0.00 sec)
+
+sunbeam>
+sunbeam>SELECT empno, ename, sal FROM v_richemp;
++-------+-------+---------+
+| empno | ename | sal     |
++-------+-------+---------+
+|  7566 | JONES | 2975.00 |
+|  7698 | BLAKE | 2850.00 |
+|  7788 | SCOTT | 3000.00 |
+|  7839 | KING  | 5000.00 |
+|  7902 | FORD  | 3000.00 |
++-------+-------+---------+
+5 rows in set (0.00 sec)
+
+sunbeam>
+sunbeam>INSERT INTO v_richemp(empno, ename, sal) VALUES(1000, 'JAMES', 2600);
+Query OK, 1 row affected (0.01 sec)
+
+sunbeam>
+sunbeam>SELECT empno, ename, sal FROM v_richemp;
++-------+-------+---------+
+| empno | ename | sal     |
++-------+-------+---------+
+|  7566 | JONES | 2975.00 |
+|  7698 | BLAKE | 2850.00 |
+|  7788 | SCOTT | 3000.00 |
+|  7839 | KING  | 5000.00 |
+|  7902 | FORD  | 3000.00 |
+|  1000 | JAMES | 2600.00 |
++-------+-------+---------+
+6 rows in set (0.00 sec)
+
+sunbeam>
+sunbeam>INSERT INTO v_richemp(empno, ename, sal) VALUES(1001, 'HARRY', 2200);
+Query OK, 1 row affected (0.01 sec)
+
+sunbeam>
+sunbeam>SELECT empno, ename, sal FROM v_richemp;
++-------+-------+---------+
+| empno | ename | sal     |
++-------+-------+---------+
+|  7566 | JONES | 2975.00 |
+|  7698 | BLAKE | 2850.00 |
+|  7788 | SCOTT | 3000.00 |
+|  7839 | KING  | 5000.00 |
+|  7902 | FORD  | 3000.00 |
+|  1000 | JAMES | 2600.00 |
++-------+-------+---------+
+6 rows in set (0.00 sec)
+
+sunbeam>SELECT empno, ename, sal FROM emp;
++-------+--------+---------+
+| empno | ename  | sal     |
++-------+--------+---------+
+|  7369 | SMITH  |  800.00 |
+|  7499 | ALLEN  | 1600.00 |
+|  7521 | WARD   | 1250.00 |
+|  7566 | JONES  | 2975.00 |
+|  7654 | MARTIN | 1250.00 |
+|  7698 | BLAKE  | 2850.00 |
+|  7782 | CLARK  | 2450.00 |
+|  7788 | SCOTT  | 3000.00 |
+|  7839 | KING   | 5000.00 |
+|  7844 | TURNER | 1500.00 |
+|  7876 | ADAMS  | 1100.00 |
+|  7900 | JAMES  |  950.00 |
+|  7902 | FORD   | 3000.00 |
+|  7934 | MILLER | 1300.00 |
+|  1000 | JILL   | 2000.00 |
+|  1001 | JOY    | 2300.00 |
+|  1000 | JAMES  | 2600.00 |
+|  1001 | HARRY  | 2200.00 |
++-------+--------+---------+
+18 rows in set (0.00 sec)
+
+sunbeam>EXPLAIN FORMAT=JSON
+    -> SELECT empno, ename, sal FROM v_richemp;
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| EXPLAIN
+
+
+
+
+                                                                   |
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| {
+  "query_block": {
+    "select_id": 1,
+    "cost_info": {
+      "query_cost": "2.05"
+    },
+    "table": {
+      "table_name": "emp",
+      "access_type": "ALL",
+      "rows_examined_per_scan": 18,
+      "rows_produced_per_join": 5,
+      "filtered": "33.33",
+      "cost_info": {
+        "read_cost": "1.45",
+        "eval_cost": "0.60",
+        "prefix_cost": "2.05",
+        "data_read_per_join": "2K"
+      },
+      "used_columns": [
+        "empno",
+        "ename",
+        "sal"
+      ],
+      "attached_condition": "(`classwork`.`emp`.`sal` > 2500.00)"
+    }
+  }
+} |
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set, 1 warning (0.00 sec)
+
+sunbeam>
+
+sunbeam>INSERT INTO v_richemp(empno, ename, sal) VALUES(1002, 'MERRY', 2000);
+Query OK, 1 row affected (0.01 sec)
+
+sunbeam>SELECT empno, ename, sal FROM v_richemp;
++-------+-------+---------+
+| empno | ename | sal     |
++-------+-------+---------+
+|  7566 | JONES | 2975.00 |
+|  7698 | BLAKE | 2850.00 |
+|  7788 | SCOTT | 3000.00 |
+|  7839 | KING  | 5000.00 |
+|  7902 | FORD  | 3000.00 |
+|  1000 | JAMES | 2600.00 |
++-------+-------+---------+
+6 rows in set (0.00 sec)
+
+sunbeam>ALTER VIEW v_richemp AS
+    -> SELECT * FROM emp WHERE sal > 2500;
+Query OK, 0 rows affected (0.01 sec)
+
+sunbeam>ALTER VIEW v_richemp AS
+    -> SELECT * FROM emp WHERE sal > 2500
+    -> WITH CHECK OPTION;
+Query OK, 0 rows affected (0.01 sec)
+
+sunbeam>INSERT INTO v_richemp(empno, ename, sal) VALUES(1004, 'EVE', 2800);
+Query OK, 1 row affected (0.01 sec)
+
+sunbeam>
+sunbeam>SELECT empno, ename, sal, comm FROM v_richemp;
++-------+-------+---------+------+
+| empno | ename | sal     | comm |
++-------+-------+---------+------+
+|  7566 | JONES | 2975.00 | NULL |
+|  7698 | BLAKE | 2850.00 | NULL |
+|  7788 | SCOTT | 3000.00 | NULL |
+|  7839 | KING  | 5000.00 | NULL |
+|  7902 | FORD  | 3000.00 | NULL |
+|  1000 | JAMES | 2600.00 | NULL |
+|  1004 | EVE   | 2800.00 | NULL |
++-------+-------+---------+------+
+7 rows in set (0.00 sec)
+
+sunbeam>CREATE VIEW v_richemp2
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+sunbeam>CREATE VIEW v_richemp2 AS
+    -> SELECT empno, ename, sal, comm FROM v_richemp;
+Query OK, 0 rows affected (0.01 sec)
+
+sunbeam>select*from v_richwmp2
+    ->
+    -> ;
+ERROR 1146 (42S02): Table 'classwork.v_richwmp2' doesn't exist
+sunbeam>select*from v_richemp2;
++-------+-------+---------+------+
+| empno | ename | sal     | comm |
++-------+-------+---------+------+
+|  7566 | JONES | 2975.00 | NULL |
+|  7698 | BLAKE | 2850.00 | NULL |
+|  7788 | SCOTT | 3000.00 | NULL |
+|  7839 | KING  | 5000.00 | NULL |
+|  7902 | FORD  | 3000.00 | NULL |
+|  1000 | JAMES | 2600.00 | NULL |
+|  1004 | EVE   | 2800.00 | NULL |
++-------+-------+---------+------+
+7 rows in set (0.00 sec)
+
+sunbeam>SHOW CREATE VIEW v_richemp2;
++------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+
+| View       | Create View
+
+                                                    | character_set_client | collation_connection |
++------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+
+| v_richemp2 | CREATE ALGORITHM=UNDEFINED DEFINER=`sunbeam`@`localhost` SQL SECURITY DEFINER VIEW `v_richemp2` AS select `v_richemp`.`empno` AS `empno`,`v_richemp`.`ename` AS `ename`,`v_richemp`.`sal` AS `sal`,`v_richemp`.`comm` AS `comm` from `v_richemp` | cp850                | cp850_general_ci     |
++------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+
+1 row in set (0.00 sec)
+
+sunbeam>SELECT * FROM v_richemp2;
++-------+-------+---------+------+
+| empno | ename | sal     | comm |
++-------+-------+---------+------+
+|  7566 | JONES | 2975.00 | NULL |
+|  7698 | BLAKE | 2850.00 | NULL |
+|  7788 | SCOTT | 3000.00 | NULL |
+|  7839 | KING  | 5000.00 | NULL |
+|  7902 | FORD  | 3000.00 | NULL |
+|  1000 | JAMES | 2600.00 | NULL |
+|  1004 | EVE   | 2800.00 | NULL |
++-------+-------+---------+------+
+7 rows in set (0.00 sec)
+
+sunbeam>
+sunbeam>SHOW CREATE VIEW v_richemp2;
++------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+
+| View       | Create View
+
+                                                    | character_set_client | collation_connection |
++------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+
+| v_richemp2 | CREATE ALGORITHM=UNDEFINED DEFINER=`sunbeam`@`localhost` SQL SECURITY DEFINER VIEW `v_richemp2` AS select `v_richemp`.`empno` AS `empno`,`v_richemp`.`ename` AS `ename`,`v_richemp`.`sal` AS `sal`,`v_richemp`.`comm` AS `comm` from `v_richemp` | cp850                | cp850_general_ci     |
++------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+
+1 row in set (0.00 sec)
+
+sunbeam>
+sunbeam>DROP VIEW v_richemp;
+Query OK, 0 rows affected (0.01 sec)
+
+sunbeam>
+sunbeam>SELECT * FROM v_richemp2;
+ERROR 1356 (HY000): View 'classwork.v_richemp2' references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them
+sunbeam>DROP VIEW v_richemp2;
+Query OK, 0 rows affected (0.01 sec)
+
+sunbeam>
+sunbeam>SHOW GRANTS FOR sunbeam@localhost;
++----------------------------------------------------------------+
+| Grants for sunbeam@localhost                                   |
++----------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `sunbeam`@`localhost`                    |
+| GRANT ALL PRIVILEGES ON `classwork`.* TO `sunbeam`@`localhost` |
+| GRANT ALL PRIVILEGES ON `employees`.* TO `sunbeam`@`localhost` |
+| GRANT ALL PRIVILEGES ON `hr`.* TO `sunbeam`@`localhost`        |
+| GRANT ALL PRIVILEGES ON `northwind`.* TO `sunbeam`@`localhost` |
+| GRANT ALL PRIVILEGES ON `sales`.* TO `sunbeam`@`localhost`     |
+| GRANT ALL PRIVILEGES ON `shopping`.* TO `sunbeam`@`localhost`  |
+| GRANT ALL PRIVILEGES ON `spj`.* TO `sunbeam`@`localhost`       |
++----------------------------------------------------------------+
+8 rows in set (0.00 sec)
+
+sunbeam>show grants for root;
+ERROR 1142 (42000): SELECT command denied to user 'sunbeam'@'localhost' for table 'user'
+sunbeam>SHOW GRANTS FOR root@%;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%' at line 1
+sunbeam>SHOW GRANTS FOR root@'%';
+ERROR 1142 (42000): SELECT command denied to user 'sunbeam'@'localhost' for table 'user'
+sunbeam>SHOW GRANTS FOR private@localhost;
+ERROR 1142 (42000): SELECT command denied to user 'sunbeam'@'localhost' for table 'user'
+sunbeam>show databases;
++--------------------+
+| Database           |
++--------------------+
+| classwork          |
+| hr                 |
+| information_schema |
+| northwind          |
+| sales              |
+| shopping           |
+| spj                |
++--------------------+
+7 rows in set (0.01 sec)
+
+sunbeam>select information_schema;
+ERROR 1054 (42S22): Unknown column 'information_schema' in 'field list'
+sunbeam>use information_schema;
+Database changed
+sunbeam>show tables;
++---------------------------------------+
+| Tables_in_information_schema          |
++---------------------------------------+
+| ADMINISTRABLE_ROLE_AUTHORIZATIONS     |
+| APPLICABLE_ROLES                      |
+| CHARACTER_SETS                        |
+| CHECK_CONSTRAINTS                     |
+| COLLATION_CHARACTER_SET_APPLICABILITY |
+| COLLATIONS                            |
+| COLUMN_PRIVILEGES                     |
+| COLUMN_STATISTICS                     |
+| COLUMNS                               |
+| COLUMNS_EXTENSIONS                    |
+| ENABLED_ROLES                         |
+| ENGINES                               |
+| EVENTS                                |
+| FILES                                 |
+| INNODB_BUFFER_PAGE                    |
+| INNODB_BUFFER_PAGE_LRU                |
+| INNODB_BUFFER_POOL_STATS              |
+| INNODB_CACHED_INDEXES                 |
+| INNODB_CMP                            |
+| INNODB_CMP_PER_INDEX                  |
+| INNODB_CMP_PER_INDEX_RESET            |
+| INNODB_CMP_RESET                      |
+| INNODB_CMPMEM                         |
+| INNODB_CMPMEM_RESET                   |
+| INNODB_COLUMNS                        |
+| INNODB_DATAFILES                      |
+| INNODB_FIELDS                         |
+| INNODB_FOREIGN                        |
+| INNODB_FOREIGN_COLS                   |
+| INNODB_FT_BEING_DELETED               |
+| INNODB_FT_CONFIG                      |
+| INNODB_FT_DEFAULT_STOPWORD            |
+| INNODB_FT_DELETED                     |
+| INNODB_FT_INDEX_CACHE                 |
+| INNODB_FT_INDEX_TABLE                 |
+| INNODB_INDEXES                        |
+| INNODB_METRICS                        |
+| INNODB_SESSION_TEMP_TABLESPACES       |
+| INNODB_TABLES                         |
+| INNODB_TABLESPACES                    |
+| INNODB_TABLESPACES_BRIEF              |
+| INNODB_TABLESTATS                     |
+| INNODB_TEMP_TABLE_INFO                |
+| INNODB_TRX                            |
+| INNODB_VIRTUAL                        |
+| KEY_COLUMN_USAGE                      |
+| KEYWORDS                              |
+| OPTIMIZER_TRACE                       |
+| PARAMETERS                            |
+| PARTITIONS                            |
+| PLUGINS                               |
+| PROCESSLIST                           |
+| PROFILING                             |
+| REFERENTIAL_CONSTRAINTS               |
+| RESOURCE_GROUPS                       |
+| ROLE_COLUMN_GRANTS                    |
+| ROLE_ROUTINE_GRANTS                   |
+| ROLE_TABLE_GRANTS                     |
+| ROUTINES                              |
+| SCHEMA_PRIVILEGES                     |
+| SCHEMATA                              |
+| SCHEMATA_EXTENSIONS                   |
+| ST_GEOMETRY_COLUMNS                   |
+| ST_SPATIAL_REFERENCE_SYSTEMS          |
+| ST_UNITS_OF_MEASURE                   |
+| STATISTICS                            |
+| TABLE_CONSTRAINTS                     |
+| TABLE_CONSTRAINTS_EXTENSIONS          |
+| TABLE_PRIVILEGES                      |
+| TABLES                                |
+| TABLES_EXTENSIONS                     |
+| TABLESPACES                           |
+| TABLESPACES_EXTENSIONS                |
+| TRIGGERS                              |
+| USER_ATTRIBUTES                       |
+| USER_PRIVILEGES                       |
+| VIEW_ROUTINE_USAGE                    |
+| VIEW_TABLE_USAGE                      |
+| VIEWS                                 |
++---------------------------------------+
+79 rows in set (0.01 sec)
+
+sunbeam>describe views;
++----------------------+---------------------------------+------+-----+---------+-------+
+| Field                | Type                            | Null | Key | Default | Extra |
++----------------------+---------------------------------+------+-----+---------+-------+
+| TABLE_CATALOG        | varchar(64)                     | YES  |     | NULL    |       |
+| TABLE_SCHEMA         | varchar(64)                     | YES  |     | NULL    |       |
+| TABLE_NAME           | varchar(64)                     | YES  |     | NULL    |       |
+| VIEW_DEFINITION      | longtext                        | YES  |     | NULL    |       |
+| CHECK_OPTION         | enum('NONE','LOCAL','CASCADED') | YES  |     | NULL    |       |
+| IS_UPDATABLE         | enum('NO','YES')                | YES  |     | NULL    |       |
+| DEFINER              | varchar(288)                    | YES  |     | NULL    |       |
+| SECURITY_TYPE        | varchar(7)                      | YES  |     | NULL    |       |
+| CHARACTER_SET_CLIENT | varchar(64)                     | NO   |     | NULL    |       |
+| COLLATION_CONNECTION | varchar(64)                     | NO   |     | NULL    |       |
++----------------------+---------------------------------+------+-----+---------+-------+
+10 rows in set (0.00 sec)
+
+sunbeam>show*from views;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*from views' at line 1
+sunbeam>select*from views;
++---------------+--------------+-----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+--------------+-------------------+---------------+----------------------+----------------------+
+| TABLE_CATALOG | TABLE_SCHEMA | TABLE_NAME      | VIEW_DEFINITION
+
+
+  | CHECK_OPTION | IS_UPDATABLE | DEFINER           | SECURITY_TYPE | CHARACTER_SET_CLIENT | COLLATION_CONNECTION |
++---------------+--------------+-----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+--------------+-------------------+---------------+----------------------+----------------------+
+| def           | classwork    | v_empsal        | select `classwork`.`emp`.`empno` AS `empno`,`classwork`.`emp`.`ename` AS `ename`,`classwork`.`emp`.`sal` AS `sal` from `classwork`.`emp`
+
+  | NONE         | YES          | sunbeam@localhost | DEFINER       | cp850                | cp850_general_ci     |
+| def           | classwork    | v_empincome     | select `classwork`.`emp`.`empno` AS `empno`,`classwork`.`emp`.`ename` AS `ename`,`classwork`.`emp`.`sal` AS `sal`,`classwork`.`emp`.`comm` AS `comm`,(`classwork`.`emp`.`sal` + ifnull(`classwork`.`emp`.`comm`,0.0)) AS `income` from `classwork`.`emp`
+  | NONE         | YES          | sunbeam@localhost | DEFINER       | cp850                | cp850_general_ci     |
+| def           | classwork    | v_empjobsummary | select `classwork`.`emp`.`job` AS `job`,sum(`classwork`.`emp`.`sal`) AS `salsum`,avg(`classwork`.`emp`.`sal`) AS `salavg`,max(`classwork`.`emp`.`sal`) AS `salmax`,min(`classwork`.`emp`.`sal`) AS `salmin` from `classwork`.`emp` group by `classwork`.`emp`.`job` | NONE         | NO           | sunbeam@localhost | DEFINER       | cp850                | cp850_general_ci     |
++---------------+--------------+-----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+--------------+-------------------+---------------+----------------------+----------------------+
+3 rows in set (0.01 sec)
+
+sunbeam>show tables;
++---------------------------------------+
+| Tables_in_information_schema          |
++---------------------------------------+
+| ADMINISTRABLE_ROLE_AUTHORIZATIONS     |
+| APPLICABLE_ROLES                      |
+| CHARACTER_SETS                        |
+| CHECK_CONSTRAINTS                     |
+| COLLATION_CHARACTER_SET_APPLICABILITY |
+| COLLATIONS                            |
+| COLUMN_PRIVILEGES                     |
+| COLUMN_STATISTICS                     |
+| COLUMNS                               |
+| COLUMNS_EXTENSIONS                    |
+| ENABLED_ROLES                         |
+| ENGINES                               |
+| EVENTS                                |
+| FILES                                 |
+| INNODB_BUFFER_PAGE                    |
+| INNODB_BUFFER_PAGE_LRU                |
+| INNODB_BUFFER_POOL_STATS              |
+| INNODB_CACHED_INDEXES                 |
+| INNODB_CMP                            |
+| INNODB_CMP_PER_INDEX                  |
+| INNODB_CMP_PER_INDEX_RESET            |
+| INNODB_CMP_RESET                      |
+| INNODB_CMPMEM                         |
+| INNODB_CMPMEM_RESET                   |
+| INNODB_COLUMNS                        |
+| INNODB_DATAFILES                      |
+| INNODB_FIELDS                         |
+| INNODB_FOREIGN                        |
+| INNODB_FOREIGN_COLS                   |
+| INNODB_FT_BEING_DELETED               |
+| INNODB_FT_CONFIG                      |
+| INNODB_FT_DEFAULT_STOPWORD            |
+| INNODB_FT_DELETED                     |
+| INNODB_FT_INDEX_CACHE                 |
+| INNODB_FT_INDEX_TABLE                 |
+| INNODB_INDEXES                        |
+| INNODB_METRICS                        |
+| INNODB_SESSION_TEMP_TABLESPACES       |
+| INNODB_TABLES                         |
+| INNODB_TABLESPACES                    |
+| INNODB_TABLESPACES_BRIEF              |
+| INNODB_TABLESTATS                     |
+| INNODB_TEMP_TABLE_INFO                |
+| INNODB_TRX                            |
+| INNODB_VIRTUAL                        |
+| KEY_COLUMN_USAGE                      |
+| KEYWORDS                              |
+| OPTIMIZER_TRACE                       |
+| PARAMETERS                            |
+| PARTITIONS                            |
+| PLUGINS                               |
+| PROCESSLIST                           |
+| PROFILING                             |
+| REFERENTIAL_CONSTRAINTS               |
+| RESOURCE_GROUPS                       |
+| ROLE_COLUMN_GRANTS                    |
+| ROLE_ROUTINE_GRANTS                   |
+| ROLE_TABLE_GRANTS                     |
+| ROUTINES                              |
+| SCHEMA_PRIVILEGES                     |
+| SCHEMATA                              |
+| SCHEMATA_EXTENSIONS                   |
+| ST_GEOMETRY_COLUMNS                   |
+| ST_SPATIAL_REFERENCE_SYSTEMS          |
+| ST_UNITS_OF_MEASURE                   |
+| STATISTICS                            |
+| TABLE_CONSTRAINTS                     |
+| TABLE_CONSTRAINTS_EXTENSIONS          |
+| TABLE_PRIVILEGES                      |
+| TABLES                                |
+| TABLES_EXTENSIONS                     |
+| TABLESPACES                           |
+| TABLESPACES_EXTENSIONS                |
+| TRIGGERS                              |
+| USER_ATTRIBUTES                       |
+| USER_PRIVILEGES                       |
+| VIEW_ROUTINE_USAGE                    |
+| VIEW_TABLE_USAGE                      |
+| VIEWS                                 |
++---------------------------------------+
+79 rows in set (0.00 sec)
+
+sunbeam>select*from events;
+Empty set (0.01 sec)
+
+sunbeam>describe table_privileges;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| GRANTEE        | varchar(292) | NO   |     |         |       |
+| TABLE_CATALOG  | varchar(512) | NO   |     |         |       |
+| TABLE_SCHEMA   | varchar(64)  | NO   |     |         |       |
+| TABLE_NAME     | varchar(64)  | NO   |     |         |       |
+| PRIVILEGE_TYPE | varchar(64)  | NO   |     |         |       |
+| IS_GRANTABLE   | varchar(3)   | NO   |     |         |       |
++----------------+--------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+sunbeam>select*from table_privileges;
+Empty set (0.00 sec)
+
+sunbeam>select*from keywords;
++----------------------------------------+----------+
+| WORD                                   | RESERVED |
++----------------------------------------+----------+
+| ACCESSIBLE                             |        1 |
+| ACCOUNT                                |        0 |
+| ACTION                                 |        0 |
+| ACTIVE                                 |        0 |
+| ADD                                    |        1 |
+| ADMIN                                  |        0 |
+| AFTER                                  |        0 |
+| AGAINST                                |        0 |
+| AGGREGATE                              |        0 |
+| ALGORITHM                              |        0 |
+| ALL                                    |        1 |
+| ALTER                                  |        1 |
+| ALWAYS                                 |        0 |
+| ANALYZE                                |        1 |
+| AND                                    |        1 |
+| ANY                                    |        0 |
+| ARRAY                                  |        0 |
+| AS                                     |        1 |
+| ASC                                    |        1 |
+| ASCII                                  |        0 |
+| ASENSITIVE                             |        1 |
+| ASSIGN_GTIDS_TO_ANONYMOUS_TRANSACTIONS |        0 |
+| AT                                     |        0 |
+| ATTRIBUTE                              |        0 |
+| AUTOEXTEND_SIZE                        |        0 |
+| AUTO_INCREMENT                         |        0 |
+| AVG                                    |        0 |
+| AVG_ROW_LENGTH                         |        0 |
+| BACKUP                                 |        0 |
+| BEFORE                                 |        1 |
+| BEGIN                                  |        0 |
+| BETWEEN                                |        1 |
+| BIGINT                                 |        1 |
+| BINARY                                 |        1 |
+| BINLOG                                 |        0 |
+| BIT                                    |        0 |
+| BLOB                                   |        1 |
+| BLOCK                                  |        0 |
+| BOOL                                   |        0 |
+| BOOLEAN                                |        0 |
+| BOTH                                   |        1 |
+| BTREE                                  |        0 |
+| BUCKETS                                |        0 |
+| BY                                     |        1 |
+| BYTE                                   |        0 |
+| CACHE                                  |        0 |
+| CALL                                   |        1 |
+| CASCADE                                |        1 |
+| CASCADED                               |        0 |
+| CASE                                   |        1 |
+| CATALOG_NAME                           |        0 |
+| CHAIN                                  |        0 |
+| CHANGE                                 |        1 |
+| CHANGED                                |        0 |
+| CHANNEL                                |        0 |
+| CHAR                                   |        1 |
+| CHARACTER                              |        1 |
+| CHARSET                                |        0 |
+| CHECK                                  |        1 |
+| CHECKSUM                               |        0 |
+| CIPHER                                 |        0 |
+| CLASS_ORIGIN                           |        0 |
+| CLIENT                                 |        0 |
+| CLONE                                  |        0 |
+| CLOSE                                  |        0 |
+| COALESCE                               |        0 |
+| CODE                                   |        0 |
+| COLLATE                                |        1 |
+| COLLATION                              |        0 |
+| COLUMN                                 |        1 |
+| COLUMNS                                |        0 |
+| COLUMN_FORMAT                          |        0 |
+| COLUMN_NAME                            |        0 |
+| COMMENT                                |        0 |
+| COMMIT                                 |        0 |
+| COMMITTED                              |        0 |
+| COMPACT                                |        0 |
+| COMPLETION                             |        0 |
+| COMPONENT                              |        0 |
+| COMPRESSED                             |        0 |
+| COMPRESSION                            |        0 |
+| CONCURRENT                             |        0 |
+| CONDITION                              |        1 |
+| CONNECTION                             |        0 |
+| CONSISTENT                             |        0 |
+| CONSTRAINT                             |        1 |
+| CONSTRAINT_CATALOG                     |        0 |
+| CONSTRAINT_NAME                        |        0 |
+| CONSTRAINT_SCHEMA                      |        0 |
+| CONTAINS                               |        0 |
+| CONTEXT                                |        0 |
+| CONTINUE                               |        1 |
+| CONVERT                                |        1 |
+| CPU                                    |        0 |
+| CREATE                                 |        1 |
+| CROSS                                  |        1 |
+| CUBE                                   |        1 |
+| CUME_DIST                              |        1 |
+| CURRENT                                |        0 |
+| CURRENT_DATE                           |        1 |
+| CURRENT_TIME                           |        1 |
+| CURRENT_TIMESTAMP                      |        1 |
+| CURRENT_USER                           |        1 |
+| CURSOR                                 |        1 |
+| CURSOR_NAME                            |        0 |
+| DATA                                   |        0 |
+| DATABASE                               |        1 |
+| DATABASES                              |        1 |
+| DATAFILE                               |        0 |
+| DATE                                   |        0 |
+| DATETIME                               |        0 |
+| DAY                                    |        0 |
+| DAY_HOUR                               |        1 |
+| DAY_MICROSECOND                        |        1 |
+| DAY_MINUTE                             |        1 |
+| DAY_SECOND                             |        1 |
+| DEALLOCATE                             |        0 |
+| DEC                                    |        1 |
+| DECIMAL                                |        1 |
+| DECLARE                                |        1 |
+| DEFAULT                                |        1 |
+| DEFAULT_AUTH                           |        0 |
+| DEFINER                                |        0 |
+| DEFINITION                             |        0 |
+| DELAYED                                |        1 |
+| DELAY_KEY_WRITE                        |        0 |
+| DELETE                                 |        1 |
+| DENSE_RANK                             |        1 |
+| DESC                                   |        1 |
+| DESCRIBE                               |        1 |
+| DESCRIPTION                            |        0 |
+| DETERMINISTIC                          |        1 |
+| DIAGNOSTICS                            |        0 |
+| DIRECTORY                              |        0 |
+| DISABLE                                |        0 |
+| DISCARD                                |        0 |
+| DISK                                   |        0 |
+| DISTINCT                               |        1 |
+| DISTINCTROW                            |        1 |
+| DIV                                    |        1 |
+| DO                                     |        0 |
+| DOUBLE                                 |        1 |
+| DROP                                   |        1 |
+| DUAL                                   |        1 |
+| DUMPFILE                               |        0 |
+| DUPLICATE                              |        0 |
+| DYNAMIC                                |        0 |
+| EACH                                   |        1 |
+| ELSE                                   |        1 |
+| ELSEIF                                 |        1 |
+| EMPTY                                  |        1 |
+| ENABLE                                 |        0 |
+| ENCLOSED                               |        1 |
+| ENCRYPTION                             |        0 |
+| END                                    |        0 |
+| ENDS                                   |        0 |
+| ENFORCED                               |        0 |
+| ENGINE                                 |        0 |
+| ENGINES                                |        0 |
+| ENGINE_ATTRIBUTE                       |        0 |
+| ENUM                                   |        0 |
+| ERROR                                  |        0 |
+| ERRORS                                 |        0 |
+| ESCAPE                                 |        0 |
+| ESCAPED                                |        1 |
+| EVENT                                  |        0 |
+| EVENTS                                 |        0 |
+| EVERY                                  |        0 |
+| EXCEPT                                 |        1 |
+| EXCHANGE                               |        0 |
+| EXCLUDE                                |        0 |
+| EXECUTE                                |        0 |
+| EXISTS                                 |        1 |
+| EXIT                                   |        1 |
+| EXPANSION                              |        0 |
+| EXPIRE                                 |        0 |
+| EXPLAIN                                |        1 |
+| EXPORT                                 |        0 |
+| EXTENDED                               |        0 |
+| EXTENT_SIZE                            |        0 |
+| FAILED_LOGIN_ATTEMPTS                  |        0 |
+| FALSE                                  |        1 |
+| FAST                                   |        0 |
+| FAULTS                                 |        0 |
+| FETCH                                  |        1 |
+| FIELDS                                 |        0 |
+| FILE                                   |        0 |
+| FILE_BLOCK_SIZE                        |        0 |
+| FILTER                                 |        0 |
+| FIRST                                  |        0 |
+| FIRST_VALUE                            |        1 |
+| FIXED                                  |        0 |
+| FLOAT                                  |        1 |
+| FLOAT4                                 |        1 |
+| FLOAT8                                 |        1 |
+| FLUSH                                  |        0 |
+| FOLLOWING                              |        0 |
+| FOLLOWS                                |        0 |
+| FOR                                    |        1 |
+| FORCE                                  |        1 |
+| FOREIGN                                |        1 |
+| FORMAT                                 |        0 |
+| FOUND                                  |        0 |
+| FROM                                   |        1 |
+| FULL                                   |        0 |
+| FULLTEXT                               |        1 |
+| FUNCTION                               |        1 |
+| GENERAL                                |        0 |
+| GENERATED                              |        1 |
+| GEOMCOLLECTION                         |        0 |
+| GEOMETRY                               |        0 |
+| GEOMETRYCOLLECTION                     |        0 |
+| GET                                    |        1 |
+| GET_FORMAT                             |        0 |
+| GET_MASTER_PUBLIC_KEY                  |        0 |
+| GET_SOURCE_PUBLIC_KEY                  |        0 |
+| GLOBAL                                 |        0 |
+| GRANT                                  |        1 |
+| GRANTS                                 |        0 |
+| GROUP                                  |        1 |
+| GROUPING                               |        1 |
+| GROUPS                                 |        1 |
+| GROUP_REPLICATION                      |        0 |
+| HANDLER                                |        0 |
+| HASH                                   |        0 |
+| HAVING                                 |        1 |
+| HELP                                   |        0 |
+| HIGH_PRIORITY                          |        1 |
+| HISTOGRAM                              |        0 |
+| HISTORY                                |        0 |
+| HOST                                   |        0 |
+| HOSTS                                  |        0 |
+| HOUR                                   |        0 |
+| HOUR_MICROSECOND                       |        1 |
+| HOUR_MINUTE                            |        1 |
+| HOUR_SECOND                            |        1 |
+| IDENTIFIED                             |        0 |
+| IF                                     |        1 |
+| IGNORE                                 |        1 |
+| IGNORE_SERVER_IDS                      |        0 |
+| IMPORT                                 |        0 |
+| IN                                     |        1 |
+| INACTIVE                               |        0 |
+| INDEX                                  |        1 |
+| INDEXES                                |        0 |
+| INFILE                                 |        1 |
+| INITIAL_SIZE                           |        0 |
+| INNER                                  |        1 |
+| INOUT                                  |        1 |
+| INSENSITIVE                            |        1 |
+| INSERT                                 |        1 |
+| INSERT_METHOD                          |        0 |
+| INSTALL                                |        0 |
+| INSTANCE                               |        0 |
+| INT                                    |        1 |
+| INT1                                   |        1 |
+| INT2                                   |        1 |
+| INT3                                   |        1 |
+| INT4                                   |        1 |
+| INT8                                   |        1 |
+| INTEGER                                |        1 |
+| INTERVAL                               |        1 |
+| INTO                                   |        1 |
+| INVISIBLE                              |        0 |
+| INVOKER                                |        0 |
+| IO                                     |        0 |
+| IO_AFTER_GTIDS                         |        1 |
+| IO_BEFORE_GTIDS                        |        1 |
+| IO_THREAD                              |        0 |
+| IPC                                    |        0 |
+| IS                                     |        1 |
+| ISOLATION                              |        0 |
+| ISSUER                                 |        0 |
+| ITERATE                                |        1 |
+| JOIN                                   |        1 |
+| JSON                                   |        0 |
+| JSON_TABLE                             |        1 |
+| JSON_VALUE                             |        0 |
+| KEY                                    |        1 |
+| KEYRING                                |        0 |
+| KEYS                                   |        1 |
+| KEY_BLOCK_SIZE                         |        0 |
+| KILL                                   |        1 |
+| LAG                                    |        1 |
+| LANGUAGE                               |        0 |
+| LAST                                   |        0 |
+| LAST_VALUE                             |        1 |
+| LATERAL                                |        1 |
+| LEAD                                   |        1 |
+| LEADING                                |        1 |
+| LEAVE                                  |        1 |
+| LEAVES                                 |        0 |
+| LEFT                                   |        1 |
+| LESS                                   |        0 |
+| LEVEL                                  |        0 |
+| LIKE                                   |        1 |
+| LIMIT                                  |        1 |
+| LINEAR                                 |        1 |
+| LINES                                  |        1 |
+| LINESTRING                             |        0 |
+| LIST                                   |        0 |
+| LOAD                                   |        1 |
+| LOCAL                                  |        0 |
+| LOCALTIME                              |        1 |
+| LOCALTIMESTAMP                         |        1 |
+| LOCK                                   |        1 |
+| LOCKED                                 |        0 |
+| LOCKS                                  |        0 |
+| LOGFILE                                |        0 |
+| LOGS                                   |        0 |
+| LONG                                   |        1 |
+| LONGBLOB                               |        1 |
+| LONGTEXT                               |        1 |
+| LOOP                                   |        1 |
+| LOW_PRIORITY                           |        1 |
+| MASTER                                 |        0 |
+| MASTER_AUTO_POSITION                   |        0 |
+| MASTER_BIND                            |        1 |
+| MASTER_COMPRESSION_ALGORITHMS          |        0 |
+| MASTER_CONNECT_RETRY                   |        0 |
+| MASTER_DELAY                           |        0 |
+| MASTER_HEARTBEAT_PERIOD                |        0 |
+| MASTER_HOST                            |        0 |
+| MASTER_LOG_FILE                        |        0 |
+| MASTER_LOG_POS                         |        0 |
+| MASTER_PASSWORD                        |        0 |
+| MASTER_PORT                            |        0 |
+| MASTER_PUBLIC_KEY_PATH                 |        0 |
+| MASTER_RETRY_COUNT                     |        0 |
+| MASTER_SSL                             |        0 |
+| MASTER_SSL_CA                          |        0 |
+| MASTER_SSL_CAPATH                      |        0 |
+| MASTER_SSL_CERT                        |        0 |
+| MASTER_SSL_CIPHER                      |        0 |
+| MASTER_SSL_CRL                         |        0 |
+| MASTER_SSL_CRLPATH                     |        0 |
+| MASTER_SSL_KEY                         |        0 |
+| MASTER_SSL_VERIFY_SERVER_CERT          |        1 |
+| MASTER_TLS_CIPHERSUITES                |        0 |
+| MASTER_TLS_VERSION                     |        0 |
+| MASTER_USER                            |        0 |
+| MASTER_ZSTD_COMPRESSION_LEVEL          |        0 |
+| MATCH                                  |        1 |
+| MAXVALUE                               |        1 |
+| MAX_CONNECTIONS_PER_HOUR               |        0 |
+| MAX_QUERIES_PER_HOUR                   |        0 |
+| MAX_ROWS                               |        0 |
+| MAX_SIZE                               |        0 |
+| MAX_UPDATES_PER_HOUR                   |        0 |
+| MAX_USER_CONNECTIONS                   |        0 |
+| MEDIUM                                 |        0 |
+| MEDIUMBLOB                             |        1 |
+| MEDIUMINT                              |        1 |
+| MEDIUMTEXT                             |        1 |
+| MEMBER                                 |        0 |
+| MEMORY                                 |        0 |
+| MERGE                                  |        0 |
+| MESSAGE_TEXT                           |        0 |
+| MICROSECOND                            |        0 |
+| MIDDLEINT                              |        1 |
+| MIGRATE                                |        0 |
+| MINUTE                                 |        0 |
+| MINUTE_MICROSECOND                     |        1 |
+| MINUTE_SECOND                          |        1 |
+| MIN_ROWS                               |        0 |
+| MOD                                    |        1 |
+| MODE                                   |        0 |
+| MODIFIES                               |        1 |
+| MODIFY                                 |        0 |
+| MONTH                                  |        0 |
+| MULTILINESTRING                        |        0 |
+| MULTIPOINT                             |        0 |
+| MULTIPOLYGON                           |        0 |
+| MUTEX                                  |        0 |
+| MYSQL_ERRNO                            |        0 |
+| NAME                                   |        0 |
+| NAMES                                  |        0 |
+| NATIONAL                               |        0 |
+| NATURAL                                |        1 |
+| NCHAR                                  |        0 |
+| NDB                                    |        0 |
+| NDBCLUSTER                             |        0 |
+| NESTED                                 |        0 |
+| NETWORK_NAMESPACE                      |        0 |
+| NEVER                                  |        0 |
+| NEW                                    |        0 |
+| NEXT                                   |        0 |
+| NO                                     |        0 |
+| NODEGROUP                              |        0 |
+| NONE                                   |        0 |
+| NOT                                    |        1 |
+| NOWAIT                                 |        0 |
+| NO_WAIT                                |        0 |
+| NO_WRITE_TO_BINLOG                     |        1 |
+| NTH_VALUE                              |        1 |
+| NTILE                                  |        1 |
+| NULL                                   |        1 |
+| NULLS                                  |        0 |
+| NUMBER                                 |        0 |
+| NUMERIC                                |        1 |
+| NVARCHAR                               |        0 |
+| OF                                     |        1 |
+| OFF                                    |        0 |
+| OFFSET                                 |        0 |
+| OJ                                     |        0 |
+| OLD                                    |        0 |
+| ON                                     |        1 |
+| ONE                                    |        0 |
+| ONLY                                   |        0 |
+| OPEN                                   |        0 |
+| OPTIMIZE                               |        1 |
+| OPTIMIZER_COSTS                        |        1 |
+| OPTION                                 |        1 |
+| OPTIONAL                               |        0 |
+| OPTIONALLY                             |        1 |
+| OPTIONS                                |        0 |
+| OR                                     |        1 |
+| ORDER                                  |        1 |
+| ORDINALITY                             |        0 |
+| ORGANIZATION                           |        0 |
+| OTHERS                                 |        0 |
+| OUT                                    |        1 |
+| OUTER                                  |        1 |
+| OUTFILE                                |        1 |
+| OVER                                   |        1 |
+| OWNER                                  |        0 |
+| PACK_KEYS                              |        0 |
+| PAGE                                   |        0 |
+| PARSER                                 |        0 |
+| PARTIAL                                |        0 |
+| PARTITION                              |        1 |
+| PARTITIONING                           |        0 |
+| PARTITIONS                             |        0 |
+| PASSWORD                               |        0 |
+| PASSWORD_LOCK_TIME                     |        0 |
+| PATH                                   |        0 |
+| PERCENT_RANK                           |        1 |
+| PERSIST                                |        0 |
+| PERSIST_ONLY                           |        0 |
+| PHASE                                  |        0 |
+| PLUGIN                                 |        0 |
+| PLUGINS                                |        0 |
+| PLUGIN_DIR                             |        0 |
+| POINT                                  |        0 |
+| POLYGON                                |        0 |
+| PORT                                   |        0 |
+| PRECEDES                               |        0 |
+| PRECEDING                              |        0 |
+| PRECISION                              |        1 |
+| PREPARE                                |        0 |
+| PRESERVE                               |        0 |
+| PREV                                   |        0 |
+| PRIMARY                                |        1 |
+| PRIVILEGES                             |        0 |
+| PRIVILEGE_CHECKS_USER                  |        0 |
+| PROCEDURE                              |        1 |
+| PROCESS                                |        0 |
+| PROCESSLIST                            |        0 |
+| PROFILE                                |        0 |
+| PROFILES                               |        0 |
+| PROXY                                  |        0 |
+| PURGE                                  |        1 |
+| QUARTER                                |        0 |
+| QUERY                                  |        0 |
+| QUICK                                  |        0 |
+| RANDOM                                 |        0 |
+| RANGE                                  |        1 |
+| RANK                                   |        1 |
+| READ                                   |        1 |
+| READS                                  |        1 |
+| READ_ONLY                              |        0 |
+| READ_WRITE                             |        1 |
+| REAL                                   |        1 |
+| REBUILD                                |        0 |
+| RECOVER                                |        0 |
+| RECURSIVE                              |        1 |
+| REDO_BUFFER_SIZE                       |        0 |
+| REDUNDANT                              |        0 |
+| REFERENCE                              |        0 |
+| REFERENCES                             |        1 |
+| REGEXP                                 |        1 |
+| RELAY                                  |        0 |
+| RELAYLOG                               |        0 |
+| RELAY_LOG_FILE                         |        0 |
+| RELAY_LOG_POS                          |        0 |
+| RELAY_THREAD                           |        0 |
+| RELEASE                                |        1 |
+| RELOAD                                 |        0 |
+| REMOVE                                 |        0 |
+| RENAME                                 |        1 |
+| REORGANIZE                             |        0 |
+| REPAIR                                 |        0 |
+| REPEAT                                 |        1 |
+| REPEATABLE                             |        0 |
+| REPLACE                                |        1 |
+| REPLICA                                |        0 |
+| REPLICAS                               |        0 |
+| REPLICATE_DO_DB                        |        0 |
+| REPLICATE_DO_TABLE                     |        0 |
+| REPLICATE_IGNORE_DB                    |        0 |
+| REPLICATE_IGNORE_TABLE                 |        0 |
+| REPLICATE_REWRITE_DB                   |        0 |
+| REPLICATE_WILD_DO_TABLE                |        0 |
+| REPLICATE_WILD_IGNORE_TABLE            |        0 |
+| REPLICATION                            |        0 |
+| REQUIRE                                |        1 |
+| REQUIRE_ROW_FORMAT                     |        0 |
+| REQUIRE_TABLE_PRIMARY_KEY_CHECK        |        0 |
+| RESET                                  |        0 |
+| RESIGNAL                               |        1 |
+| RESOURCE                               |        0 |
+| RESPECT                                |        0 |
+| RESTART                                |        0 |
+| RESTORE                                |        0 |
+| RESTRICT                               |        1 |
+| RESUME                                 |        0 |
+| RETAIN                                 |        0 |
+| RETURN                                 |        1 |
+| RETURNED_SQLSTATE                      |        0 |
+| RETURNING                              |        0 |
+| RETURNS                                |        0 |
+| REUSE                                  |        0 |
+| REVERSE                                |        0 |
+| REVOKE                                 |        1 |
+| RIGHT                                  |        1 |
+| RLIKE                                  |        1 |
+| ROLE                                   |        0 |
+| ROLLBACK                               |        0 |
+| ROLLUP                                 |        0 |
+| ROTATE                                 |        0 |
+| ROUTINE                                |        0 |
+| ROW                                    |        1 |
+| ROWS                                   |        1 |
+| ROW_COUNT                              |        0 |
+| ROW_FORMAT                             |        0 |
+| ROW_NUMBER                             |        1 |
+| RTREE                                  |        0 |
+| SAVEPOINT                              |        0 |
+| SCHEDULE                               |        0 |
+| SCHEMA                                 |        1 |
+| SCHEMAS                                |        1 |
+| SCHEMA_NAME                            |        0 |
+| SECOND                                 |        0 |
+| SECONDARY                              |        0 |
+| SECONDARY_ENGINE                       |        0 |
+| SECONDARY_ENGINE_ATTRIBUTE             |        0 |
+| SECONDARY_LOAD                         |        0 |
+| SECONDARY_UNLOAD                       |        0 |
+| SECOND_MICROSECOND                     |        1 |
+| SECURITY                               |        0 |
+| SELECT                                 |        1 |
+| SENSITIVE                              |        1 |
+| SEPARATOR                              |        1 |
+| SERIAL                                 |        0 |
+| SERIALIZABLE                           |        0 |
+| SERVER                                 |        0 |
+| SESSION                                |        0 |
+| SET                                    |        1 |
+| SHARE                                  |        0 |
+| SHOW                                   |        1 |
+| SHUTDOWN                               |        0 |
+| SIGNAL                                 |        1 |
+| SIGNED                                 |        0 |
+| SIMPLE                                 |        0 |
+| SKIP                                   |        0 |
+| SLAVE                                  |        0 |
+| SLOW                                   |        0 |
+| SMALLINT                               |        1 |
+| SNAPSHOT                               |        0 |
+| SOCKET                                 |        0 |
+| SOME                                   |        0 |
+| SONAME                                 |        0 |
+| SOUNDS                                 |        0 |
+| SOURCE                                 |        0 |
+| SOURCE_AUTO_POSITION                   |        0 |
+| SOURCE_BIND                            |        0 |
+| SOURCE_COMPRESSION_ALGORITHMS          |        0 |
+| SOURCE_CONNECTION_AUTO_FAILOVER        |        0 |
+| SOURCE_CONNECT_RETRY                   |        0 |
+| SOURCE_DELAY                           |        0 |
+| SOURCE_HEARTBEAT_PERIOD                |        0 |
+| SOURCE_HOST                            |        0 |
+| SOURCE_LOG_FILE                        |        0 |
+| SOURCE_LOG_POS                         |        0 |
+| SOURCE_PASSWORD                        |        0 |
+| SOURCE_PORT                            |        0 |
+| SOURCE_PUBLIC_KEY_PATH                 |        0 |
+| SOURCE_RETRY_COUNT                     |        0 |
+| SOURCE_SSL                             |        0 |
+| SOURCE_SSL_CA                          |        0 |
+| SOURCE_SSL_CAPATH                      |        0 |
+| SOURCE_SSL_CERT                        |        0 |
+| SOURCE_SSL_CIPHER                      |        0 |
+| SOURCE_SSL_CRL                         |        0 |
+| SOURCE_SSL_CRLPATH                     |        0 |
+| SOURCE_SSL_KEY                         |        0 |
+| SOURCE_SSL_VERIFY_SERVER_CERT          |        0 |
+| SOURCE_TLS_CIPHERSUITES                |        0 |
+| SOURCE_TLS_VERSION                     |        0 |
+| SOURCE_USER                            |        0 |
+| SOURCE_ZSTD_COMPRESSION_LEVEL          |        0 |
+| SPATIAL                                |        1 |
+| SPECIFIC                               |        1 |
+| SQL                                    |        1 |
+| SQLEXCEPTION                           |        1 |
+| SQLSTATE                               |        1 |
+| SQLWARNING                             |        1 |
+| SQL_AFTER_GTIDS                        |        0 |
+| SQL_AFTER_MTS_GAPS                     |        0 |
+| SQL_BEFORE_GTIDS                       |        0 |
+| SQL_BIG_RESULT                         |        1 |
+| SQL_BUFFER_RESULT                      |        0 |
+| SQL_CALC_FOUND_ROWS                    |        1 |
+| SQL_NO_CACHE                           |        0 |
+| SQL_SMALL_RESULT                       |        1 |
+| SQL_THREAD                             |        0 |
+| SQL_TSI_DAY                            |        0 |
+| SQL_TSI_HOUR                           |        0 |
+| SQL_TSI_MINUTE                         |        0 |
+| SQL_TSI_MONTH                          |        0 |
+| SQL_TSI_QUARTER                        |        0 |
+| SQL_TSI_SECOND                         |        0 |
+| SQL_TSI_WEEK                           |        0 |
+| SQL_TSI_YEAR                           |        0 |
+| SRID                                   |        0 |
+| SSL                                    |        1 |
+| STACKED                                |        0 |
+| START                                  |        0 |
+| STARTING                               |        1 |
+| STARTS                                 |        0 |
+| STATS_AUTO_RECALC                      |        0 |
+| STATS_PERSISTENT                       |        0 |
+| STATS_SAMPLE_PAGES                     |        0 |
+| STATUS                                 |        0 |
+| STOP                                   |        0 |
+| STORAGE                                |        0 |
+| STORED                                 |        1 |
+| STRAIGHT_JOIN                          |        1 |
+| STREAM                                 |        0 |
+| STRING                                 |        0 |
+| SUBCLASS_ORIGIN                        |        0 |
+| SUBJECT                                |        0 |
+| SUBPARTITION                           |        0 |
+| SUBPARTITIONS                          |        0 |
+| SUPER                                  |        0 |
+| SUSPEND                                |        0 |
+| SWAPS                                  |        0 |
+| SWITCHES                               |        0 |
+| SYSTEM                                 |        1 |
+| TABLE                                  |        1 |
+| TABLES                                 |        0 |
+| TABLESPACE                             |        0 |
+| TABLE_CHECKSUM                         |        0 |
+| TABLE_NAME                             |        0 |
+| TEMPORARY                              |        0 |
+| TEMPTABLE                              |        0 |
+| TERMINATED                             |        1 |
+| TEXT                                   |        0 |
+| THAN                                   |        0 |
+| THEN                                   |        1 |
+| THREAD_PRIORITY                        |        0 |
+| TIES                                   |        0 |
+| TIME                                   |        0 |
+| TIMESTAMP                              |        0 |
+| TIMESTAMPADD                           |        0 |
+| TIMESTAMPDIFF                          |        0 |
+| TINYBLOB                               |        1 |
+| TINYINT                                |        1 |
+| TINYTEXT                               |        1 |
+| TLS                                    |        0 |
+| TO                                     |        1 |
+| TRAILING                               |        1 |
+| TRANSACTION                            |        0 |
+| TRIGGER                                |        1 |
+| TRIGGERS                               |        0 |
+| TRUE                                   |        1 |
+| TRUNCATE                               |        0 |
+| TYPE                                   |        0 |
+| TYPES                                  |        0 |
+| UNBOUNDED                              |        0 |
+| UNCOMMITTED                            |        0 |
+| UNDEFINED                              |        0 |
+| UNDO                                   |        1 |
+| UNDOFILE                               |        0 |
+| UNDO_BUFFER_SIZE                       |        0 |
+| UNICODE                                |        0 |
+| UNINSTALL                              |        0 |
+| UNION                                  |        1 |
+| UNIQUE                                 |        1 |
+| UNKNOWN                                |        0 |
+| UNLOCK                                 |        1 |
+| UNSIGNED                               |        1 |
+| UNTIL                                  |        0 |
+| UPDATE                                 |        1 |
+| UPGRADE                                |        0 |
+| USAGE                                  |        1 |
+| USE                                    |        1 |
+| USER                                   |        0 |
+| USER_RESOURCES                         |        0 |
+| USE_FRM                                |        0 |
+| USING                                  |        1 |
+| UTC_DATE                               |        1 |
+| UTC_TIME                               |        1 |
+| UTC_TIMESTAMP                          |        1 |
+| VALIDATION                             |        0 |
+| VALUE                                  |        0 |
+| VALUES                                 |        1 |
+| VARBINARY                              |        1 |
+| VARCHAR                                |        1 |
+| VARCHARACTER                           |        1 |
+| VARIABLES                              |        0 |
+| VARYING                                |        1 |
+| VCPU                                   |        0 |
+| VIEW                                   |        0 |
+| VIRTUAL                                |        1 |
+| VISIBLE                                |        0 |
+| WAIT                                   |        0 |
+| WARNINGS                               |        0 |
+| WEEK                                   |        0 |
+| WEIGHT_STRING                          |        0 |
+| WHEN                                   |        1 |
+| WHERE                                  |        1 |
+| WHILE                                  |        1 |
+| WINDOW                                 |        1 |
+| WITH                                   |        1 |
+| WITHOUT                                |        0 |
+| WORK                                   |        0 |
+| WRAPPER                                |        0 |
+| WRITE                                  |        1 |
+| X509                                   |        0 |
+| XA                                     |        0 |
+| XID                                    |        0 |
+| XML                                    |        0 |
+| XOR                                    |        1 |
+| YEAR                                   |        0 |
+| YEAR_MONTH                             |        1 |
+| ZEROFILL                               |        1 |
+| ZONE                                   |        0 |
++----------------------------------------+----------+
+738 rows in set (0.01 sec)
+
+sunbeam>CREATE TABLE accounts(id INT PRIMARY KEY, type CHAR(20),balance DECIMAL(9,2));
+ERROR 1044 (42000): Access denied for user 'sunbeam'@'localhost' to database 'information_schema'
+sunbeam>exit
+Bye
+
+C:\Users\Piyush>mysql -u sunbeam -p
+Enter password: *
+ERROR 1045 (28000): Access denied for user 'sunbeam'@'localhost' (using password: YES)
+
+C:\Users\Piyush>mysql -u root -p
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+root>grant all on * to sunbeam@localhost;
+ERROR 1046 (3D000): No database selected
+root>grant all on classwork.* to sunbeam@localhost;
+Query OK, 0 rows affected (0.01 sec)
+
+root>exit
+Bye
+
+C:\Users\Piyush>mysql -u sunbeam -p
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+sunbeam>CREATE TABLE accounts(id INT PRIMARY KEY, type CHAR(20),balance DECIMAL(9,2));
+ERROR 1046 (3D000): No database selected
+sunbeam>use classwork
+Database changed
+sunbeam>CREATE TABLE accounts(id INT PRIMARY KEY, type CHAR(20),balance DECIMAL(9,2));
+Query OK, 0 rows affected (0.07 sec)
+
+sunbeam>(1, 'Saving', 20000.00),
+    -> (2, 'Current', 60000.00),
+    -> (3, 'Saving', 5000.00),
+    -> (4, 'Saving', 3000.00),
+    -> (5, 'Current', 50000.00),
+    -> (6, 'Saving', 10000.00);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1, 'Saving', 20000.00),
+(2, 'Current', 60000.00),
+(3, 'Saving', 5000.00),
+(4, 'S' at line 1
+sunbeam>INSERT INTO accounts VALUES
+    -> (1, 'Saving', 20000.00),
+    -> (2, 'Current', 60000.00),
+    -> (3, 'Saving', 5000.00),
+    -> (4, 'Saving', 3000.00),
+    -> (5, 'Current', 50000.00),
+    -> (6, 'Saving', 10000.00);
+Query OK, 6 rows affected (0.01 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+sunbeam>SELECT * FROM accounts;
++----+---------+----------+
+| id | type    | balance  |
++----+---------+----------+
+|  1 | Saving  | 20000.00 |
+|  2 | Current | 60000.00 |
+|  3 | Saving  |  5000.00 |
+|  4 | Saving  |  3000.00 |
+|  5 | Current | 50000.00 |
+|  6 | Saving  | 10000.00 |
++----+---------+----------+
+6 rows in set (0.00 sec)
+
+sunbeam>UPDATE accounts SET balance = balance - 2000
+    -> WHERE id = 1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+sunbeam>
+sunbeam>UPDATE accounts SET balance = balance + 2000
+    -> WHERE id = 3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+sunbeam>SELECT * FROM accounts;
++----+---------+----------+
+| id | type    | balance  |
++----+---------+----------+
+|  1 | Saving  | 18000.00 |
+|  2 | Current | 60000.00 |
+|  3 | Saving  |  7000.00 |
+|  4 | Saving  |  3000.00 |
+|  5 | Current | 50000.00 |
+|  6 | Saving  | 10000.00 |
++----+---------+----------+
+6 rows in set (0.00 sec)
+
+sunbeam>
